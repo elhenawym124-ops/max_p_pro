@@ -1,0 +1,580 @@
+model Customer {
+  id                             String                          @id @default(cuid())
+  firstName                      String
+  lastName                       String
+  email                          String?
+  phone                          String?
+  avatar                         String?
+  facebookId                     String?
+  whatsappId                     String?
+  telegramId                     String?
+  status                         CustomersStatus                 @default(LEAD)
+  tags                           String?
+  notes                          String?
+  metadata                       String?                         @db.Text
+  companyId                      String
+  createdAt                      DateTime                        @default(now())
+  updatedAt                      DateTime                        @updatedAt
+  customerRating                 CustomersCustomerRating         @default(UNKNOWN)
+  successScore                   Float                           @default(0)
+  deliveryRate                   Float                           @default(0)
+  totalDelivered                 Int                             @default(0)
+  totalOrdersCount               Int                             @default(0)
+  activities                     Activity[]
+  affiliate_referrals            AffiliateReferral[]
+  aiInteractions                 AiInteraction[]
+  appointments                   Appointment[]
+  blockedCustomersOnPages        BlockedCustomersOnPage[]
+  conversationOutcomes           ConversationOutcome[]
+  conversations                  Conversation[]
+  customerLoyaltyRecords         CustomerLoyaltyRecord[]
+  customerNotes                  CustomerNote[]
+  customerNotificationPreference CustomerNotificationPreference?
+  company                      Company                         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  orders                         Order[]
+  returnRequests                 ReturnRequest[]
+  whatsAppContacts               WhatsAppContact[]
+  whatsapp_notification_logs     WhatsAppNotificationLog[]
+
+  customerWallets CustomerWallet[] @relation
+
+  @@unique([facebookId, companyId])
+  @@unique([telegramId, companyId])
+  @@unique([whatsappId, companyId])
+  @@index([companyId])
+  @@index([companyId, status])
+  @@index([facebookId])
+  @@index([status])
+  @@map("customers")
+}
+
+/// UNUSED - Legacy feature
+model BlockedCustomersOnPage {
+  id             String       @id @default(cuid())
+  facebookPageId String
+  pageId         String
+  customerId     String
+  facebookId     String
+  blockedBy      String?
+  reason         String?      @db.Text
+  blockedAt      DateTime     @default(now())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  metadata       String?      @db.Text
+  customer      Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  facebookPage   FacebookPage @relation(fields: [facebookPageId], references: [id], onDelete: Cascade)
+
+  @@unique([facebookPageId, customerId])
+  @@unique([pageId, facebookId])
+  @@index([customerId])
+  @@index([facebookId])
+  @@index([facebookPageId])
+  @@index([pageId])
+  @@map("blocked_customers_on_page")
+}
+
+model Category {
+  id               String     @id @default(cuid())
+  name             String
+  description      String?    @db.Text
+  image            String?
+  parentId         String?
+  isActive         Boolean    @default(true)
+  sortOrder        Int        @default(0)
+  companyId        String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  displayType      String     @default("default")
+  metaDescription  String?    @db.Text
+  metaTitle        String?
+  slug             String?
+  company        Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  category         Category?  @relation("categoriesTocategories", fields: [parentId], references: [id])
+  other_categories Category[] @relation("categoriesTocategories")
+  products         Product[]
+
+  @@unique([companyId, slug])
+  @@index([companyId])
+  @@index([parentId])
+  @@index([slug])
+  @@map("categories")
+}
+
+/// UNUSED - Legacy feature
+model CouponUsage {
+  id             String   @id @default(cuid())
+  couponId       String
+  companyId      String
+  customerId     String?
+  orderId        String?
+  discountAmount Decimal  @db.Decimal(10, 2)
+  orderAmount    Decimal  @db.Decimal(10, 2)
+  usedAt         DateTime @default(now())
+  coupon         Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([couponId])
+  @@index([customerId])
+  @@index([orderId])
+  @@index([usedAt])
+  @@map("coupon_usages")
+}
+
+model Coupon {
+  id                String        @id @default(cuid())
+  companyId         String
+  code              String
+  name              String
+  description       String?       @db.Text
+  type              CouponType    @default(PERCENTAGE)
+  value             Decimal       @db.Decimal(10, 2)
+  minOrderAmount    Decimal?      @db.Decimal(10, 2)
+  maxDiscountAmount Decimal?      @db.Decimal(10, 2)
+  usageLimit        Int?
+  usageCount        Int           @default(0)
+  userUsageLimit    Int?
+  validFrom         DateTime
+  validTo           DateTime
+  isActive          Boolean       @default(true)
+  customerSegments  String?       @db.Text
+  metadata          String?       @db.Text
+  createdBy         String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  couponUsages      CouponUsage[]
+  company         Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, code])
+  @@index([code])
+  @@index([companyId])
+  @@index([isActive])
+  @@index([validFrom, validTo])
+  @@map("coupons")
+}
+
+/// UNUSED - Legacy feature
+model CustomerList {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  criteria    String   @db.LongText
+  count       Int      @default(0)
+  isDefault   Boolean  @default(false)
+  companyId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("customer_lists")
+}
+
+model CustomerNote {
+  id         String   @id
+  customerId String
+  authorId   String
+  content    String   @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+  user      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  customer  Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([customerId])
+  @@map("customer_notes")
+}
+
+model ProductReview {
+  id            String   @id @default(cuid())
+  productId     String
+  companyId     String
+  customerName  String
+  customerEmail String?
+  customerPhone String?
+  rating        Int
+  title         String?
+  comment       String?  @db.Text
+  isVerified    Boolean  @default(false)
+  isApproved    Boolean  @default(false)
+  helpfulCount  Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([isApproved])
+  @@index([productId])
+  @@index([rating])
+  @@map("product_reviews")
+}
+
+model ProductVariant {
+  id             String      @id @default(cuid())
+  productId      String
+  name           String
+  type           String      @default("color")
+  sku            String?
+  price          Decimal?    @db.Decimal(10, 2)
+  comparePrice   Decimal?    @db.Decimal(10, 2)
+  cost           Decimal?    @db.Decimal(10, 2)
+  images         String?     @db.Text
+  stock          Int         @default(0)
+  trackInventory Boolean     @default(true)
+  isActive       Boolean     @default(true)
+  sortOrder      Int         @default(0)
+  metadata       String?     @db.Text
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime
+  orderItems     OrderItem[]
+  product       Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, sku])
+  @@index([productId])
+  @@index([sku])
+  @@map("product_variants")
+}
+
+model Product {
+  id                         String                    @id @default(cuid())
+  name                       String
+  description                String?                   @db.Text
+  sku                        String?
+  price                      Decimal                   @db.Decimal(10, 2)
+  comparePrice               Decimal?                  @db.Decimal(10, 2)
+  cost                       Decimal?                  @db.Decimal(10, 2)
+  images                     String?                   @db.Text
+  stock                      Int                       @default(0)
+  trackInventory             Boolean                   @default(true)
+  weight                     Decimal?                  @db.Decimal(8, 2)
+  dimensions                 String?                   @db.Text
+  categoryId                 String?
+  isActive                   Boolean                   @default(true)
+  isFeatured                 Boolean                   @default(false)
+  tags                       String?
+  metadata                   String?                   @db.Text
+  companyId                  String
+  createdAt                  DateTime                  @default(now())
+  updatedAt                  DateTime                  @updatedAt
+  barcode                    String?
+  easyOrdersId               String?
+  easyOrdersUrl              String?
+  source                     String?                   @default("manual")
+  wooCommerceId              String?
+  wooCommerceUrl             String?
+  hasPromotedAd              Boolean                   @default(false)
+  enableCheckoutForm         Boolean                   @default(true)
+  showAddToCartButton        Boolean                   @default(true)
+  saleStartDate              DateTime?
+  saleEndDate                DateTime?
+  sizeGuide                  String?                   @db.Text
+  isPreOrder                 Boolean                   @default(false)
+  preOrderDate               DateTime?
+  preOrderMessage            String?                   @db.Text
+  embedding                  String?                   @db.Text
+  embeddingGeneratedAt       DateTime?
+  slug                       String?
+  isDropshipped              Boolean                   @default(false)
+  merchantProductId          String?
+  basePrice                  Decimal?                  @db.Decimal(10, 2)
+  allowAffiliateMarkup       Boolean                   @default(false)
+  affiliateCommission        Decimal?                  @db.Decimal(10, 2)
+  commissionType             String?                   @default("PERCENTAGE")
+  affiliate_products         AffiliateProduct[]
+  backInStockNotifications   BackInStockNotification[]
+  conversion_events          ConversionEvent[]
+  facebookCatalogProducts    FacebookCatalogProduct[]
+  inventories                Inventory[]
+  merchantProducts           MerchantProduct[]
+  orderItems                 OrderItem[]
+  postResponseSettings       PostResponseSettings[]
+  productAnalytics           ProductAnalytic[]
+  productReviews             ProductReview[]
+  productVariants            ProductVariant[]
+  productVisits              ProductVisit[]
+  category                   Category?                 @relation(fields: [categoryId], references: [id])
+  company                  Company                   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  purchaseInvoiceItems       PurchaseInvoiceItem[]
+  purchaseOrderItems         PurchaseOrderItem[]
+  recentlyVieweds            RecentlyViewed[]
+  stockAlerts                StockAlert[]
+  stockMovements             StockMovement[]
+  whatsapp_notification_logs WhatsAppNotificationLog[]
+  wishlists                  Wishlist[]
+
+  @@unique([companyId, sku])
+  @@unique([companyId, slug])
+  @@index([categoryId])
+  @@index([companyId])
+  @@index([sku])
+  @@index([wooCommerceId])
+  @@map("products")
+}
+
+model Wishlist {
+  id         String   @id @default(cuid())
+  sessionId  String
+  customerId String?
+  productId  String
+  variantId  String?
+  companyId  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, productId, variantId, companyId])
+  @@index([companyId])
+  @@index([customerId])
+  @@index([productId])
+  @@index([sessionId])
+  @@map("wishlists")
+}
+
+model CustomerWallet {
+  id          String   @id @default(cuid())
+  customerId  String   @unique
+  companyId   String
+  balance     Float    @default(0)
+  totalEarned Float    @default(0)
+  totalSpent  Float    @default(0)
+  currency    String   @default("EGP")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  customer     Customer?           @relation(fields: [customerId], references: [id])
+  company      Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+
+  @@index([companyId])
+  @@map("customer_wallets")
+}
+
+model CustomerLoyaltyProgram {
+  id                      String                        @id @default(cuid())
+  companyId               String
+  name                    String
+  nameAr                  String?
+  description             String?                       @db.Text
+  type                    CustomerLoyaltyProgramType    @default(POINTS)
+  status                  CustomerLoyaltyProgramsStatus @default(DRAFT)
+  pointsPerPurchase       Decimal                       @default(1.00) @db.Decimal(10, 2)
+  pointsPerReferral       Decimal                       @default(10.00) @db.Decimal(10, 2)
+  pointsPerAmount         Decimal?                      @db.Decimal(10, 2)
+  redemptionRate          Decimal                       @default(100.00) @db.Decimal(10, 2)
+  minimumPoints           Decimal                       @default(100.00) @db.Decimal(10, 2)
+  maxPointsPerTransaction Decimal?                      @db.Decimal(10, 2)
+  expiryMonths            Int                           @default(12)
+  rules                   String?                       @db.Text
+  createdBy               String
+  createdAt               DateTime                      @default(now())
+  updatedAt               DateTime                      @updatedAt
+  company               Company                       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customerLoyaltyRecords  CustomerLoyaltyRecord[]
+  customerLoyaltyTiers    CustomerLoyaltyTier[]
+
+  @@index([companyId])
+  @@index([status])
+  @@index([type])
+  @@map("customer_loyalty_programs")
+}
+
+model CustomerLoyaltyRecord {
+  id                     String                       @id @default(cuid())
+  companyId              String
+  customerId             String
+  programId              String
+  tierId                 String?
+  currentPoints          Decimal                      @default(0.00) @db.Decimal(10, 2)
+  totalEarned            Decimal                      @default(0.00) @db.Decimal(10, 2)
+  totalRedeemed          Decimal                      @default(0.00) @db.Decimal(10, 2)
+  status                 CustomerLoyaltyRecordsStatus @default(ACTIVE)
+  joinDate               DateTime                     @default(now())
+  lastActivity           DateTime                     @default(now())
+  lastPointsEarned       DateTime?
+  lastPointsRedeemed     DateTime?
+  metadata               String?                      @db.Text
+  createdAt              DateTime                     @default(now())
+  updatedAt              DateTime                     @updatedAt
+  company              Company                      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customer              Customer                     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerLoyaltyProgram CustomerLoyaltyProgram       @relation(fields: [programId], references: [id], onDelete: Cascade)
+  customerLoyaltyTier    CustomerLoyaltyTier?         @relation(fields: [tierId], references: [id])
+
+  @@unique([customerId, programId])
+  @@index([companyId])
+  @@index([customerId])
+  @@index([lastActivity])
+  @@index([programId])
+  @@index([status])
+  @@index([tierId])
+  @@map("customer_loyalty_records")
+}
+
+model CustomerLoyaltyTier {
+  id                     String                  @id @default(cuid())
+  companyId              String
+  programId              String
+  name                   String
+  nameAr                 String?
+  minPoints              Decimal                 @db.Decimal(10, 2)
+  maxPoints              Decimal?                @db.Decimal(10, 2)
+  benefits               String?                 @db.Text
+  color                  String                  @default("#6366f1")
+  icon                   String                  @default("crown")
+  priority               Int                     @default(1)
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  customerLoyaltyRecords CustomerLoyaltyRecord[]
+  company              Company                 @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customerLoyaltyProgram CustomerLoyaltyProgram  @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([minPoints])
+  @@index([programId])
+  @@map("customer_loyalty_tiers")
+}
+
+model CustomerNotificationPreference {
+  id            String    @id @default(cuid())
+  companyId     String
+  customerId    String    @unique
+  phone         String
+  orderUpdates  Boolean   @default(true)
+  promotions    Boolean   @default(false)
+  backInStock   Boolean   @default(true)
+  priceDrops    Boolean   @default(true)
+  abandonedCart Boolean   @default(true)
+  isOptedIn     Boolean   @default(true)
+  optedInAt     DateTime  @default(now())
+  optedOutAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  company     Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customer     Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, customerId])
+  @@unique([companyId, phone])
+  @@map("customer_notification_preferences")
+}
+
+model MerchantOrder {
+  id              String               @id @default(cuid())
+  merchantId      String
+  orderId         String               @unique
+  merchantOrderId String?
+  status          MerchantOrdersStatus @default(PENDING)
+  items           String               @db.Text
+  totalAmount     Decimal              @db.Decimal(10, 2)
+  shippingAddress String?              @db.Text
+  trackingNumber  String?
+  syncedAt        DateTime?
+  fulfilledAt     DateTime?
+  notes           String?              @db.Text
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  merchant       Merchant             @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  order          Order                @relation("OrderMerchantOrder", references: [id], onDelete: Cascade, fields: [orderId])
+
+  @@index([merchantId])
+  @@index([orderId])
+  @@index([status])
+  @@map("merchant_orders")
+}
+
+model MerchantProduct {
+  id            String    @id @default(cuid())
+  merchantId    String
+  productId     String
+  merchantSku   String?
+  merchantPrice Decimal   @db.Decimal(10, 2)
+  stock         Int       @default(0)
+  isActive      Boolean   @default(true)
+  syncEnabled   Boolean   @default(true)
+  lastSyncedAt  DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  merchant     Merchant  @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  product      Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([merchantId, productId])
+  @@index([merchantId])
+  @@index([productId])
+  @@map("merchant_products")
+}
+
+model Merchant {
+  id               String            @id @default(cuid())
+  companyId        String
+  name             String
+  email            String            @unique
+  phone            String?
+  address          String?           @db.Text
+  isActive         Boolean           @default(true)
+  commissionRate   Float             @default(10)
+  autoFulfill      Boolean           @default(false)
+  apiKey           String?           @unique
+  webhookUrl       String?
+  settings         String?           @db.Text
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  commissions      Commission[]
+  merchantOrders   MerchantOrder[]
+  merchantProducts MerchantProduct[]
+  company        Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([isActive])
+}
+
+model ProductVisit {
+  id          String   @id @default(cuid())
+  productId   String
+  companyId   String
+  sessionId   String
+  visitedAt   DateTime @default(now())
+  duration    Int?
+  source      String?
+  addedToCart Boolean  @default(false)
+  purchased   Boolean  @default(false)
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, productId, visitedAt])
+  @@index([sessionId, companyId])
+  @@map("product_visits")
+}
+
+/// UNUSED - Planned feature for return management
+model ReturnReasonCategory {
+  id            String                            @id @default(cuid())
+  name          String
+  defaultRole   ReturnReasonCategoriesDefaultRole @default(OTHER)
+  isActive      Boolean                           @default(true)
+  createdAt     DateTime                          @default(now())
+  updatedAt     DateTime                          @updatedAt
+  companyId     String
+  company     Company                           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  returnReasons ReturnReason[]
+
+  @@index([companyId])
+  @@map("return_reason_categories")
+}
+
+model ShippingMethod {
+  id           String       @id @default(cuid())
+  zoneId       String
+  type         String       @default("flat_rate")
+  title        String
+  isEnabled    Boolean      @default(true)
+  settings     String?      @db.LongText
+  sortOrder    Int          @default(0)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  shippingZone ShippingZone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+
+  @@index([isEnabled])
+  @@index([zoneId])
+  @@map("shipping_methods")
+}

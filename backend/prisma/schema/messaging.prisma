@@ -1,0 +1,362 @@
+model Conversation {
+  id                        String               @id @default(cuid())
+  customerId                String
+  assignedUserId            String?
+  channel                   ConversationsChannel
+  status                    ConversationsStatus  @default(ACTIVE)
+  subject                   String?
+  priority                  Int                  @default(1)
+  tags                      String?
+  lastMessageAt             DateTime?
+  lastMessagePreview        String?
+  isRead                    Boolean              @default(false)
+  metadata                  String?              @db.Text
+  companyId                 String
+  createdAt                 DateTime             @default(now())
+  updatedAt                 DateTime             @updatedAt
+  aiEnabled                 Boolean              @default(true)
+  lastMessageIsFromCustomer Boolean              @default(false)
+  unreadCount               Int                  @default(0)
+  broadcastRecipients       BroadcastRecipient[]
+  user                      User?                @relation(fields: [assignedUserId], references: [id])
+  company                   Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customer                  Customer             @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  messages                  Message[]
+  orders                    Order[]
+
+  @@index([assignedUserId])
+  @@index([companyId])
+  @@index([companyId, lastMessageAt])
+  @@index([companyId, status, lastMessageAt])
+  @@index([customerId])
+  @@index([lastMessageAt])
+  @@index([status])
+  @@index([companyId, lastMessageIsFromCustomer, status])
+  @@map("conversations")
+}
+
+/// UNUSED - Legacy feature
+model ConversationMemory {
+  id             String   @id @default(cuid())
+  conversationId String
+  senderId       String
+  userMessage    String
+  aiResponse     String
+  intent         String?
+  sentiment      String?
+  timestamp      DateTime @default(now())
+  metadata       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  companyId      String
+  company        Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, conversationId])
+  @@index([companyId])
+  @@index([companyId, senderId])
+  @@index([conversationId])
+  @@index([senderId])
+  @@index([timestamp])
+  @@map("conversation_memory")
+}
+
+model ConversationOutcome {
+  id                   String   @id @default(cuid())
+  conversationId       String
+  customerId           String
+  companyId            String
+  outcome              String
+  outcomeValue         Float?
+  responseQuality      Float?
+  customerSatisfaction Float?
+  conversionTime       Int?
+  messageCount         Int?
+  aiResponseCount      Int?
+  humanHandoff         Boolean  @default(false)
+  metadata             String?  @db.Text
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  company              Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customer             Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([conversationId])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([outcome])
+  @@map("conversation_outcomes")
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  senderId       String?
+  type           MessageType  @default(TEXT)
+  content        String       @db.Text
+  attachments    String?      @db.Text
+  metadata       String?      @db.Text
+  isFromCustomer Boolean      @default(true)
+  isRead         Boolean      @default(false)
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User?        @relation(fields: [senderId], references: [id])
+
+  @@index([conversationId, isFromCustomer, createdAt])
+  @@index([conversationId])
+  @@index([conversationId, createdAt])
+  @@index([createdAt])
+  @@index([isFromCustomer])
+  @@index([senderId])
+  @@map("messages")
+}
+
+model SentMessageStat {
+  id                    String    @id @default(cuid())
+  companyId             String
+  facebookPageId        String?
+  recipientFacebookId   String
+  recipientCustomerId   String?
+  messageId             String    @unique
+  messageContent        String?   @db.Text
+  messageType           String?
+  messageStatus         String
+  ignoredReason         String?
+  conversationId        String?
+  conversationStatus    String?
+  sentAt                DateTime  @default(now())
+  savedAt               DateTime?
+  conversationCreatedAt DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  company               Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([companyId, sentAt])
+  @@index([conversationStatus])
+  @@index([messageStatus])
+  @@index([recipientFacebookId])
+  @@index([sentAt])
+  @@map("sent_message_stats")
+}
+
+model TelegramConfig {
+  id            String   @id @default(cuid())
+  companyId     String
+  botToken      String?  @db.Text
+  botName       String?
+  botUsername   String?
+  apiId         String?  @db.Text
+  apiHash       String?  @db.Text
+  isActive      Boolean  @default(false)
+  clientSession String?  @db.Text
+  clientPhone   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  label         String   @default("Official Bot")
+  sessionString String?  @db.Text
+  type          String   @default("BOT")
+  company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, type])
+  @@index([companyId])
+  @@index([type])
+  @@map("telegram_configs")
+}
+
+model WhatsAppContact {
+  id              String          @id @default(cuid())
+  sessionId       String
+  jid             String
+  phoneNumber     String
+  name            String?
+  pushName        String?
+  profilePicUrl   String?         @db.Text
+  isGroup         Boolean         @default(false)
+  isBlocked       Boolean         @default(false)
+  customerId      String?
+  category        String?         @default("LEAD")
+  tags            String?         @db.Text
+  notes           String?         @db.Text
+  lastMessageAt   DateTime?
+  unreadCount     Int             @default(0)
+  totalMessages   Int             @default(0)
+  isArchived      Boolean         @default(false)
+  isPinned        Boolean         @default(false)
+  isMuted         Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  customer        Customer?       @relation(fields: [customerId], references: [id])
+  whatsAppSession WhatsAppSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, jid])
+  @@index([category])
+  @@index([customerId])
+  @@index([lastMessageAt])
+  @@index([phoneNumber])
+  @@index([sessionId])
+  @@map("whatsapp_contacts")
+}
+
+model WhatsAppEventLog {
+  id        String   @id @default(cuid())
+  sessionId String
+  companyId String
+  eventType String
+  eventData String?  @db.Text
+  level     String   @default("info")
+  createdAt DateTime @default(now())
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([eventType])
+  @@index([sessionId])
+  @@map("whatsapp_event_logs")
+}
+
+model WhatsAppMessage {
+  id              String                      @id @default(cuid())
+  sessionId       String
+  remoteJid       String
+  messageId       String                      @unique
+  fromMe          Boolean
+  messageType     WhatsAppMessagesMessageType @default(TEXT)
+  content         String?                     @db.Text
+  mediaUrl        String?                     @db.Text
+  mediaType       String?
+  mediaMimeType   String?
+  mediaSize       Int?
+  mediaFileName   String?
+  quotedMessageId String?
+  quotedContent   String?                     @db.Text
+  status          WhatsAppMessagesStatus      @default(SENT)
+  timestamp       DateTime
+  isAIResponse    Boolean                     @default(false)
+  aiConfidence    Float?
+  interactiveData String?                     @db.Text
+  metadata        String?                     @db.Text
+  createdAt       DateTime                    @default(now())
+  updatedAt       DateTime                    @updatedAt
+  senderId        String?
+  participant     String?
+  user            User?                       @relation(fields: [senderId], references: [id])
+  whatsAppSession WhatsAppSession             @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([remoteJid])
+  @@index([senderId])
+  @@index([sessionId])
+  @@index([sessionId, remoteJid])
+  @@index([sessionId, timestamp])
+  @@index([timestamp])
+  @@map("whatsapp_messages")
+}
+
+model WhatsAppQuickReply {
+  id         String    @id @default(cuid())
+  companyId  String
+  title      String
+  shortcut   String?
+  content    String    @db.Text
+  category   String    @default("general")
+  variables  String?   @db.Text
+  mediaUrl   String?   @db.Text
+  mediaType  String?
+  usageCount Int       @default(0)
+  lastUsedAt DateTime?
+  isActive   Boolean   @default(true)
+  sortOrder  Int       @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  company    Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, shortcut])
+  @@index([category])
+  @@index([companyId])
+  @@index([isActive])
+  @@map("whatsapp_quick_replies")
+}
+
+model WhatsAppSession {
+  id                  String                 @id @default(cuid())
+  companyId           String
+  name                String
+  phoneNumber         String?
+  status              WhatsAppSessionsStatus @default(DISCONNECTED)
+  lastConnectedAt     DateTime?
+  lastDisconnectedAt  DateTime?
+  authState           String?                @db.LongText
+  isDefault           Boolean                @default(false)
+  aiEnabled           Boolean                @default(true)
+  autoReply           Boolean                @default(false)
+  aiMode              String                 @default("suggest")
+  welcomeMessage      String?                @db.Text
+  awayMessage         String?                @db.Text
+  workingHoursEnabled Boolean                @default(false)
+  workingHours        String?                @db.Text
+  metadata            String?                @db.Text
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  profileName         String?
+  profilePictureUrl   String?                @db.Text
+  profileStatus       String?
+  whatsAppContacts    WhatsAppContact[]
+  whatsAppMessages    WhatsAppMessage[]
+  company             Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  whatsAppStatuses    WhatsAppStatus[]
+
+  @@index([companyId])
+  @@index([phoneNumber])
+  @@index([status])
+  @@map("whatsapp_sessions")
+}
+
+model WhatsAppSettings {
+  id                   String   @id @default(cuid())
+  companyId            String   @unique
+  isEnabled            Boolean  @default(true)
+  maxSessions          Int      @default(3)
+  notificationSound    Boolean  @default(true)
+  browserNotifications Boolean  @default(true)
+  defaultAIMode        String   @default("suggest")
+  aiWelcomeEnabled     Boolean  @default(false)
+  aiAwayEnabled        Boolean  @default(false)
+  maxImageSize         Int      @default(16)
+  maxVideoSize         Int      @default(64)
+  maxDocumentSize      Int      @default(100)
+  autoCompressImages   Boolean  @default(true)
+  autoArchiveDays      Int?
+  metadata             String?  @db.Text
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  company            Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("whatsapp_settings")
+}
+
+model WhatsAppStatus {
+  id              String             @id @default(cuid())
+  sessionId       String
+  remoteJid       String
+  messageId       String             @unique
+  type            WhatsAppStatusType @default(TEXT)
+  content         String?            @db.Text
+  mediaUrl        String?            @db.Text
+  mediaType       String?
+  mediaMimeType   String?
+  timestamp       DateTime
+  expiresAt       DateTime
+  isViewed        Boolean            @default(false)
+  viewedAt        DateTime?
+  metadata        String?            @db.Text
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  whatsAppSession WhatsAppSession    @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+  @@index([remoteJid])
+  @@index([sessionId])
+  @@index([timestamp])
+  @@map("whatsapp_statuses")
+}

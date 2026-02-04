@@ -1,0 +1,609 @@
+model DevNotification {
+  id               String        @id @default(cuid())
+  memberId         String
+  taskId           String?
+  projectId        String?
+  type             String
+  title            String
+  message          String        @db.Text
+  isRead           Boolean       @default(false)
+  readAt           DateTime?
+  link             String?
+  createdAt        DateTime      @default(now())
+  dev_team_member DevTeamMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([isRead])
+  @@index([memberId])
+  @@map("dev_notifications")
+}
+
+model DevProject {
+  id               String              @id @default(cuid())
+  name             String
+  description      String              @db.Text
+  status           DevProjectsStatus   @default(PLANNING)
+  priority         DevProjectsPriority @default(MEDIUM)
+  color            String              @default("#6366f1")
+  icon             String?
+  startDate        DateTime?
+  endDate          DateTime?
+  progress         Int                 @default(0)
+  managerId        String?
+  teamMembers      String?             @db.LongText
+  tags             String?             @db.LongText
+  repository       String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  dev_team_member DevTeamMember?      @relation(fields: [managerId], references: [id])
+  dev_releases     DevRelease[]
+  dev_tasks        DevTask[]
+
+  companyRel   Company? @relation(fields: [companyRelId], references: [id])
+  companyRelId String?
+
+  @@index([managerId])
+  @@index([priority])
+  @@index([status])
+  @@map("dev_projects")
+}
+
+model DevRelease {
+  id           String            @id @default(cuid())
+  version      String
+  name         String
+  description  String?           @db.Text
+  status       DevReleasesStatus @default(PLANNING)
+  releaseDate  DateTime?
+  changelog    String?           @db.LongText
+  projectId    String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  dev_project DevProject?       @relation(fields: [projectId], references: [id])
+  dev_tasks    DevTask[]
+
+  @@index([projectId])
+  @@index([releaseDate])
+  @@index([status])
+  @@map("dev_releases")
+}
+
+model DevTaskActivity {
+  id               String         @id @default(cuid())
+  taskId           String
+  memberId         String?
+  action           String
+  field            String?
+  oldValue         String?        @db.Text
+  newValue         String?        @db.Text
+  description      String?        @db.Text
+  createdAt        DateTime       @default(now())
+  dev_team_member DevTeamMember? @relation(fields: [memberId], references: [id])
+  dev_task        DevTask        @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([action])
+  @@index([createdAt])
+  @@index([memberId])
+  @@index([taskId])
+  @@map("dev_task_activities")
+}
+
+/// UNUSED - Planned feature for dev task attachments
+model DevTaskAttachment {
+  id           String   @id @default(cuid())
+  taskId       String
+  fileName     String
+  originalName String
+  fileSize     Int
+  fileType     String
+  filePath     String
+  uploadedBy   String
+  createdAt    DateTime @default(now())
+  dev_task    DevTask  @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId])
+  @@map("dev_task_attachments")
+}
+
+/// UNUSED - Planned feature for dev task checklists
+model DevTaskChecklistItem {
+  id               String           @id @default(cuid())
+  checklistId      String
+  content          String
+  isCompleted      Boolean          @default(false)
+  completedAt      DateTime?
+  completedBy      String?
+  position         Int              @default(0)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  devTaskChecklist DevTaskChecklist @relation(fields: [checklistId], references: [id], onDelete: Cascade)
+
+  @@index([checklistId])
+  @@map("dev_task_checklist_items")
+}
+
+/// UNUSED - Planned feature for dev task checklists
+model DevTaskChecklist {
+  id                    String                 @id @default(cuid())
+  taskId                String
+  title                 String
+  position              Int                    @default(0)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  devTaskChecklistItems DevTaskChecklistItem[]
+  dev_task             DevTask                @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId])
+  @@map("dev_task_checklists")
+}
+
+model DevTaskComment {
+  id                      String           @id @default(cuid())
+  taskId                  String
+  authorId                String
+  content                 String           @db.Text
+  parentCommentId         String?
+  mentions                String?          @db.LongText
+  isEdited                Boolean          @default(false)
+  editedAt                DateTime?
+  createdAt               DateTime         @default(now())
+  updatedAt               DateTime         @updatedAt
+  dev_team_member        DevTeamMember    @relation(fields: [authorId], references: [id])
+  devTaskComment          DevTaskComment?  @relation("dev_task_commentsTodev_task_comments", fields: [parentCommentId], references: [id])
+  other_dev_task_comments DevTaskComment[] @relation("dev_task_commentsTodev_task_comments")
+  dev_task               DevTask          @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([parentCommentId])
+  @@index([taskId])
+  @@map("dev_task_comments")
+}
+
+model DevTaskWatcher {
+  id               String        @id @default(cuid())
+  taskId           String
+  memberId         String
+  createdAt        DateTime      @default(now())
+  dev_team_member DevTeamMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  dev_task        DevTask       @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, memberId])
+  @@index([memberId])
+  @@index([taskId])
+  @@map("dev_task_watchers")
+}
+
+model DevTask {
+  id                                                      String              @id @default(cuid())
+  title                                                   String
+  description                                             String              @db.Text
+  type                                                    DevTaskType         @default(FEATURE)
+  status                                                  DevTasksStatus      @default(BACKLOG)
+  priority                                                DevTasksPriority    @default(MEDIUM)
+  component                                               String?
+  assigneeId                                              String?
+  reporterId                                              String
+  projectId                                               String?
+  releaseId                                               String?
+  parentTaskId                                            String?
+  order                                                   Int                 @default(0)
+  dueDate                                                 DateTime?
+  startDate                                               DateTime?
+  completedDate                                           DateTime?
+  estimatedHours                                          Float               @default(0)
+  actualHours                                             Float               @default(0)
+  progress                                                Int                 @default(0)
+  tags                                                    String?             @db.LongText
+  labels                                                  String?             @db.LongText
+  gitBranch                                               String?
+  gitPR                                                   String?
+  companyId                                               String?
+  ticketId                                                String?
+  createdAt                                               DateTime            @default(now())
+  updatedAt                                               DateTime            @updatedAt
+  acceptanceCriteria                                      String?             @db.Text
+  businessValue                                           String?             @db.Text
+  xpEarned                                                Int?
+  relatedLinks                                            String?             @db.LongText
+  devTaskActivities                                       DevTaskActivity[]
+  devTaskAttachments                                      DevTaskAttachment[]
+  devTaskChecklists                                       DevTaskChecklist[]
+  devTaskComments                                         DevTaskComment[]
+  devTaskWatchers                                         DevTaskWatcher[]
+  dev_team_members_dev_tasks_assigneeIdTodev_team_members DevTeamMember?      @relation("dev_tasks_assigneeIdTodev_team_members", fields: [assigneeId], references: [id])
+  dev_task                                               DevTask?            @relation("dev_tasksTodev_tasks", fields: [parentTaskId], references: [id])
+  other_dev_tasks                                         DevTask[]           @relation("dev_tasksTodev_tasks")
+  dev_project                                            DevProject?         @relation(fields: [projectId], references: [id])
+  dev_release                                            DevRelease?         @relation(fields: [releaseId], references: [id])
+  dev_team_members_dev_tasks_reporterIdTodev_team_members DevTeamMember       @relation("dev_tasks_reporterIdTodev_team_members", fields: [reporterId], references: [id])
+  devTimeLogs                                             DevTimeLog[]
+
+  companyRel   Company? @relation(fields: [companyRelId], references: [id])
+  companyRelId String?
+
+  @@index([assigneeId])
+  @@index([component])
+  @@index([dueDate])
+  @@index([order])
+  @@index([parentTaskId])
+  @@index([priority])
+  @@index([projectId])
+  @@index([releaseId])
+  @@index([reporterId])
+  @@index([status])
+  @@index([type])
+  @@map("dev_tasks")
+}
+
+model Project {
+  id          String           @id @default(cuid())
+  name        String
+  description String           @db.Text
+  status      ProjectsStatus   @default(PLANNING)
+  priority    ProjectsPriority @default(MEDIUM)
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Decimal?         @db.Decimal(10, 2)
+  spentBudget Decimal?         @default(0.00) @db.Decimal(10, 2)
+  progress    Int              @default(0)
+  managerId   String
+  teamMembers String?          @db.LongText
+  tags        String?          @db.LongText
+  companyId   String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  company   Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user       User             @relation(fields: [managerId], references: [id])
+  tasks       Task[]
+
+  @@index([companyId])
+  @@index([managerId])
+  @@index([priority])
+  @@index([status])
+}
+
+model DevSystemSettings {
+  id                    String   @id @default("default") // Singleton
+  taskStatuses          String?  @db.LongText // JSON: Custom status definitions
+  taskPriorities        String?  @db.LongText // JSON: Custom priority definitions
+  componentMappings     String?  @db.LongText // JSON: Component -> MemberId
+  permissions           String?  @db.LongText // JSON: Role -> Permissions
+  autoTestingSubtask    Boolean  @default(false)
+  autoTestingAssigneeId String?
+  leaderboardSettings   String?  @db.LongText // JSON: Leaderboard & Gamification
+  taskDetailsVisibility String?  @db.LongText // JSON: Task view settings
+  automationSettings    String?  @db.LongText // JSON: Automation rules
+  updatedAt             DateTime @updatedAt
+
+  @@map("dev_system_settings")
+}
+
+model TaskActivity {
+  id          String   @id @default(cuid())
+  taskId      String
+  userId      String
+  action      String
+  field       String?
+  oldValue    String?  @db.Text
+  newValue    String?  @db.Text
+  description String?  @db.Text
+  companyId   String
+  createdAt   DateTime @default(now())
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  task       Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([taskId])
+  @@index([userId])
+  @@map("task_activities")
+}
+
+model TaskAttachment {
+  id            String   @id @default(cuid())
+  taskId        String
+  userId        String
+  fileName      String
+  originalName  String
+  fileSize      Int
+  fileType      String
+  filePath      String
+  downloadCount Int      @default(0)
+  companyId     String
+  createdAt     DateTime @default(now())
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  task         Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id])
+
+  @@index([companyId])
+  @@index([taskId])
+  @@index([userId])
+  @@map("task_attachments")
+}
+
+model TaskChecklistItem {
+  id            String        @id @default(cuid())
+  checklistId   String
+  content       String
+  isCompleted   Boolean       @default(false)
+  completedAt   DateTime?
+  completedBy   String?
+  position      Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  taskChecklist TaskChecklist @relation(fields: [checklistId], references: [id], onDelete: Cascade)
+  user         User?         @relation(fields: [completedBy], references: [id])
+
+  @@index([checklistId])
+  @@index([completedBy])
+  @@map("task_checklist_items")
+}
+
+/// UNUSED - Planned feature for task checklists
+model TaskChecklist {
+  id                 String              @id @default(cuid())
+  taskId             String
+  title              String
+  position           Int                 @default(0)
+  companyId          String
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  taskChecklistItems TaskChecklistItem[]
+  company          Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  task              Task                @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([taskId])
+  @@map("task_checklists")
+}
+
+model TaskComment {
+  id                  String        @id @default(cuid())
+  taskId              String
+  userId              String
+  content             String        @db.Text
+  parentCommentId     String?
+  mentions            String?       @db.LongText
+  isEdited            Boolean       @default(false)
+  editedAt            DateTime?
+  companyId           String
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  company           Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  taskComment         TaskComment?  @relation("task_commentsTotask_comments", fields: [parentCommentId], references: [id])
+  other_task_comments TaskComment[] @relation("task_commentsTotask_comments")
+  task               Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  users              User          @relation(fields: [userId], references: [id])
+
+  @@index([companyId])
+  @@index([parentCommentId])
+  @@index([taskId])
+  @@index([userId])
+  @@map("task_comments")
+}
+
+/// UNUSED - Planned feature for task dependencies
+model TaskDependency {
+  id                                         String   @id @default(cuid())
+  taskId                                     String
+  dependsOnId                                String
+  type                                       String   @default("blocked_by")
+  companyId                                  String
+  createdAt                                  DateTime @default(now())
+  company                                  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  tasks_task_dependencies_dependsOnIdTotasks Task     @relation("task_dependencies_dependsOnIdTotasks", fields: [dependsOnId], references: [id], onDelete: Cascade)
+  tasks_task_dependencies_taskIdTotasks      Task     @relation("task_dependencies_taskIdTotasks", fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, dependsOnId])
+  @@index([companyId])
+  @@index([dependsOnId])
+  @@index([taskId])
+  @@map("task_dependencies")
+}
+
+model TaskNotification {
+  id        String    @id @default(cuid())
+  userId    String
+  taskId    String?
+  projectId String?
+  type      String
+  title     String
+  message   String    @db.Text
+  isRead    Boolean   @default(false)
+  readAt    DateTime?
+  link      String?
+  companyId String
+  createdAt DateTime  @default(now())
+  company Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([isRead])
+  @@index([userId])
+  @@map("task_notifications")
+}
+
+/// UNUSED - Planned feature for task templates
+model TaskTemplate {
+  id              String                       @id @default(cuid())
+  name            String
+  description     String?                      @db.Text
+  defaultStatus   TaskTemplatesDefaultStatus   @default(PENDING)
+  defaultPriority TaskTemplatesDefaultPriority @default(MEDIUM)
+  type            String                       @default("general")
+  estimatedHours  Int                          @default(0)
+  tags            String?                      @db.LongText
+  checklist       String?                      @db.LongText
+  isPublic        Boolean                      @default(false)
+  createdBy       String
+  companyId       String
+  createdAt       DateTime                     @default(now())
+  updatedAt       DateTime                     @updatedAt
+  company       Company                      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user           User                         @relation(fields: [createdBy], references: [id])
+
+  @@index([companyId])
+  @@index([createdBy])
+  @@map("task_templates")
+}
+
+model TaskWatcher {
+  id        String   @id @default(cuid())
+  taskId    String
+  userId    String
+  companyId String
+  createdAt DateTime @default(now())
+  company Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  task     Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([taskId, userId])
+  @@index([companyId])
+  @@index([taskId])
+  @@index([userId])
+  @@map("task_watchers")
+}
+
+model Task {
+  id                                                     String           @id @default(cuid())
+  projectId                                              String?
+  title                                                  String
+  description                                            String           @db.Text
+  status                                                 TasksStatus      @default(PENDING)
+  priority                                               TasksPriority    @default(MEDIUM)
+  type                                                   String           @default("general")
+  assignedTo                                             String
+  createdBy                                              String
+  dueDate                                                DateTime?
+  estimatedHours                                         Int              @default(0)
+  actualHours                                            Int              @default(0)
+  progress                                               Int              @default(0)
+  tags                                                   String?          @db.LongText
+  dependencies                                           String?          @db.LongText
+  companyId                                              String
+  createdAt                                              DateTime         @default(now())
+  updatedAt                                              DateTime         @updatedAt
+  categoryId                                             String?
+  color                                                  String?
+  completedDate                                          DateTime?
+  isRecurring                                            Boolean          @default(false)
+  order                                                  Int              @default(0)
+  parentTaskId                                           String?
+  recurringRule                                          String?          @db.LongText
+  startDate                                              DateTime?
+  taskActivities                                         TaskActivity[]
+  taskAttachments                                        TaskAttachment[]
+  taskChecklists                                         TaskChecklist[]
+  taskComments                                           TaskComment[]
+  task_dependencies_task_dependencies_dependsOnIdTotasks TaskDependency[] @relation("task_dependencies_dependsOnIdTotasks")
+  task_dependencies_task_dependencies_taskIdTotasks      TaskDependency[] @relation("task_dependencies_taskIdTotasks")
+  taskWatchers                                           TaskWatcher[]
+  assignee                                             User             @relation("tasks_assignedToTousers", fields: [assignedTo], references: [id])
+  taskCategory                                           TaskCategory?    @relation(fields: [categoryId], references: [id])
+  company                                              Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  creator                                              User             @relation("tasks_createdByTousers", fields: [createdBy], references: [id])
+  task                                                  Task?            @relation("tasksTotasks", fields: [parentTaskId], references: [id])
+  other_tasks                                            Task[]           @relation("tasksTotasks")
+  project                                               Project?         @relation(fields: [projectId], references: [id])
+  time_entries                                           TimeEntry[]
+
+  @@index([assignedTo])
+  @@index([categoryId])
+  @@index([companyId])
+  @@index([createdBy])
+  @@index([dueDate])
+  @@index([order])
+  @@index([parentTaskId])
+  @@index([priority])
+  @@index([projectId])
+  @@index([status])
+}
+
+model TimeEntry {
+  id          String    @id @default(cuid())
+  taskId      String
+  userId      String
+  startTime   DateTime
+  endTime     DateTime?
+  duration    Int       @default(0)
+  description String?   @db.Text
+  isBillable  Boolean   @default(false)
+  hourlyRate  Decimal?  @db.Decimal(10, 2)
+  isRunning   Boolean   @default(false)
+  companyId   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  task       Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id])
+
+  @@index([companyId])
+  @@index([startTime])
+  @@index([taskId])
+  @@index([userId])
+}
+
+model DevTeamMember {
+  id                                               String            @id @default(cuid())
+  userId                                           String            @unique
+  role                                             String            @default("developer")
+  department                                       String?
+  skills                                           String?           @db.LongText
+  availability                                     String            @default("available")
+  isActive                                         Boolean           @default(true)
+  createdAt                                        DateTime          @default(now())
+  updatedAt                                        DateTime          @updatedAt
+  level                                            Int               @default(1)
+  xp                                               Int               @default(0)
+  dailyTarget                                      Int?
+  hourlyRate                                       Decimal?          @db.Decimal(10, 2)
+  weeklyTarget                                     Int?
+  ai_chat_sessions                                 AIChatSession[]
+  dev_member_badges                                DevMemberBadge[]
+  dev_notifications                                DevNotification[]
+  dev_projects                                     DevProject[]
+  devTaskActivities                                DevTaskActivity[]
+  devTaskComments                                  DevTaskComment[]
+  devTaskWatchers                                  DevTaskWatcher[]
+  dev_tasks_dev_tasks_assigneeIdTodev_team_members DevTask[]         @relation("dev_tasks_assigneeIdTodev_team_members")
+  dev_tasks_dev_tasks_reporterIdTodev_team_members DevTask[]         @relation("dev_tasks_reporterIdTodev_team_members")
+  user                                            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  devTimeLogs                                      DevTimeLog[]
+
+  companyRel   Company? @relation(fields: [companyRelId], references: [id])
+  companyRelId String?
+
+  @@index([isActive])
+  @@index([role])
+  @@index([userId])
+  @@map("dev_team_members")
+}
+
+model DevTimeLog {
+  id               String        @id @default(cuid())
+  taskId           String
+  memberId         String
+  startTime        DateTime
+  endTime          DateTime?
+  duration         Int           @default(0)
+  description      String?       @db.Text
+  isBillable       Boolean       @default(false)
+  isRunning        Boolean       @default(false)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  activityType     String?
+  isPaused         Boolean       @default(false)
+  pauseDuration    Int           @default(0)
+  pauseHistory     String?       @db.LongText
+  pausedAt         DateTime?
+  dev_team_member DevTeamMember @relation(fields: [memberId], references: [id])
+  dev_task        DevTask       @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([isPaused])
+  @@index([isRunning])
+  @@index([memberId])
+  @@index([taskId])
+  @@map("dev_time_logs")
+}

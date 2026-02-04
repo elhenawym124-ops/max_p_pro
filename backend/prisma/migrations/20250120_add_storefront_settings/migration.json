@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "description": "Add StorefrontSettings model for managing storefront features",
+  "steps": [
+    {
+      "kind": "CreateTable",
+      "table": "storefront_settings"
+    }
+  ]
+}
+

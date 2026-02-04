@@ -1,0 +1,474 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "createdAt": "2025-11-08T07:37:02.151Z",
+    "description": "أسئلة مستخرجة من بيانات شركة cmem8ayyr004cufakqkcsyn97",
+    "totalQuestions": 45,
+    "companyId": "cmem8ayyr004cufakqkcsyn97"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "عندك كوتشي سوان سكوتشي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن كوتشي سوان سكوتشي",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmfx3wrmo000luflwjs7jb0a4"
+    },
+    {
+      "id": 2,
+      "question": "كام سعر كوتشي سوان سكوتشي؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر كوتشي سوان سكوتشي",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmfx3wrmo000luflwjs7jb0a4"
+    },
+    {
+      "id": 3,
+      "question": "ممكن صور كوتشي سوان سكوتشي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور كوتشي سوان سكوتشي",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmfx3wrmo000luflwjs7jb0a4"
+    },
+    {
+      "id": 4,
+      "question": "عندك كوتشي سوان سكوتشي في مقاس كبير؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "التحقق من توفر المقاس",
+      "difficulty": "medium",
+      "category": "product_inquiry",
+      "basedOn": "product:cmfx3wrmo000luflwjs7jb0a4,variant:cmfx48a7d0009uf78m1e6v6re"
+    },
+    {
+      "id": 5,
+      "question": "عندك كوتشي شانكي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن كوتشي شانكي",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgq8kpg3004ajujaspfzwl29"
+    },
+    {
+      "id": 6,
+      "question": "كام سعر كوتشي شانكي؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر كوتشي شانكي",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgq8kpg3004ajujaspfzwl29"
+    },
+    {
+      "id": 7,
+      "question": "ممكن صور كوتشي شانكي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور كوتشي شانكي",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgq8kpg3004ajujaspfzwl29"
+    },
+    {
+      "id": 8,
+      "question": "عندك Shiny Half Boot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن Shiny Half Boot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mpj000djufgbe2j1gn3"
+    },
+    {
+      "id": 9,
+      "question": "كام سعر Shiny Half Boot؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر Shiny Half Boot",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqf0mpj000djufgbe2j1gn3"
+    },
+    {
+      "id": 10,
+      "question": "ممكن صور Shiny Half Boot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور Shiny Half Boot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mpj000djufgbe2j1gn3"
+    },
+    {
+      "id": 11,
+      "question": "عندك GlamBoot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن GlamBoot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mrj000fjufgqkk7i9bm"
+    },
+    {
+      "id": 12,
+      "question": "كام سعر GlamBoot؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر GlamBoot",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqf0mrj000fjufgqkk7i9bm"
+    },
+    {
+      "id": 13,
+      "question": "ممكن صور GlamBoot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور GlamBoot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mrj000fjufgqkk7i9bm"
+    },
+    {
+      "id": 14,
+      "question": "عندك Belle Boot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن Belle Boot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mt0000hjufg49799929"
+    },
+    {
+      "id": 15,
+      "question": "كام سعر Belle Boot؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر Belle Boot",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqf0mt0000hjufg49799929"
+    },
+    {
+      "id": 16,
+      "question": "ممكن صور Belle Boot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور Belle Boot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mt0000hjufg49799929"
+    },
+    {
+      "id": 17,
+      "question": "عندك Fiora Fur Boot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن Fiora Fur Boot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mun000jjufgh1vf8w6b"
+    },
+    {
+      "id": 18,
+      "question": "كام سعر Fiora Fur Boot؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر Fiora Fur Boot",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqf0mun000jjufgh1vf8w6b"
+    },
+    {
+      "id": 19,
+      "question": "ممكن صور Fiora Fur Boot؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور Fiora Fur Boot",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqf0mun000jjufgh1vf8w6b"
+    },
+    {
+      "id": 20,
+      "question": "عندك 80/091 سابوه حريمي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن 80/091 سابوه حريمي",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhrl000fjuu3rnbgrvc2"
+    },
+    {
+      "id": 21,
+      "question": "كام سعر 80/091 سابوه حريمي؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر 80/091 سابوه حريمي",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqlhhrl000fjuu3rnbgrvc2"
+    },
+    {
+      "id": 22,
+      "question": "ممكن صور 80/091 سابوه حريمي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور 80/091 سابوه حريمي",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhrl000fjuu3rnbgrvc2"
+    },
+    {
+      "id": 23,
+      "question": "عندك بالرينا 83/176؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن بالرينا 83/176",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhu0000hjuu3yu6h5wlf"
+    },
+    {
+      "id": 24,
+      "question": "كام سعر بالرينا 83/176؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر بالرينا 83/176",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqlhhu0000hjuu3yu6h5wlf"
+    },
+    {
+      "id": 25,
+      "question": "ممكن صور بالرينا 83/176؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور بالرينا 83/176",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhu0000hjuu3yu6h5wlf"
+    },
+    {
+      "id": 26,
+      "question": "عندك هاڤ 92/287؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن هاڤ 92/287",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhvs000jjuu3949zbkm7"
+    },
+    {
+      "id": 27,
+      "question": "كام سعر هاڤ 92/287؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر هاڤ 92/287",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqlhhvs000jjuu3949zbkm7"
+    },
+    {
+      "id": 28,
+      "question": "ممكن صور هاڤ 92/287؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور هاڤ 92/287",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhvs000jjuu3949zbkm7"
+    },
+    {
+      "id": 29,
+      "question": "عندك هاڤ90/068؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن هاڤ90/068",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhxo000ljuu30kux39xa"
+    },
+    {
+      "id": 30,
+      "question": "كام سعر هاڤ90/068؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر هاڤ90/068",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqlhhxo000ljuu30kux39xa"
+    },
+    {
+      "id": 31,
+      "question": "ممكن صور هاڤ90/068؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور هاڤ90/068",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhxo000ljuu30kux39xa"
+    },
+    {
+      "id": 32,
+      "question": "عندك هاف حريمي 90/420؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن هاف حريمي 90/420",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhzj000njuu3w0j4z5c2"
+    },
+    {
+      "id": 33,
+      "question": "كام سعر هاف حريمي 90/420؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر هاف حريمي 90/420",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqlhhzj000njuu3w0j4z5c2"
+    },
+    {
+      "id": 34,
+      "question": "ممكن صور هاف حريمي 90/420؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور هاف حريمي 90/420",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhhzj000njuu3w0j4z5c2"
+    },
+    {
+      "id": 35,
+      "question": "عندك هاف UGG؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض معلومات عن هاف UGG",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhi1e000pjuu3lx0osqlf"
+    },
+    {
+      "id": 36,
+      "question": "كام سعر هاف UGG؟",
+      "expectedIntent": "price_inquiry",
+      "context": null,
+      "expectedResponse": "عرض سعر هاف UGG",
+      "difficulty": "easy",
+      "category": "price_inquiry",
+      "basedOn": "product:cmgqlhi1e000pjuu3lx0osqlf"
+    },
+    {
+      "id": 37,
+      "question": "ممكن صور هاف UGG؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض صور هاف UGG",
+      "difficulty": "easy",
+      "category": "product_inquiry",
+      "basedOn": "product:cmgqlhi1e000pjuu3lx0osqlf"
+    },
+    {
+      "id": 38,
+      "question": "عندك إيه في سلبيرات حريمي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض منتجات فئة سلبيرات حريمي",
+      "difficulty": "medium",
+      "category": "product_inquiry",
+      "basedOn": "category:cmemy6tkm0021ufswu203cxto"
+    },
+    {
+      "id": 39,
+      "question": "عندك إيه في احذيه حريمي؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض منتجات فئة احذيه حريمي",
+      "difficulty": "medium",
+      "category": "product_inquiry",
+      "basedOn": "category:cmfay16pd003zjuervv9j07e8"
+    },
+    {
+      "id": 40,
+      "question": "عندك إيه في Woman's Shoes؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض منتجات فئة Woman's Shoes",
+      "difficulty": "medium",
+      "category": "product_inquiry",
+      "basedOn": "category:cmgqlhhpt000djuu3p48pz53x"
+    },
+    {
+      "id": 41,
+      "question": "عندك إيه في بوتات؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض منتجات فئة بوتات",
+      "difficulty": "medium",
+      "category": "product_inquiry",
+      "basedOn": "category:cmhajiqxr01chjuszru6kqq8a"
+    },
+    {
+      "id": 42,
+      "question": "عندك إيه في كوتشيات؟",
+      "expectedIntent": "product_inquiry",
+      "context": null,
+      "expectedResponse": "عرض منتجات فئة كوتشيات",
+      "difficulty": "medium",
+      "category": "product_inquiry",
+      "basedOn": "category:cmhbps66j002hjulxf41u2g37"
+    },
+    {
+      "id": 43,
+      "question": "السلام عليكم",
+      "expectedIntent": "greeting",
+      "context": null,
+      "expectedResponse": "رد ترحيبي",
+      "difficulty": "easy",
+      "category": "greeting",
+      "basedOn": "company:general"
+    },
+    {
+      "id": 44,
+      "question": "الشحن كام؟",
+      "expectedIntent": "shipping_inquiry",
+      "context": null,
+      "expectedResponse": "معلومات عن الشحن",
+      "difficulty": "easy",
+      "category": "shipping_inquiry",
+      "basedOn": "company:general"
+    },
+    {
+      "id": 45,
+      "question": "ازاي أدفع؟",
+      "expectedIntent": "general_inquiry",
+      "context": null,
+      "expectedResponse": "معلومات عن طرق الدفع",
+      "difficulty": "easy",
+      "category": "support_inquiry",
+      "basedOn": "company:general"
+    }
+  ],
+  "statistics": {
+    "byCategory": {
+      "product_inquiry": 30,
+      "price_inquiry": 12,
+      "greeting": 1,
+      "shipping_inquiry": 1,
+      "support_inquiry": 1
+    },
+    "byDifficulty": {
+      "easy": 39,
+      "medium": 6
+    }
+  }
+}

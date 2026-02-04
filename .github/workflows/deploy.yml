@@ -1,0 +1,325 @@
+name: Deploy to Server
+# Trigger: 2026-02-01 13:35 (Fix: Extended timeouts and verbosity)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # للسماح بالتشغيل اليدوي
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  deploy:
+    name: Deploy Frontend & Backend
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: |
+            frontend/package-lock.json
+            backend/package-lock.json
+
+      # Build Frontend
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: |
+          npm ci || npm install
+        continue-on-error: false
+
+      - name: Build Frontend
+        working-directory: ./frontend
+        run: |
+          npm run build
+          echo "📂 Listing build files:"
+          ls -R dist | head -n 20
+        env:
+          NODE_OPTIONS: '--max-old-space-size=6144'
+        continue-on-error: false
+
+      # Build Backend (if needed)
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: |
+          npm ci --only=production || npm install --only=production
+        continue-on-error: false
+
+      # Packaging for reliable transfer
+      - name: Package Assets
+        run: |
+          tar -czf frontend.tar.gz -C frontend/dist .
+          tar -czf backend.tar.gz --exclude="backend/node_modules/.cache" --exclude="backend/logs" --exclude="backend/*.log" backend
+          ls -lh *.tar.gz
+
+      # Verify secrets exist
+      - name: Verify Secrets
+        run: |
+          if [ -z "${{ secrets.SERVER_HOST }}" ]; then
+            echo "❌ SERVER_HOST is missing"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SERVER_USER }}" ]; then
+            echo "❌ SERVER_USER is missing"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SERVER_SSH_KEY }}" ]; then
+            echo "❌ SERVER_SSH_KEY is missing"
+            exit 1
+          fi
+          echo "✅ All secrets are present"
+
+      # Test SSH Connection & Setup Staging
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          timeout: 600s
+          command_timeout: 10m
+          debug: true
+          request_pty: true
+          script: |
+            echo "✅ SSH connection successful"
+            echo "👤 User: $(whoami)"
+            echo "🏠 Home: $HOME"
+            echo "📁 Current dir: $(pwd)"
+            
+            echo "🧹 Running early cleanup to free space..."
+            sudo pm2 flush || echo "⚠️ PM2 flush failed"
+            sudo journalctl --vacuum-time=1d || echo "⚠️ Journalctl cleanup failed"
+            sudo npm cache clean --force || echo "⚠️ NPM cache cleanup failed"
+            
+            echo "🚀 Creating staging directory..."
+            rm -rf $HOME/deploy_staging
+            mkdir -p $HOME/deploy_staging/backend
+            mkdir -p $HOME/deploy_staging/frontend
+            echo "📊 Disk Space after cleanup:"
+            df -h $HOME
+            echo "🔒 Permissions for $HOME/deploy_staging:"
+            ls -ld $HOME/deploy_staging
+        continue-on-error: false
+
+      # Deploy Tarballs to Server
+      - name: Deploy Tarballs to Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          timeout: 600s
+          command_timeout: 20m
+          debug: true
+          source: "*.tar.gz"
+          target: "deploy_staging"
+        continue-on-error: false
+
+      - name: Run Deployment Script on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          timeout: 600s
+          command_timeout: 25m
+          debug: true
+          request_pty: true
+          script: |
+            set -ev
+            export NODE_ENV=production
+            echo "🧹 Running automatic cleanup to free space..."
+            sudo pm2 flush || echo "⚠️ PM2 flush failed"
+            sudo journalctl --vacuum-time=1d || echo "⚠️ Journalctl cleanup failed"
+            sudo npm cache clean --force || echo "⚠️ NPM cache cleanup failed"
+            
+            echo "🚀 Starting deployment on server..."
+            
+            # Diagnostic listing
+            echo "📋 Staging directory content:"
+            ls -R $HOME/deploy_staging | head -n 50
+            
+            # Create directories with sudo if needed
+            sudo mkdir -p /var/www/front_maxP
+            sudo mkdir -p /var/www/back_maxP
+            
+            # Move frontend files from staging
+            if [ -f "$HOME/deploy_staging/frontend.tar.gz" ]; then
+              echo "📦 Extracting frontend files from staging..."
+              sudo rm -rf /var/www/front_maxP/dist
+              sudo mkdir -p /var/www/front_maxP/dist
+              sudo tar -xzf $HOME/deploy_staging/frontend.tar.gz -C /var/www/front_maxP/dist
+              sudo chown -R $USER:$USER /var/www/front_maxP/dist
+              echo "✅ Frontend extracted successfully"
+            elif [ -d "$HOME/deploy_staging/frontend/dist" ]; then
+              echo "📦 Moving frontend files from old staging format..."
+              sudo rm -rf /var/www/front_maxP/dist
+              sudo mv $HOME/deploy_staging/frontend/dist /var/www/front_maxP/dist
+              sudo chown -R $USER:$USER /var/www/front_maxP/dist
+              echo "✅ Frontend moved successfully"
+            elif [ -d "/var/www/frontend/dist" ]; then
+              echo "📦 Moving frontend files from legacy location..."
+              sudo rm -rf /var/www/front_maxP/dist
+              sudo mv /var/www/frontend/dist /var/www/front_maxP/dist
+              sudo rm -rf /var/www/frontend
+              echo "✅ Frontend moved successfully from legacy"
+            else
+              echo "⚠️ Frontend files not found, skipping..."
+            fi
+            
+            # Move backend files from staging
+            if [ -f "$HOME/deploy_staging/backend.tar.gz" ]; then
+              echo "📦 Extracting backend files from tarball..."
+              
+              # Save uploads folder if it exists in back_maxP (preserve user uploads)
+              if [ -d "/var/www/back_maxP/uploads" ]; then
+                echo "💾 Saving uploads folder from back_maxP..."
+                sudo cp -r /var/www/back_maxP/uploads /tmp/backend_uploads_backup
+              fi
+
+              # Save .env if it exists in back_maxP
+              if [ -f "/var/www/back_maxP/.env" ]; then
+                sudo cp /var/www/back_maxP/.env /tmp/backend_env_backup.env
+              fi
+
+              sudo rm -rf /var/www/back_maxP
+              # Extract tarball directly to /var/www/ (it contains backend/ folder)
+              sudo tar -xzf $HOME/deploy_staging/backend.tar.gz -C /var/www/
+              sudo mv /var/www/backend /var/www/back_maxP
+              sudo chown -R $USER:$USER /var/www/back_maxP
+              
+              # Restore .env strategy
+              if [ -f "/var/www/back_maxP/.env.production" ]; then
+                sudo cp /var/www/back_maxP/.env.production /var/www/back_maxP/.env
+              elif [ -f "/tmp/backend_env_backup.env" ]; then
+                sudo cp /tmp/backend_env_backup.env /var/www/back_maxP/.env
+              fi
+
+              # Restore uploads
+              if [ -d "/tmp/backend_uploads_backup" ]; then
+                sudo rm -rf /var/www/back_maxP/uploads
+                sudo mv /tmp/backend_uploads_backup /var/www/back_maxP/uploads
+              fi
+              
+              echo "✅ Backend extracted and restored successfully"
+            elif [ -d "$HOME/deploy_staging/backend" ]; then
+              echo "📦 Moving backend files from staging directory..."
+              
+              # Save uploads folder if it exists in back_maxP (preserve user uploads)
+              if [ -d "/var/www/back_maxP/uploads" ]; then
+                echo "💾 Saving uploads folder from back_maxP..."
+                sudo cp -r /var/www/back_maxP/uploads /tmp/backend_uploads_backup
+              fi
+
+              # Save .env if it exists in back_maxP
+              if [ -f "/var/www/back_maxP/.env" ]; then
+                sudo cp /var/www/back_maxP/.env /tmp/backend_env_backup.env
+              fi
+
+              sudo rm -rf /var/www/back_maxP
+              sudo mv $HOME/deploy_staging/backend /var/www/back_maxP
+              sudo chown -R $USER:$USER /var/www/back_maxP
+              
+              # Restore .env strategy
+              if [ -f "/var/www/back_maxP/.env.production" ]; then
+                sudo cp /var/www/back_maxP/.env.production /var/www/back_maxP/.env
+              elif [ -f "/tmp/backend_env_backup.env" ]; then
+                sudo cp /tmp/backend_env_backup.env /var/www/back_maxP/.env
+              fi
+
+              # Restore uploads
+              if [ -d "/tmp/backend_uploads_backup" ]; then
+                sudo rm -rf /var/www/back_maxP/uploads
+                sudo mv /tmp/backend_uploads_backup /var/www/back_maxP/uploads
+              fi
+              
+              echo "✅ Backend moved successfully from staging"
+            elif [ -d "/var/www/backend" ]; then
+              echo "📦 Moving backend files from legacy location..."
+              sudo rm -rf /var/www/back_maxP
+              sudo mv /var/www/backend /var/www/back_maxP
+              sudo chown -R $USER:$USER /var/www/back_maxP
+              echo "✅ Backend moved successfully from legacy"
+            else
+              echo "⚠️ Backend not found, skipping..."
+            fi
+            
+            # NOTE: Server-side npm/prisma steps removed to prevent deployment failures.
+            # Backend dependencies are installed during CI before upload.
+            
+            # Database migration
+            echo "🔄 Synchronizing database schema..."
+            cd /var/www/back_maxP
+            npx prisma db push --schema=prisma/schema --accept-data-loss || {
+              echo "❌ Database synchronization failed"
+              exit 1
+            }
+
+            # Database migration note
+            echo " Note: Database migration file is available at:"
+            echo "   /var/www/back_maxP/migrations/safe_add_taxRate.sql"
+            echo "   Run manually if needed: mysql -u root -p maxp < /var/www/back_maxP/migrations/safe_add_taxRate.sql"
+
+            # Restart services
+            echo "🔄 Restarting services..."
+            if command -v pm2 &> /dev/null; then
+              # Check PM2 processes
+              echo "📋 Current PM2 processes:"
+              pm2 list
+              
+              # Try to restart by name first (check backend1 first as it's the actual name)
+              if pm2 list | grep -q "backend1"; then
+                echo "🔄 Restarting backend1 by name..."
+                pm2 restart backend1 --update-env
+              elif pm2 list | grep -q "backend"; then
+                echo "🔄 Restarting backend by name..."
+                pm2 restart backend --update-env
+              elif pm2 list | grep -q "maxp-backend"; then
+                echo "🔄 Restarting maxp-backend by name..."
+                pm2 restart maxp-backend --update-env
+              else
+                # Try to restart by id (process 0 is backend1)
+                echo "🔄 Restarting process by ID (0)..."
+                pm2 restart 0 --update-env || {
+                  echo "🆕 Starting new backend process..."
+                  cd /var/www/back_maxP
+                  NODE_ENV=production pm2 start server.js --name backend1
+                }
+              fi
+              
+              # Wait a bit for process to start
+              sleep 3
+              
+              # Check if process is running
+              echo "📋 PM2 status after restart:"
+              pm2 list
+              
+              # Try to get logs from any backend process
+              if pm2 list | grep -q "backend1"; then
+                echo "📋 Backend1 logs (last 10 lines):"
+                pm2 logs backend1 --lines 10 --nostream || echo "⚠️ Could not get backend1 logs"
+              elif pm2 list | grep -q "backend"; then
+                echo "📋 Backend logs (last 10 lines):"
+                pm2 logs backend --lines 10 --nostream || echo "⚠️ Could not get backend logs"
+              elif pm2 list | grep -q "maxp-backend"; then
+                echo "📋 Maxp-backend logs (last 10 lines):"
+                pm2 logs maxp-backend --lines 10 --nostream || echo "⚠️ Could not get maxp-backend logs"
+              else
+                echo "⚠️ Could not find backend process to show logs"
+              fi
+            else
+              echo "⚠️ PM2 not found, skipping restart"
+            fi
+            
+            echo "✅ Deployment completed!"
+            rm -rf $HOME/deploy_staging
+
+
+

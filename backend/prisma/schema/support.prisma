@@ -1,0 +1,62 @@
+model SupportTicket {
+  id                                        String                @id @default(cuid())
+  ticketId                                  String                @unique
+  subject                                   String
+  description                               String                @db.Text
+  category                                  SupportTicketCategory @default(INQUIRY)
+  status                                    SupportTicketStatus   @default(OPEN)
+  rating                                    Int?
+  feedback                                  String?               @db.Text
+  userId                                    String
+  companyId                                 String?
+  createdAt                                 DateTime              @default(now())
+  updatedAt                                 DateTime              @updatedAt
+  closedAt                                  DateTime?
+  assignedUserId                            String?
+  priority                                  SupportTicketPriority @default(MEDIUM)
+  SupportAttachment                         SupportAttachment[]
+  SupportMessage                            SupportMessage[]
+  assignedUser                              User?                 @relation("SupportTicket_assignedUserIdTousers", fields: [assignedUserId], references: [id])
+  company                                 Company?              @relation(fields: [companyId], references: [id])
+  user                                      User                  @relation("SupportTicket_userIdTousers", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([assignedUserId])
+  @@index([category])
+  @@index([companyId])
+  @@index([priority])
+  @@index([status])
+  @@index([userId])
+}
+
+model SupportMessage {
+  id                String              @id @default(cuid())
+  content           String              @db.Text
+  isFromAdmin       Boolean             @default(false)
+  ticketId          String
+  senderId          String
+  createdAt         DateTime            @default(now())
+  isInternal        Boolean             @default(false)
+  SupportAttachment SupportAttachment[]
+  user             User                @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  SupportTicket     SupportTicket       @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@index([senderId])
+  @@index([ticketId])
+}
+
+model SupportAttachment {
+  id             String          @id @default(cuid())
+  filename       String
+  originalName   String
+  mimeType       String
+  size           Int
+  url            String
+  ticketId       String?
+  messageId      String?
+  createdAt      DateTime        @default(now())
+  SupportMessage SupportMessage? @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  SupportTicket  SupportTicket?  @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@index([ticketId])
+}

@@ -1,0 +1,12 @@
+{
+  "name": "chat-backend-socketio",
+  "version": "1.0.0",
+  "description": "Socket.IO dependencies for real-time messaging",
+  "dependencies": {
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "install-socketio": "npm install socket.io"
+  }
+}

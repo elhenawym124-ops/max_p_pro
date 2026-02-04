@@ -1,0 +1,142 @@
+// TelegramConfig is defined in common.prisma
+
+model TelegramScheduledMessage {
+  id               String   @id @default(cuid())
+  userbotConfigId  String
+  companyId        String
+  chatId           String
+  message          String   @db.Text
+  mediaUrl         String?
+  mediaType        String?
+  scheduledTime    DateTime
+  status           String   @default("PENDING") // PENDING, SENT, FAILED
+  sentAt           DateTime?
+  error            String?  @db.Text
+  recurring        Boolean  @default(false)
+  recurringPattern String?
+  createdBy        String?
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userbotConfigId])
+  @@index([companyId])
+  @@map("telegram_scheduled_messages")
+}
+
+model TelegramAutoReplyRule {
+  id               String   @id @default(cuid())
+  userbotConfigId  String
+  isActive         Boolean  @default(true)
+  priority         Int      @default(0)
+  response         String   @db.Text
+  triggerType      String   // KEYWORD, REGEX, ALL
+  triggerValue     String   @db.Text
+  workingHoursOnly Boolean  @default(false)
+  startTime        String?  // "09:00"
+  endTime          String?  // "17:00"
+  daysOfWeek       Json?    // Array of Int [0-6]
+  maxUsesPerUser   Int?
+  cooldownMinutes  Int      @default(0)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userbotConfigId])
+  @@map("telegram_auto_reply_rules")
+}
+
+model TelegramAutoReplyUsage {
+  id        String   @id @default(cuid())
+  ruleId    String
+  userId    String
+  usedAt    DateTime @default(now())
+
+  @@index([ruleId])
+  @@index([userId])
+  @@map("telegram_auto_reply_usages")
+}
+
+model TelegramBulkMessage {
+  id                   String    @id @default(cuid())
+  status               String    @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, FAILED
+  recipients           Json      // Array of strings (chatIds/usernames)
+  message              String    @db.Text
+  delayBetweenMessages Int       @default(1000) // ms
+  sentCount            Int       @default(0)
+  failedCount          Int       @default(0)
+  startedAt            DateTime?
+  completedAt          DateTime?
+  
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@map("telegram_bulk_messages")
+}
+
+model TelegramBulkMessageLog {
+  id            String   @id @default(cuid())
+  bulkMessageId String
+  recipient     String
+  status        String   // SENT, FAILED
+  error         String?  @db.Text
+  sentAt        DateTime @default(now())
+
+  @@index([bulkMessageId])
+  @@map("telegram_bulk_message_logs")
+}
+
+model TelegramGroup {
+  id              String   @id @default(cuid())
+  userbotConfigId String
+  companyId       String
+  telegramId      String
+  title           String
+  type            String   // GROUP, CHANNEL
+  description     String?  @db.Text
+  isPublic        Boolean  @default(false)
+  managedByUs     Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([companyId])
+  @@map("telegram_groups")
+}
+
+model TelegramContact {
+  id              String   @id @default(cuid())
+  userbotConfigId String
+  companyId       String
+  telegramId      String
+  firstName       String?
+  lastName        String?
+  username        String?
+  phone           String?
+  isBot           Boolean  @default(false)
+  isPremium       Boolean  @default(false)
+  source          String?
+  sourceGroupId   String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([telegramId, companyId], name: "telegramId_companyId")
+  @@index([companyId])
+  @@map("telegram_contacts")
+}
+
+model TelegramForwardRule {
+  id               String   @id @default(cuid())
+  isActive         Boolean  @default(true)
+  sourceChats      Json     // Array of strings
+  targetChat       String
+  filterKeywords   Json?    // Array of strings
+  filterMediaTypes Json?    // Array of strings
+  forwardCount     Int      @default(0)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("telegram_forward_rules")
+}

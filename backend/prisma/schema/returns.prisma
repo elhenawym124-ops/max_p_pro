@@ -1,0 +1,99 @@
+model ReturnReason {
+  id                   String                @id @default(cuid())
+  reason               String
+  description          String?
+  companyId            String
+  isActive             Boolean               @default(true)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  categoryId           String?
+  returnReasonCategory ReturnReasonCategory? @relation(fields: [categoryId], references: [id])
+  company            Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  returnRequests       ReturnRequest[]
+
+  @@index([categoryId])
+  @@index([companyId])
+  @@map("return_reasons")
+}
+
+model ReturnRequest {
+  id                    String                         @id @default(cuid())
+  orderId               String
+  customerId            String
+  companyId             String
+  reasonId              String
+  status                ReturnRequestsStatus           @default(PENDING)
+  adminNotes            String?                        @db.Text
+  customerNotes         String?                        @db.Text
+  refundAmount          Decimal?                       @db.Decimal(10, 2)
+  assignedTo            String?
+  createdAt             DateTime                       @default(now())
+  updatedAt             DateTime                       @updatedAt
+  isReviewed            Boolean                        @default(false)
+  orderItemId           String?
+  rejectionReason       String?                        @db.Text
+  responsibleParty      ReturnRequestsResponsibleParty @default(OTHER)
+  reviewedAt            DateTime?
+  reviewedBy            String?
+  returnActivityLogs    ReturnActivityLog[]
+  returnContactAttempts ReturnContactAttempt[]
+  assignedUser         User?                          @relation(fields: [assignedTo], references: [id])
+  company             Company                        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customer             Customer                       @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  order                Order                          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  returnReason          ReturnReason                   @relation(fields: [reasonId], references: [id])
+
+  @@index([assignedTo])
+  @@index([companyId])
+  @@index([customerId])
+  @@index([orderId])
+  @@index([reasonId])
+  @@index([status])
+  @@map("return_requests")
+}
+
+model ReturnContactAttempt {
+  id              String        @id @default(cuid())
+  returnRequestId String
+  userId          String
+  method          String
+  result          String
+  notes           String?       @db.Text
+  createdAt       DateTime      @default(now())
+  returnRequest   ReturnRequest @relation(fields: [returnRequestId], references: [id], onDelete: Cascade)
+  user           User          @relation(fields: [userId], references: [id])
+
+  @@index([returnRequestId])
+  @@index([userId])
+  @@map("return_contact_attempts")
+}
+
+model ReturnActivityLog {
+  id              String        @id @default(cuid())
+  returnRequestId String
+  userId          String?
+  action          String
+  details         String?       @db.Text
+  createdAt       DateTime      @default(now())
+  returnRequest   ReturnRequest @relation(fields: [returnRequestId], references: [id], onDelete: Cascade)
+  user           User?         @relation(fields: [userId], references: [id])
+
+  @@index([returnRequestId])
+  @@index([userId])
+  @@map("return_activity_logs")
+}
+
+model CallAttemptLog {
+  id        String   @id @default(cuid())
+  orderId   String
+  userId    String
+  result    String?
+  notes     String?
+  createdAt DateTime @default(now())
+  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@index([orderId])
+  @@index([userId])
+  @@map("call_attempt_logs")
+}

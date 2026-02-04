@@ -1,0 +1,94 @@
+model ImageGallery {
+  id        String   @id
+  userId    String
+  companyId String
+  filename  String
+  fileUrl   String
+  fileType  String
+  fileSize  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  company Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([userId])
+  @@map("image_gallery")
+}
+
+model MediaFile {
+  id             String   @id
+  conversationId String
+  senderId       String
+  fileName       String
+  fileType       String
+  fileSize       Int?
+  fileUrl        String
+  analysis       String?
+  processed      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@index([conversationId])
+  @@index([fileType])
+  @@map("media_files")
+}
+
+model TextGallery {
+  id        String   @id
+  userId    String
+  companyId String
+  title     String?
+  content   String   @db.Text
+  imageUrls String?  @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  isPinned  Boolean  @default(false)
+  company Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([userId])
+  @@map("text_gallery")
+}
+
+model ImageStudioUsage {
+  id               String   @id
+  companyId        String
+  date             DateTime @db.Date
+  basicImagesCount Int      @default(0)
+  proImagesCount   Int      @default(0)
+  totalImagesCount Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime
+  company        Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, date])
+  @@index([companyId])
+  @@index([date])
+  @@map("image_studio_usage")
+}
+
+model ImageStudioHistory {
+  id           String   @id
+  companyId    String
+  userId       String
+  prompt       String   @db.Text
+  modelType    String
+  modelName    String
+  imageUrl     String?
+  status       String   @default("pending")
+  errorMessage String?  @db.Text
+  metadata     String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([status])
+  @@index([userId])
+  @@map("image_studio_history")
+}

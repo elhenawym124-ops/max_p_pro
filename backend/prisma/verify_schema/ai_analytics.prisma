@@ -1,0 +1,337 @@
+model AiAnalytic {
+  id                    String   @id
+  date                  DateTime @db.Date
+  totalMessages         Int      @default(0)
+  aiResponses           Int      @default(0)
+  humanHandoffs         Int      @default(0)
+  avgResponseTime       Float?
+  avgConfidence         Float?
+  topIntents            String?
+  sentimentDistribution String?
+  createdAt             DateTime @default(now())
+
+  @@index([date])
+  @@map("ai_analytics")
+}
+
+model AiInteraction {
+  id                        String    @id
+  companyId                 String
+  customerId                String?
+  userMessage               String    @db.Text
+  aiResponse                String    @db.Text
+  intent                    String?
+  sentiment                 String?
+  confidence                Float?
+  requiresHumanIntervention Boolean   @default(false)
+  metadata                  String?   @db.Text
+  createdAt                 DateTime  @default(now())
+  modelUsed                 String?
+  responseTime              Int?
+  tokensUsed                Int?
+  keyId                     String?
+  keyName                   String?
+  companies                 Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customers                 Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([customerId])
+  @@index([keyName])
+  @@index([modelUsed])
+  @@map("ai_interactions")
+}
+
+model AiKey {
+  id                String          @id
+  name              String
+  provider          AiKeysProvider  @default(GOOGLE)
+  apiKey            String          @unique
+  baseUrl           String?
+  isActive          Boolean         @default(true)
+  companyId         String?
+  keyType           AiKeysKeyType   @default(CENTRAL)
+  usage             String          @db.Text
+  currentUsage      Int             @default(0)
+  maxRequestsPerDay Int             @default(1500)
+  priority          Int             @default(1)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime
+  companies         Company?        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  aiModelConfigs    AiModelConfig[]
+
+  @@index([companyId])
+  @@index([provider, isActive])
+  @@map("ai_keys")
+}
+
+model AiModelConfig {
+  id        String   @id
+  keyId     String
+  modelName String
+  isEnabled Boolean  @default(true)
+  priority  Int      @default(1)
+  usage     String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  aiKey     AiKey    @relation(fields: [keyId], references: [id], onDelete: Cascade)
+
+  @@unique([keyId, modelName])
+  @@index([keyId])
+  @@map("ai_model_configs")
+}
+
+model AiNotification {
+  id        String    @id
+  companyId String
+  type      String
+  severity  String    @default("medium")
+  title     String
+  message   String    @db.Text
+  metadata  String?   @db.Text
+  isRead    Boolean   @default(false)
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([isRead])
+  @@map("ai_notifications")
+}
+
+model AiSettings {
+  id                         String   @id
+  companyId                  String   @unique
+  promptTemplate             String?  @db.Text
+  autoReplyEnabled           Boolean  @default(false)
+  confidenceThreshold        Float    @default(0.7)
+  escalationRules            String?  @db.Text
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime
+  autoCreateOrders           Boolean  @default(false)
+  autoSuggestProducts        Boolean  @default(true)
+  defaultProductId           String?
+  includeImages              Boolean  @default(true)
+  maxSuggestions             Int      @default(3)
+  modelSettings              String?  @db.Text
+  responsePrompt             String?  @db.Text
+  memorySettings             String?  @db.Text
+  useAdvancedTools           Boolean  @default(false)
+  workingHours               String?  @db.Text
+  workingHoursEnabled        Boolean  @default(true)
+  maxRepliesPerCustomer      Int      @default(5)
+  multimodalEnabled          Boolean  @default(true)
+  ragEnabled                 Boolean  @default(true)
+  qualityEvaluationEnabled   Boolean  @default(true)
+  queueSettings              String?  @db.Text
+  aiMaxTokens                Int?     @default(2048)
+  aiResponseStyle            String?  @default("balanced")
+  aiTemperature              Float?   @default(0.7)
+  aiTopK                     Int?     @default(40)
+  aiTopP                     Float?   @default(0.9)
+  enableDiversityCheck       Boolean  @default(true)
+  enableEmotionalResponse    Boolean  @default(true)
+  enableLongTermMemory       Boolean  @default(false)
+  enableLowQualityAlerts     Boolean  @default(true)
+  enableSmartSuggestions     Boolean  @default(false)
+  enableToneAdaptation       Boolean  @default(true)
+  maxMessagesPerConversation Int?     @default(50)
+  memoryRetentionDays        Int?     @default(30)
+  minQualityScore            Float?   @default(70)
+  replyMode                  String   @default("all")
+  autoCleanup                Boolean  @default(true)
+  compressionEnabled         Boolean  @default(false)
+  maxConversationsPerUser    Int?     @default(100)
+  responseRules              String?  @db.Text
+  disableDefaultTemplates    Boolean  @default(false)
+  enableFailover             Boolean  @default(true)
+  useModernAgent             Boolean  @default(false)
+  companies                  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("ai_settings")
+}
+
+model LearningData {
+  id             String   @id
+  companyId      String
+  customerId     String?
+  conversationId String?
+  type           String
+  data           String?  @db.Text
+  userMessage    String?  @db.Text
+  aiResponse     String?  @db.Text
+  intent         String?
+  sentiment      String?
+  processingTime Int?
+  ragDataUsed    Boolean  @default(false)
+  memoryUsed     Boolean  @default(false)
+  model          String?
+  confidence     Float?
+  outcome        String?
+  feedback       String?  @db.Text
+  insights       String?  @db.Text
+  metadata       String?  @db.Text
+  createdAt      DateTime @default(now())
+  companies      Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([confidence])
+  @@index([createdAt])
+  @@index([intent])
+  @@index([type])
+  @@map("learning_data")
+}
+
+model LearningSettings {
+  id                    String   @id
+  companyId             String   @unique
+  enabled               Boolean  @default(true)
+  learningSpeed         String   @default("medium")
+  autoApplyImprovements Boolean  @default(false)
+  dataRetentionDays     Int      @default(90)
+  minimumSampleSize     Int      @default(50)
+  confidenceThreshold   Float    @default(0.8)
+  settings              String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime
+  companies             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("learning_settings")
+}
+
+model SearchAnalytic {
+  id            String   @id
+  companyId     String
+  customerId    String?
+  query         String   @db.Text
+  intent        String?
+  resultsCount  Int      @default(0)
+  wasSuccessful Boolean  @default(true)
+  responseTime  Int?
+  metadata      String?  @db.Text
+  createdAt     DateTime @default(now())
+
+  @@index([companyId, createdAt])
+  @@index([companyId])
+  @@index([intent])
+  @@index([wasSuccessful])
+  @@map("search_analytics")
+}
+
+model AiFailureLog {
+  id             String   @id
+  companyId      String
+  conversationId String?
+  customerId     String?
+  errorType      String   @db.VarChar(100)
+  errorMessage   String?  @db.Text
+  context        String?  @db.LongText
+  createdAt      DateTime @default(now())
+
+  @@index([companyId, createdAt])
+  @@index([errorType])
+  @@map("ai_failure_logs")
+}
+
+model AIChatMessage {
+  id               String        @id
+  sessionId        String
+  role             String
+  content          String        @db.LongText
+  isError          Boolean       @default(false)
+  createdAt        DateTime      @default(now())
+  ai_chat_sessions AIChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+}
+
+model AIChatSession {
+  id               String          @id
+  userId           String
+  title            String?
+  isActive         Boolean         @default(true)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime
+  ai_chat_messages AIChatMessage[]
+  dev_team_members DevTeamMember   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model AiTraceStep {
+  id        String   @id @default(cuid())
+  traceId   String
+  stepType  String // EXPANSION, RETRIEVAL, RERANK, GENERATION
+  latencyMs Int
+  input     String   @db.Text
+  output    String   @db.Text
+  metadata  String?  @db.Text
+  order     Int
+  createdAt DateTime @default(now())
+
+  trace AiTrace @relation(fields: [traceId], references: [id], onDelete: Cascade)
+
+  @@index([traceId])
+  @@index([createdAt])
+  @@map("ai_trace_steps")
+}
+
+model AiTrace {
+  id        String   @id @default(cuid())
+  companyId String
+  query     String   @db.Text
+  timestamp DateTime @default(now())
+  latencyMs Int?
+  metadata  String?  @db.Text
+  createdAt DateTime @default(now())
+
+  company Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  steps   AiTraceStep[]
+
+  @@index([companyId])
+  @@index([createdAt])
+  @@map("ai_traces")
+}
+
+model DailyAnalytic {
+  id                 String   @id @default(cuid())
+  companyId          String
+  date               DateTime @db.Date
+  totalVisits        Int      @default(0)
+  uniqueVisitors     Int      @default(0)
+  totalProductViews  Int      @default(0)
+  totalAddToCarts    Int      @default(0)
+  totalCheckouts     Int      @default(0)
+  totalPurchases     Int      @default(0)
+  totalRevenue       Decimal  @default(0) @db.Decimal(12, 2)
+  conversionRate     Decimal  @default(0) @db.Decimal(5, 2)
+  avgOrderValue      Decimal  @default(0) @db.Decimal(10, 2)
+  bounceRate         Decimal  @default(0) @db.Decimal(5, 2)
+  avgSessionDuration Int      @default(0)
+  company            Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, date])
+  @@index([companyId, date])
+  @@map("daily_analytics")
+}
+
+model ProductAnalytic {
+  id              String   @id @default(cuid())
+  productId       String
+  companyId       String
+  date            DateTime @db.Date
+  views           Int      @default(0)
+  uniqueViews     Int      @default(0)
+  addToCarts      Int      @default(0)
+  purchases       Int      @default(0)
+  revenue         Decimal  @default(0) @db.Decimal(10, 2)
+  conversionRate  Decimal  @default(0) @db.Decimal(5, 2)
+  avgViewDuration Int      @default(0)
+  product         Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, productId, date])
+  @@index([companyId, date])
+  @@index([productId, companyId])
+  @@map("product_analytics")
+}

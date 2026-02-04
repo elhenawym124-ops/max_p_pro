@@ -1,0 +1,12 @@
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "u339372869_test2" at "92.113.22.70:3306"
+
+Error: P3014
+
+Prisma Migrate could not create the shadow database. Please make sure the database user has permission to create databases. Read more about the shadow database (and workarounds) at https://pris.ly/d/migrate-shadow
+
+Original error: Error code: P1010
+
+User was denied access on the database `prisma_migrate_shadow_db_a80811ec-1455-4e5b-81ad-856b0b71348e`
+

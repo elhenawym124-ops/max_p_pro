@@ -1,0 +1,1518 @@
+[
+  {
+    "file": "affiliate.prisma",
+    "modelName": "AffiliatePayout",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "affiliate.prisma",
+    "modelName": "AffiliateProduct",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "affiliate.prisma",
+    "modelName": "AffiliateReferral",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "affiliate.prisma",
+    "modelName": "AffiliateSetting",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "affiliate.prisma",
+    "modelName": "Affiliate",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "affiliate.prisma",
+    "modelName": "Commission",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiAnalytic",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_analytics",
+    "suggestedMap": "ai_analytic"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiInteraction",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_interactions",
+    "suggestedMap": "ai_interaction"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiKey",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_keys",
+    "suggestedMap": "ai_key"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiModelConfig",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_model_configs",
+    "suggestedMap": "ai_model_config"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiNotification",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_notifications",
+    "suggestedMap": "ai_notification"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "LearningData",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "String",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "learning_data",
+    "suggestedMap": "string"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "SearchAnalytic",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "search_analytics",
+    "suggestedMap": "search_analytic"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiFailureLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_failure_logs",
+    "suggestedMap": "ai_failure_log"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AIChatMessage",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AIChatSession",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiTraceStep",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_trace_steps",
+    "suggestedMap": "ai_trace_step"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiTrace",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_traces",
+    "suggestedMap": "ai_trace"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "DailyAnalytic",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "daily_analytics",
+    "suggestedMap": "daily_analytic"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "ProductAnalytic",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "product_analytics",
+    "suggestedMap": "product_analytic"
+  },
+  {
+    "file": "ai_analytics.prisma",
+    "modelName": "AiModelLimit",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "ai_model_limits",
+    "suggestedMap": "ai_model_limit"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "AssetAssignment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "asset_assignments",
+    "suggestedMap": "asset_assignment"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "AssetCategory",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "asset_categories",
+    "suggestedMap": "asset_category"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "Asset",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "String",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "assets",
+    "suggestedMap": "string"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "AssetRequest",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "asset_requests",
+    "suggestedMap": "asset_request"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "AssetAudit",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "asset_audits",
+    "suggestedMap": "asset_audit"
+  },
+  {
+    "file": "assets.prisma",
+    "modelName": "AssetAttachment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "asset_attachments",
+    "suggestedMap": "asset_attachment"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "Company",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "companies",
+    "suggestedMap": "company"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "User",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "users",
+    "suggestedMap": "user"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "UserCompany",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "user_companies",
+    "suggestedMap": "user_company"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "UserInvitation",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "user_invitations",
+    "suggestedMap": "user_invitation"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "Activity",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "activities",
+    "suggestedMap": "activity"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "ActivityLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "activity_logs",
+    "suggestedMap": "activity_log"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "Integration",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "integrations",
+    "suggestedMap": "integration"
+  },
+  {
+    "file": "core.prisma",
+    "modelName": "Policy",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "policies",
+    "suggestedMap": "policy"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Department",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_departments",
+    "suggestedMap": "department"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Employee",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_employees",
+    "suggestedMap": "employee"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Position",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_positions",
+    "suggestedMap": "position"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Attendance",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_attendance",
+    "suggestedMap": "attendance"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LeaveRequest",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_leave_requests",
+    "suggestedMap": "leave_request"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Payroll",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_payroll",
+    "suggestedMap": "payroll"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "PerformanceReview",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_performance_reviews",
+    "suggestedMap": "performance_review"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "EmployeeDocument",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_employee_documents",
+    "suggestedMap": "employee_document"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "SalaryHistory",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_salary_history",
+    "suggestedMap": "salary_history"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "EmployeeWarning",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_employee_warnings",
+    "suggestedMap": "employee_warning"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "EmployeeTraining",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_employee_training",
+    "suggestedMap": "employee_training"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Shift",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_shifts",
+    "suggestedMap": "shift"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "ShiftAssignment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_shift_assignments",
+    "suggestedMap": "shift_assignment"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Benefit",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_benefits",
+    "suggestedMap": "benefit"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "BenefitEnrollment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_benefit_enrollments",
+    "suggestedMap": "benefit_enrollment"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Goal",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_goals",
+    "suggestedMap": "goal"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Feedback",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_feedback",
+    "suggestedMap": "feedback"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Resignation",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_resignations",
+    "suggestedMap": "resignation"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "HRAuditLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_audit_logs",
+    "suggestedMap": "hraudit_log"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "HRSettings",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_settings",
+    "suggestedMap": "hrsettings"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "AdvanceRequest",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_advance_requests",
+    "suggestedMap": "advance_request"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "ClearanceChecklist",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "clearance_checklists",
+    "suggestedMap": "clearance_checklist"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LateWarning",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "late_warnings",
+    "suggestedMap": "late_warning"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Kudos",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_kudos",
+    "suggestedMap": "kudos"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LatenessBalance",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_lateness_balance",
+    "suggestedMap": "lateness_balance"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "ManualDeduction",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_manual_deductions",
+    "suggestedMap": "manual_deduction"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "Promotion",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_promotions",
+    "suggestedMap": "promotion"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "RewardEligibilityLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_reward_eligibility_logs",
+    "suggestedMap": "reward_eligibility_log"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "RewardRecord",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_reward_records",
+    "suggestedMap": "reward_record"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "RewardSettings",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_reward_settings",
+    "suggestedMap": "reward_settings"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "RewardType",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "hr_reward_types",
+    "suggestedMap": "reward_type"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LatenessAllowance",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "lateness_allowances",
+    "suggestedMap": "lateness_allowance"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LatenessRecord",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "lateness_records",
+    "suggestedMap": "lateness_record"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LatenessDeduction",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "lateness_deductions",
+    "suggestedMap": "lateness_deduction"
+  },
+  {
+    "file": "hr.prisma",
+    "modelName": "LatenessMonthlySummary",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "lateness_monthly_summaries",
+    "suggestedMap": "lateness_monthly_summary"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "BackInStockNotification",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "back_in_stock_notifications",
+    "suggestedMap": "back_in_stock_notification"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "StockAlert",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "stock_alerts",
+    "suggestedMap": "stock_alert"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "StockMovement",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "stock_movements",
+    "suggestedMap": "stock_movement"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "TaskCategory",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_categories",
+    "suggestedMap": "task_category"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "Warehouse",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "warehouses",
+    "suggestedMap": "warehouse"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "WoocommerceSyncLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "woocommerce_sync_logs",
+    "suggestedMap": "woocommerce_sync_log"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "PurchaseInvoiceItem",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "purchase_invoice_items",
+    "suggestedMap": "purchase_invoice_item"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "PurchaseInvoice",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "purchase_invoices",
+    "suggestedMap": "purchase_invoice"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "PurchaseOrderItem",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "purchase_order_items",
+    "suggestedMap": "purchase_order_item"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "PurchaseOrder",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "purchase_orders",
+    "suggestedMap": "purchase_order"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "SupplierPayment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "supplier_payments",
+    "suggestedMap": "supplier_payment"
+  },
+  {
+    "file": "inventory.prisma",
+    "modelName": "Supplier",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "suppliers",
+    "suggestedMap": "supplier"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "BroadcastCampaign",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "broadcast_campaigns",
+    "suggestedMap": "broadcast_campaign"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "BroadcastRecipient",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "broadcast_recipients",
+    "suggestedMap": "broadcast_recipient"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookAdAccount",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_ad_accounts",
+    "suggestedMap": "facebook_ad_account"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookAdInsight",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_ad_insights",
+    "suggestedMap": "facebook_ad_insight"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookAdTestVariant",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_ad_test_variants",
+    "suggestedMap": "facebook_ad_test_variant"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookAdTest",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_ad_tests",
+    "suggestedMap": "facebook_ad_test"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookAd",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_ads",
+    "suggestedMap": "facebook_ad"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookAdset",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_adsets",
+    "suggestedMap": "facebook_adset"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookCampaign",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_campaigns",
+    "suggestedMap": "facebook_campaign"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookCatalogProduct",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_catalog_products",
+    "suggestedMap": "facebook_catalog_product"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookComment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_comments",
+    "suggestedMap": "facebook_comment"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookCustomAudience",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_custom_audiences",
+    "suggestedMap": "facebook_custom_audience"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookDynamicAd",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_dynamic_ads",
+    "suggestedMap": "facebook_dynamic_ad"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookLookalikeAudience",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_lookalike_audiences",
+    "suggestedMap": "facebook_lookalike_audience"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookPage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_pages",
+    "suggestedMap": "facebook_page"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookPixelConfig",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_pixel_configs",
+    "suggestedMap": "facebook_pixel_config"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookProductCatalog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_product_catalogs",
+    "suggestedMap": "facebook_product_catalog"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "FacebookProductFeed",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "facebook_product_feeds",
+    "suggestedMap": "facebook_product_feed"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "WhatsAppNotificationLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_notification_logs",
+    "suggestedMap": "whats_app_notification_log"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "WhatsAppNotificationQueue",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_notification_queue",
+    "suggestedMap": "whats_app_notification_queue"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "WhatsAppNotificationSettings",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_notification_settings",
+    "suggestedMap": "whats_app_notification_settings"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "WhatsAppNotificationTemplate",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_notification_templates",
+    "suggestedMap": "whats_app_notification_template"
+  },
+  {
+    "file": "marketing.prisma",
+    "modelName": "ConversionEvent",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "conversion_events",
+    "suggestedMap": "conversion_event"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "MarketplaceApp",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "marketplace_apps",
+    "suggestedMap": "marketplace_app"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "CompanyApp",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "company_apps",
+    "suggestedMap": "company_app"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "AppUsageLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "app_usage_logs",
+    "suggestedMap": "app_usage_log"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "AppReview",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "app_reviews",
+    "suggestedMap": "app_review"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "AppPricingRule",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "app_pricing_rules",
+    "suggestedMap": "app_pricing_rule"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "AppBundle",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "app_bundles",
+    "suggestedMap": "app_bundle"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "CompanyWallet",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "company_wallets",
+    "suggestedMap": "company_wallet"
+  },
+  {
+    "file": "marketplace.prisma",
+    "modelName": "Transaction",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "transactions",
+    "suggestedMap": "transaction"
+  },
+  {
+    "file": "media.prisma",
+    "modelName": "MediaFile",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "media_files",
+    "suggestedMap": "media_file"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "Conversation",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "conversations",
+    "suggestedMap": "conversation"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "ConversationOutcome",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "conversation_outcomes",
+    "suggestedMap": "conversation_outcome"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "Message",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "messages",
+    "suggestedMap": "message"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "SentMessageStat",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "sent_message_stats",
+    "suggestedMap": "sent_message_stat"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "TelegramConfig",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_configs",
+    "suggestedMap": "telegram_config"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppContact",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_contacts",
+    "suggestedMap": "whats_app_contact"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppEventLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_event_logs",
+    "suggestedMap": "whats_app_event_log"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppMessage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_messages",
+    "suggestedMap": "whats_app_message"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppQuickReply",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_quick_replies",
+    "suggestedMap": "whats_app_quick_reply"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppSession",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_sessions",
+    "suggestedMap": "whats_app_session"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppSettings",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_settings",
+    "suggestedMap": "whats_app_settings"
+  },
+  {
+    "file": "messaging.prisma",
+    "modelName": "WhatsAppStatus",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "whatsapp_statuses",
+    "suggestedMap": "whats_app_status"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "ExcludedModel",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "excluded_models",
+    "suggestedMap": "excluded_model"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "Notification",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "notifications",
+    "suggestedMap": "notification"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "SkippedFacebookPage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "skipped_facebook_pages",
+    "suggestedMap": "skipped_facebook_page"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "WalletNumber",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "wallet_numbers",
+    "suggestedMap": "wallet_number"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "Faq",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "faqs",
+    "suggestedMap": "faq"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "RagRateLimit",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "rag_rate_limits",
+    "suggestedMap": "rag_rate_limit"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "WalletTransaction",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "wallet_transactions",
+    "suggestedMap": "wallet_transaction"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "Appointment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "appointments",
+    "suggestedMap": "appointment"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "EmployeeNotificationPreference",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "employee_notification_preferences",
+    "suggestedMap": "employee_notification_preference"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "StoreVisit",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "store_visits",
+    "suggestedMap": "store_visit"
+  },
+  {
+    "file": "misc.prisma",
+    "modelName": "DevMemberBadge",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_member_badges",
+    "suggestedMap": "dev_member_badge"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "Branche",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "branches",
+    "suggestedMap": "branche"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "DeliveryOption",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "delivery_options",
+    "suggestedMap": "delivery_option"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "GuestCart",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "guest_carts",
+    "suggestedMap": "guest_cart"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "GuestOrder",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "guest_orders",
+    "suggestedMap": "guest_order"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "InvoiceItem",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "invoice_items",
+    "suggestedMap": "invoice_item"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "Invoice",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "invoices",
+    "suggestedMap": "invoice"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "OrderItem",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "order_items",
+    "suggestedMap": "order_item"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "OrderNote",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "order_notes",
+    "suggestedMap": "order_note"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "OrderStatusConfig",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "order_status_configs",
+    "suggestedMap": "order_status_config"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "Order",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "orders",
+    "suggestedMap": "order"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "PaymentReceipt",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "payment_receipts",
+    "suggestedMap": "payment_receipt"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "Payment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "payments",
+    "suggestedMap": "payment"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "ShippingZone",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "shipping_zones",
+    "suggestedMap": "shipping_zone"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "OrderStatusHistory",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "orders.prisma",
+    "modelName": "OrderInvoice",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "order_invoices",
+    "suggestedMap": "order_invoice"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "Customer",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customers",
+    "suggestedMap": "customer"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "Category",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "categories",
+    "suggestedMap": "category"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CouponUsage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "coupon_usages",
+    "suggestedMap": "coupon_usage"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "Coupon",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "coupons",
+    "suggestedMap": "coupon"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerList",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_lists",
+    "suggestedMap": "customer_list"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerNote",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_notes",
+    "suggestedMap": "customer_note"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "ProductReview",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "product_reviews",
+    "suggestedMap": "product_review"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "ProductVariant",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "product_variants",
+    "suggestedMap": "product_variant"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "Product",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "products",
+    "suggestedMap": "product"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "Wishlist",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "wishlists",
+    "suggestedMap": "wishlist"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerWallet",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_wallets",
+    "suggestedMap": "customer_wallet"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerLoyaltyProgram",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_loyalty_programs",
+    "suggestedMap": "customer_loyalty_program"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerLoyaltyRecord",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_loyalty_records",
+    "suggestedMap": "customer_loyalty_record"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerLoyaltyTier",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_loyalty_tiers",
+    "suggestedMap": "customer_loyalty_tier"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "CustomerNotificationPreference",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "customer_notification_preferences",
+    "suggestedMap": "customer_notification_preference"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "MerchantOrder",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "merchant_orders",
+    "suggestedMap": "merchant_order"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "MerchantProduct",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "merchant_products",
+    "suggestedMap": "merchant_product"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "Merchant",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "ProductVisit",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "product_visits",
+    "suggestedMap": "product_visit"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "ReturnReasonCategory",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "return_reason_categories",
+    "suggestedMap": "return_reason_category"
+  },
+  {
+    "file": "products.prisma",
+    "modelName": "ShippingMethod",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "shipping_methods",
+    "suggestedMap": "shipping_method"
+  },
+  {
+    "file": "returns.prisma",
+    "modelName": "ReturnReason",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "return_reasons",
+    "suggestedMap": "return_reason"
+  },
+  {
+    "file": "returns.prisma",
+    "modelName": "ReturnRequest",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "return_requests",
+    "suggestedMap": "return_request"
+  },
+  {
+    "file": "returns.prisma",
+    "modelName": "ReturnContactAttempt",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "return_contact_attempts",
+    "suggestedMap": "return_contact_attempt"
+  },
+  {
+    "file": "returns.prisma",
+    "modelName": "ReturnActivityLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "return_activity_logs",
+    "suggestedMap": "return_activity_log"
+  },
+  {
+    "file": "returns.prisma",
+    "modelName": "CallAttemptLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "call_attempt_logs",
+    "suggestedMap": "call_attempt_log"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "PromptTemplate",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "FewShotExample",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "few_shot_examples",
+    "suggestedMap": "few_shot_example"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "GlobalAiConfig",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "global_ai_configs",
+    "suggestedMap": "global_ai_config"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "HomepageTemplate",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "homepage_templates",
+    "suggestedMap": "homepage_template"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "PlanConfiguration",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "plan_configurations",
+    "suggestedMap": "plan_configuration"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "StorePage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "store_pages",
+    "suggestedMap": "store_page"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "Subscription",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "subscriptions",
+    "suggestedMap": "subscription"
+  },
+  {
+    "file": "settings.prisma",
+    "modelName": "SystemPrompt",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "system_prompts",
+    "suggestedMap": "system_prompt"
+  },
+  {
+    "file": "support.prisma",
+    "modelName": "SupportTicket",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "support.prisma",
+    "modelName": "SupportMessage",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "support.prisma",
+    "modelName": "SupportAttachment",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevNotification",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_notifications",
+    "suggestedMap": "dev_notification"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevProject",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_projects",
+    "suggestedMap": "dev_project"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevRelease",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_releases",
+    "suggestedMap": "dev_release"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTaskActivity",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_task_activities",
+    "suggestedMap": "dev_task_activity"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTaskAttachment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_task_attachments",
+    "suggestedMap": "dev_task_attachment"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTaskChecklistItem",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_task_checklist_items",
+    "suggestedMap": "dev_task_checklist_item"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTaskChecklist",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_task_checklists",
+    "suggestedMap": "dev_task_checklist"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTaskComment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_task_comments",
+    "suggestedMap": "dev_task_comment"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTaskWatcher",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_task_watchers",
+    "suggestedMap": "dev_task_watcher"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTask",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_tasks",
+    "suggestedMap": "dev_task"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "Project",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskActivity",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_activities",
+    "suggestedMap": "task_activity"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskAttachment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_attachments",
+    "suggestedMap": "task_attachment"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskChecklistItem",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_checklist_items",
+    "suggestedMap": "task_checklist_item"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskChecklist",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_checklists",
+    "suggestedMap": "task_checklist"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskComment",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_comments",
+    "suggestedMap": "task_comment"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskDependency",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_dependencies",
+    "suggestedMap": "task_dependency"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskNotification",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_notifications",
+    "suggestedMap": "task_notification"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskTemplate",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_templates",
+    "suggestedMap": "task_template"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TaskWatcher",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "task_watchers",
+    "suggestedMap": "task_watcher"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "Task",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "TimeEntry",
+    "issue": "Missing @@map"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTeamMember",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_team_members",
+    "suggestedMap": "dev_team_member"
+  },
+  {
+    "file": "tasks.prisma",
+    "modelName": "DevTimeLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "dev_time_logs",
+    "suggestedMap": "dev_time_log"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramScheduledMessage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_scheduled_messages",
+    "suggestedMap": "telegram_scheduled_message"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramAutoReplyRule",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_auto_reply_rules",
+    "suggestedMap": "telegram_auto_reply_rule"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramBulkMessage",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_bulk_messages",
+    "suggestedMap": "telegram_bulk_message"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramBulkMessageLog",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_bulk_message_logs",
+    "suggestedMap": "telegram_bulk_message_log"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramGroup",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_groups",
+    "suggestedMap": "telegram_group"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramContact",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_contacts",
+    "suggestedMap": "telegram_contact"
+  },
+  {
+    "file": "telegram_userbot.prisma",
+    "modelName": "TelegramForwardRule",
+    "issue": "Inconsistent @@map naming",
+    "currentMap": "telegram_forward_rules",
+    "suggestedMap": "telegram_forward_rule"
+  }
+]

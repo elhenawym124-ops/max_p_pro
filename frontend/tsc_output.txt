@@ -1,0 +1,2 @@
+src/pages/super-admin/RAGManagement.tsx(1,1): error TS1127: Invalid character.
+src/pages/super-admin/RAGManagement.tsx(1,2): error TS1128: Declaration or statement expected.

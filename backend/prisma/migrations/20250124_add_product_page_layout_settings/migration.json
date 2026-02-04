@@ -1,0 +1,228 @@
+{
+  "version": "20250124_add_product_page_layout_settings",
+  "steps": [
+    {
+      "tag": "AlterTable",
+      "table": "storefront_settings",
+      "alterations": [
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageLayoutEnabled",
+            "tpe": "Boolean",
+            "default": false
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageOrder",
+            "tpe": "Text",
+            "nullable": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowTitle",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowCategory",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowSocialSharing",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowBadges",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowPrice",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowCountdown",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowStockStatus",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowStockProgress",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowBackInStock",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowSecurityBadges",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowSoldNumber",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowOnlineVisitors",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowEstimatedDelivery",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowFreeShipping",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowPreOrder",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowVariants",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowSizeGuide",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowQuantity",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowVolumeDiscounts",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowReasonsToPurchase",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowActions",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowTabs",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowDescription",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowSKU",
+            "tpe": "Boolean",
+            "default": true
+          }
+        },
+        {
+          "kind": "AddColumn",
+          "column": {
+            "name": "productPageShowCheckoutForm",
+            "tpe": "Boolean",
+            "default": true
+          }
+        }
+      ]
+    }
+  ]
+}
+

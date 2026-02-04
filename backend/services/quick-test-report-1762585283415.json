@@ -1,0 +1,160 @@
+{
+  "companyId": "cmhnzbjl50000ufus81imj8wq",
+  "companyName": "mo-test",
+  "testDate": "2025-11-08T07:01:23.415Z",
+  "totalQuestions": 10,
+  "successfulTests": 0,
+  "averageScore": "0.00",
+  "results": [
+    {
+      "questionId": 1,
+      "question": "السلام عليكم",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 2,
+      "question": "أهلاً، عندك إيه من المنتجات؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 3,
+      "question": "ازيك؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 4,
+      "question": "هلو",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 5,
+      "question": "عايز أعرف الأسعار",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 26,
+      "question": "الشحن لأسوان كام؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 27,
+      "question": "الشحن مجاني ولا لا؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 28,
+      "question": "عندك توصيل سريع؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 29,
+      "question": "ازاي أتابع طلبي؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 30,
+      "question": "بتشحنوا برة مصر؟",
+      "success": false,
+      "error": "this.aiAgentService.isUrgentMessage is not a function",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    }
+  ]
+}

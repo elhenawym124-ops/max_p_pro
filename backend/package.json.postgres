@@ -1,0 +1,15 @@
+{
+  "name": "chat-backend-postgres",
+  "description": "Dependencies needed for PostgreSQL + pgvector integration",
+  "dependencies_to_add": {
+    "pg": "^8.11.3",
+    "pg-vector": "^0.1.0"
+  },
+  "installation_command": "npm install pg@^8.11.3",
+  "notes": [
+    "قم بتشغيل: npm install pg",
+    "تأكد من تثبيت PostgreSQL 12+ على السيرفر",
+    "تأكد من تثبيت pgvector extension",
+    "أضف POSTGRES_URL في ملف .env"
+  ]
+}

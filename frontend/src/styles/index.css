@@ -1,0 +1,599 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for theming */
+:root {
+  --color-primary: 59 130 246;
+  --color-primary-foreground: 255 255 255;
+  --color-secondary: 34 197 94;
+  --color-secondary-foreground: 255 255 255;
+  --color-background: 255 255 255;
+  --color-foreground: 17 24 39;
+  --color-muted: 243 244 246;
+  --color-muted-foreground: 107 114 128;
+  --color-border: 229 231 235;
+  --color-input: 255 255 255;
+  --color-ring: 59 130 246;
+  --color-destructive: 239 68 68;
+  --color-destructive-foreground: 255 255 255;
+  --color-warning: 245 158 11;
+  --color-warning-foreground: 255 255 255;
+  --color-success: 34 197 94;
+  --color-success-foreground: 255 255 255;
+  --color-info: 59 130 246;
+  --color-info-foreground: 255 255 255;
+}
+
+.dark {
+  --color-background: 3 7 18;
+  --color-foreground: 248 250 252;
+  --color-muted: 31 41 55;
+  --color-muted-foreground: 156 163 175;
+  --color-border: 55 65 81;
+  --color-input: 31 41 55;
+}
+
+/* Base styles */
+* {
+  border-color: rgb(var(--color-border));
+}
+
+html {
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-variation-settings: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* السماح بـ scroll للصفحة مع الحفاظ على التخطيط */
+#root {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-muted-foreground) / 0.5);
+}
+
+/* Sidebar specific scrollbar */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-muted-foreground) / 0.3);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-muted-foreground) / 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-muted-foreground) / 0.3) rgb(var(--color-muted));
+}
+
+/* Smooth transitions for sidebar */
+.sidebar-transition {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effects for sidebar items */
+.sidebar-item-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-item-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.sidebar-item-hover:hover::before {
+  transform: scaleY(1);
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900;
+}
+
+/* Button variants */
+.btn {
+  @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-ring disabled:pointer-events-none disabled:opacity-50;
+}
+
+.btn-primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800;
+}
+
+.btn-secondary {
+  @apply bg-secondary-600 text-white hover:bg-secondary-700 active:bg-secondary-800;
+}
+
+.btn-outline {
+  @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 active:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700;
+}
+
+.btn-ghost {
+  @apply text-gray-700 hover:bg-gray-100 active:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:active:bg-gray-700;
+}
+
+.btn-destructive {
+  @apply bg-red-600 text-white hover:bg-red-700 active:bg-red-800;
+}
+
+/* Size variants */
+.btn-sm {
+  @apply h-8 px-3 text-xs;
+}
+
+.btn-md {
+  @apply h-10 px-4 py-2;
+}
+
+.btn-lg {
+  @apply h-12 px-6 text-base;
+}
+
+/* Input styles */
+.input {
+  @apply flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-500 focus-ring disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder:text-gray-400;
+}
+
+/* ✅ FIX: منع zoom على inputs و textareas في الموبايل */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea,
+select {
+  font-size: 16px !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  touch-action: manipulation;
+}
+
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 18px !important;
+  }
+  
+  /* ✅ FIX: استخدام position fixed للـ input area في الموبايل لمنع scroll تلقائي */
+  #conversation-area {
+    position: relative;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* ✅ FIX: إضافة padding-bottom لمنطقة الرسائل لإفساح المجال للـ input */
+  .messages-container {
+    padding-bottom: 100px !important; /* مساحة للـ input area */
+  }
+  
+  #message-input-area {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100;
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding-bottom: env(safe-area-inset-bottom, 0); /* Support for devices with notch */
+    width: 100%;
+  }
+  
+  /* ✅ FIX: منع scroll و zoom تلقائي عند focus */
+  textarea:focus,
+  input:focus {
+    scroll-margin: 0 !important;
+    scroll-padding: 0 !important;
+    transform: scale(1) !important;
+    zoom: 1 !important;
+  }
+  
+  /* ✅ FIX: منع scroll التلقائي للصفحة عند focus على input */
+  #conversation-area {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* ✅ FIX: منع scroll التلقائي عند focus */
+  #message-input-area textarea:focus {
+    scroll-margin: 0 !important;
+    scroll-padding: 0 !important;
+    transform: scale(1) !important;
+    zoom: 1 !important;
+  }
+  
+  /* ✅ FIX: منع zoom تلقائي في الموبايل */
+  @media screen and (max-width: 768px) {
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+    
+    textarea,
+    input {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+    
+    /* منع double-tap zoom */
+    html {
+      touch-action: manipulation;
+      -ms-touch-action: manipulation;
+    }
+  }
+  
+}
+
+.input-error {
+  @apply border-red-500 focus:ring-red-500;
+}
+
+/* Card styles */
+.card {
+  @apply rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800;
+}
+
+.card-header {
+  @apply flex flex-col space-y-1.5 p-6;
+}
+
+.card-title {
+  @apply text-lg font-semibold leading-none tracking-tight;
+}
+
+.card-description {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+.card-content {
+  @apply p-6 pt-0;
+}
+
+.card-footer {
+  @apply flex items-center p-6 pt-0;
+}
+
+/* Badge styles */
+.badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+}
+
+.badge-primary {
+  @apply bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300;
+}
+
+.badge-secondary {
+  @apply bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300;
+}
+
+.badge-success {
+  @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300;
+}
+
+.badge-warning {
+  @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300;
+}
+
+.badge-error {
+  @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300;
+}
+
+/* Animation utilities */
+.animate-in {
+  animation: animate-in 0.2s ease-out;
+}
+
+.animate-out {
+  animation: animate-out 0.2s ease-in;
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animate-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Loading states */
+.loading {
+  @apply animate-pulse;
+}
+
+.skeleton {
+  @apply bg-gray-200 dark:bg-gray-700;
+}
+
+/* Text selection */
+::selection {
+  background-color: rgb(var(--color-primary) / 0.2);
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .btn {
+    @apply border-2;
+  }
+  
+  .input {
+    @apply border-2;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* RTL support */
+[dir="rtl"] {
+  .rtl\:rotate-180 {
+    transform: rotate(180deg);
+  }
+}
+
+/* Custom utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Container queries support */
+@container (min-width: 768px) {
+  .container-md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Backdrop blur fallback */
+@supports not (backdrop-filter: blur(10px)) {
+  .backdrop-blur {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .dark .backdrop-blur {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+/* Custom animations for Modern Login */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Product Description Styles - Ensure images display correctly */
+.product-description {
+  direction: rtl;
+  text-align: right;
+}
+
+.product-description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-description p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.product-description h1,
+.product-description h2,
+.product-description h3,
+.product-description h4,
+.product-description h5,
+.product-description h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.product-description ul,
+.product-description ol {
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.product-description a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.product-description a:hover {
+  color: #2563eb;
+}
+
+/* Manual Order Page - Custom Scrollbar */
+.manual-order-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+.manual-order-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.manual-order-scroll::-webkit-scrollbar-track {
+  background: #f9fafb;
+  border-radius: 4px;
+}
+
+.manual-order-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+  border: 2px solid #f9fafb;
+}
+
+.manual-order-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Smooth scroll for manual order columns */
+/* Custom Scrollbar for Chat Widget */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.8);
+}

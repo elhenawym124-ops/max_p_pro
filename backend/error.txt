@@ -1,0 +1,10 @@
+﻿[dotenv@17.2.0] injecting env (46) from .env (tip: ΓÜÖ∩╕Å  write to custom object with { processEnv: myObject })
+production
+≡ƒîì [BACKEND-ENV] Environment Detection: {
+  environment: 'production',
+  frontendUrl: 'https://maxp-ai.pro',
+  backendUrl: 'https://maxp-ai.pro',
+  apiBaseUrl: 'https://maxp-ai.pro/api/v1',
+  corsOrigins: [Function: corsOrigins]
+}
+Γ£à [QUALITY-MONITOR] Quality Monitor Service initialized (Singleton)

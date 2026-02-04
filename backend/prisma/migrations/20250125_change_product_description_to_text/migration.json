@@ -1,0 +1,5 @@
+{
+  "version": "20250125_change_product_description_to_text",
+  "description": "Change product description field from VARCHAR to TEXT to support longer descriptions"
+}
+

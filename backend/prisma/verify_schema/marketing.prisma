@@ -1,0 +1,759 @@
+model BroadcastCampaign {
+  id                  String               @id
+  name                String
+  message             String               @db.Text
+  targetAudience      String
+  scheduledAt         DateTime?
+  sentAt              DateTime?
+  tags                String?              @db.LongText
+  priority            String               @default("medium")
+  includeImages       Boolean              @default(false)
+  trackClicks         Boolean              @default(true)
+  autoResend          Boolean              @default(false)
+  images              String?              @db.LongText
+  status              String               @default("draft")
+  recipientCount      Int                  @default(0)
+  sentCount           Int                  @default(0)
+  deliveredCount      Int                  @default(0)
+  openedCount         Int                  @default(0)
+  clickedCount        Int                  @default(0)
+  failedCount         Int                  @default(0)
+  companyId           String
+  creatorId           String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime
+  companies           Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  broadcastRecipients BroadcastRecipient[]
+
+  @@index([companyId])
+  @@index([scheduledAt])
+  @@index([status])
+  @@map("broadcast_campaigns")
+}
+
+model BroadcastRecipient {
+  id                String            @id
+  campaignId        String
+  conversationId    String
+  customerPhone     String
+  customerName      String?
+  messengerUserId   String?
+  status            String            @default("pending")
+  sentAt            DateTime?
+  deliveredAt       DateTime?
+  openedAt          DateTime?
+  clickedAt         DateTime?
+  repliedAt         DateTime?
+  failureReason     String?           @db.Text
+  messageId         String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime
+  broadcastCampaign BroadcastCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  conversation      Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([conversationId])
+  @@index([status])
+  @@map("broadcast_recipients")
+}
+
+model BroadcastSettings {
+  id                           String   @id
+  companyId                    String   @unique
+  defaultSendTime              String   @default("10:00")
+  timezone                     String   @default("Asia/Riyadh")
+  maxRecipientsPerCampaign     Int      @default(5000)
+  maxCampaignsPerDay           Int      @default(10)
+  enableDeliveryReports        Boolean  @default(true)
+  enableOpenTracking           Boolean  @default(true)
+  enableClickTracking          Boolean  @default(true)
+  enableUnsubscribeTracking    Boolean  @default(true)
+  notifyOnCampaignSent         Boolean  @default(true)
+  notifyOnHighUnsubscribeRate  Boolean  @default(true)
+  notifyOnLowDeliveryRate      Boolean  @default(true)
+  adminEmail                   String?
+  requireApprovalForHighVolume Boolean  @default(false)
+  highVolumeThreshold          Int      @default(1000)
+  enableContentFiltering       Boolean  @default(false)
+  blockedWords                 String?  @db.LongText
+  messagesPerMinute            Int      @default(60)
+  messagesPerHour              Int      @default(1000)
+  messagesPerDay               Int      @default(10000)
+  defaultFooter                String?  @db.Text
+  unsubscribeText              String   @default("للإلغاء اكتب STOP")
+  companyName                  String?
+  companyAddress               String?
+  createdAt                    DateTime @default(now())
+  updatedAt                    DateTime
+  companies                    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("broadcast_settings")
+}
+
+model FacebookAdAccount {
+  id                         String                      @id
+  companyId                  String
+  accountId                  String
+  name                       String
+  currency                   String                      @default("USD")
+  timezone                   String?
+  accessToken                String                      @db.Text
+  isActive                   Boolean                     @default(true)
+  settings                   String?                     @db.Text
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime
+  companies                  Company                     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  facebookCampaigns          FacebookCampaign[]
+  facebookCustomAudiences    FacebookCustomAudience[]
+  facebookLookalikeAudiences FacebookLookalikeAudience[]
+  facebookProductCatalogs    FacebookProductCatalog[]
+
+  @@unique([companyId, accountId])
+  @@index([accountId])
+  @@index([companyId])
+  @@map("facebook_ad_accounts")
+}
+
+model FacebookAdInsight {
+  id               String     @id
+  adId             String
+  date             DateTime
+  impressions      Int        @default(0)
+  clicks           Int        @default(0)
+  ctr              Float      @default(0)
+  cpc              Float      @default(0)
+  spend            Float      @default(0)
+  conversions      Int        @default(0)
+  cpa              Float      @default(0)
+  reach            Int        @default(0)
+  frequency        Float      @default(0)
+  linkClicks       Int        @default(0)
+  costPerLinkClick Float      @default(0)
+  landingPageViews Int        @default(0)
+  purchases        Int        @default(0)
+  purchaseValue    Float      @default(0)
+  roas             Float      @default(0)
+  breakdown        String?    @db.Text
+  createdAt        DateTime   @default(now())
+  facebookAd       FacebookAd @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@unique([adId, date])
+  @@index([adId])
+  @@index([date])
+  @@map("facebook_ad_insights")
+}
+
+model FacebookAdTestVariant {
+  id              String         @id
+  testId          String
+  name            String
+  variantType     String
+  variantData     String         @db.Text
+  adSetId         String?
+  adId            String?
+  impressions     Int            @default(0)
+  clicks          Int            @default(0)
+  conversions     Int            @default(0)
+  spend           Float          @default(0)
+  ctr             Float          @default(0)
+  cpc             Float          @default(0)
+  cpa             Float          @default(0)
+  roas            Float          @default(0)
+  isWinner        Boolean        @default(false)
+  pValue          Float?
+  confidenceLevel Float?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime
+  facebookAd      FacebookAd?    @relation(fields: [adId], references: [id])
+  facebookAdset   FacebookAdset? @relation(fields: [adSetId], references: [id])
+  facebookAdTest  FacebookAdTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  @@index([adId])
+  @@index([adSetId])
+  @@index([testId])
+  @@index([variantType])
+  @@map("facebook_ad_test_variants")
+}
+
+model FacebookAdTest {
+  id                     String                  @id
+  companyId              String
+  name                   String
+  description            String?                 @db.Text
+  testType               String
+  status                 String                  @default("DRAFT")
+  campaignId             String?
+  variants               String                  @db.Text
+  winnerVariantId        String?
+  confidenceLevel        Float?
+  testDuration           Int?
+  startDate              DateTime?
+  endDate                DateTime?
+  trafficSplit           Int                     @default(50)
+  minimumResults         Int                     @default(100)
+  autoPromote            Boolean                 @default(false)
+  totalSpend             Float                   @default(0)
+  totalImpressions       Int                     @default(0)
+  totalClicks            Int                     @default(0)
+  totalConversions       Int                     @default(0)
+  settings               String?                 @db.Text
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime
+  facebookAdTestVariants FacebookAdTestVariant[]
+  facebookCampaign       FacebookCampaign?       @relation(fields: [campaignId], references: [id])
+  companies              Company                 @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([companyId])
+  @@index([status])
+  @@index([testType])
+  @@map("facebook_ad_tests")
+}
+
+model FacebookAd {
+  id                     String                  @id
+  adSetId                String
+  companyId              String
+  name                   String
+  status                 String                  @default("PAUSED")
+  facebookAdId           String?
+  creativeType           String
+  primaryText            String                  @db.Text
+  headline               String?
+  description            String?                 @db.Text
+  callToAction           String?
+  imageUrl               String?
+  videoUrl               String?
+  imageHash              String?
+  videoId                String?
+  carouselImages         String?                 @db.Text
+  carouselCount          Int?                    @default(1)
+  linkUrl                String?
+  productId              String?
+  creative               String?                 @db.Text
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime
+  lastSyncAt             DateTime?
+  facebookAdInsights     FacebookAdInsight[]
+  facebookAdTestVariants FacebookAdTestVariant[]
+  facebookAdset          FacebookAdset           @relation(fields: [adSetId], references: [id], onDelete: Cascade)
+
+  @@index([adSetId])
+  @@index([companyId])
+  @@index([facebookAdId])
+  @@index([status])
+  @@map("facebook_ads")
+}
+
+model FacebookAdset {
+  id                         String                      @id
+  campaignId                 String
+  name                       String
+  status                     String                      @default("PAUSED")
+  facebookAdSetId            String?
+  targeting                  String?                     @db.Text
+  ageMin                     Int?
+  ageMax                     Int?
+  genders                    String?                     @db.Text
+  locations                  String?                     @db.Text
+  interests                  String?                     @db.Text
+  behaviors                  String?                     @db.Text
+  customAudiencesJson        String?                     @db.Text
+  lookalikeAudiencesJson     String?                     @db.Text
+  budgetType                 String
+  budgetAmount               Float
+  optimizationGoal           String?
+  billingEvent               String?
+  settings                   String?                     @db.Text
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime
+  lastSyncAt                 DateTime?
+  facebookAdTestVariants     FacebookAdTestVariant[]
+  facebookAds                FacebookAd[]
+  facebookCampaign           FacebookCampaign            @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  facebookDynamicAds         FacebookDynamicAd[]
+  facebookCustomAudiences    FacebookCustomAudience[]    @relation("AdSetCustomAudiences")
+  facebookLookalikeAudiences FacebookLookalikeAudience[] @relation("AdSetLookalikeAudiences")
+
+  @@index([campaignId])
+  @@index([facebookAdSetId])
+  @@index([status])
+  @@map("facebook_adsets")
+}
+
+model FacebookCampaign {
+  id                 String             @id
+  companyId          String
+  adAccountId        String?
+  name               String
+  objective          String
+  status             String             @default("PAUSED")
+  facebookCampaignId String?
+  budgetType         String
+  budgetAmount       Float
+  startDate          DateTime?
+  endDate            DateTime?
+  pixelId            String?
+  settings           String?            @db.Text
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime
+  lastSyncAt         DateTime?
+  facebookAdTests    FacebookAdTest[]
+  facebookAdsets     FacebookAdset[]
+  facebookAdAccount  FacebookAdAccount? @relation(fields: [adAccountId], references: [id])
+  companies          Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([adAccountId])
+  @@index([companyId])
+  @@index([facebookCampaignId])
+  @@index([status])
+  @@map("facebook_campaigns")
+}
+
+model FacebookCatalogProduct {
+  id                     String                 @id
+  catalogId              String
+  productId              String?
+  name                   String
+  description            String?                @db.Text
+  brand                  String?
+  category               String?
+  sku                    String?
+  price                  Decimal?               @db.Decimal(10, 2)
+  currency               String?                @default("USD")
+  availability           String                 @default("in stock")
+  inventory              Int?
+  imageUrl               String?
+  imageHash              String?
+  additionalImages       String?                @db.Text
+  linkUrl                String?
+  mobileLinkUrl          String?
+  facebookProductId      String?
+  facebookRetailerId     String?
+  syncStatus             String                 @default("PENDING")
+  lastSyncedAt           DateTime?
+  syncError              String?                @db.Text
+  metadata               String?                @db.Text
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime
+  facebookProductCatalog FacebookProductCatalog @relation(fields: [catalogId], references: [id], onDelete: Cascade)
+  products               Product?               @relation(fields: [productId], references: [id])
+
+  @@unique([catalogId, productId])
+  @@unique([catalogId, sku])
+  @@index([catalogId])
+  @@index([facebookProductId])
+  @@index([productId])
+  @@index([syncStatus])
+  @@map("facebook_catalog_products")
+}
+
+model FacebookComment {
+  id          String    @id
+  commentId   String    @unique
+  postId      String
+  senderId    String
+  senderName  String
+  message     String    @db.Text
+  response    String?   @db.Text
+  createdTime DateTime
+  respondedAt DateTime?
+  pageId      String?
+  companyId   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  companies   Company?  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([commentId])
+  @@index([companyId])
+  @@index([createdTime])
+  @@index([postId])
+  @@index([senderId])
+  @@map("facebook_comments")
+}
+
+model FacebookCustomAudience {
+  id                         String                      @id
+  companyId                  String
+  adAccountId                String?
+  name                       String
+  description                String?                     @db.Text
+  audienceType               String
+  facebookAudienceId         String?
+  customerListId             String?
+  matchRate                  Float?
+  pixelId                    String?
+  eventType                  String?
+  retentionDays              Int?                        @default(30)
+  engagementType             String?
+  videoId                    String?
+  videoViewDuration          Int?
+  status                     String                      @default("ACTIVE")
+  audienceSize               Int?
+  settings                   String?                     @db.Text
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime
+  lastSyncAt                 DateTime?
+  facebookAdAccount          FacebookAdAccount?          @relation(fields: [adAccountId], references: [id])
+  companies                  Company                     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  facebookLookalikeAudiences FacebookLookalikeAudience[]
+  facebookAdsets             FacebookAdset[]             @relation("AdSetCustomAudiences")
+
+  @@index([adAccountId])
+  @@index([companyId])
+  @@index([facebookAudienceId])
+  @@index([status])
+  @@map("facebook_custom_audiences")
+}
+
+model FacebookDynamicAd {
+  id                     String                 @id
+  companyId              String
+  catalogId              String
+  adSetId                String?
+  name                   String
+  status                 String                 @default("PAUSED")
+  facebookAdId           String?
+  productSetId           String?
+  templateUrl            String?
+  templateId             String?
+  collectionId           String?
+  categoryId             String?
+  headline               String?
+  description            String?                @db.Text
+  callToAction           String?
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime
+  lastSyncAt             DateTime?
+  facebookAdset          FacebookAdset?         @relation(fields: [adSetId], references: [id])
+  facebookProductCatalog FacebookProductCatalog @relation(fields: [catalogId], references: [id], onDelete: Cascade)
+  companies              Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, facebookAdId])
+  @@index([adSetId])
+  @@index([catalogId])
+  @@index([companyId])
+  @@index([facebookAdId])
+  @@index([status])
+  @@map("facebook_dynamic_ads")
+}
+
+model FacebookLookalikeAudience {
+  id                     String                 @id
+  companyId              String
+  adAccountId            String?
+  sourceAudienceId       String
+  name                   String
+  description            String?                @db.Text
+  facebookAudienceId     String?
+  lookalikeSpec          String
+  country                String
+  ratio                  Int                    @default(1)
+  status                 String                 @default("ACTIVE")
+  audienceSize           Int?
+  settings               String?                @db.Text
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime
+  lastSyncAt             DateTime?
+  facebookAdAccount      FacebookAdAccount?     @relation(fields: [adAccountId], references: [id])
+  companies              Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  facebookCustomAudience FacebookCustomAudience @relation(fields: [sourceAudienceId], references: [id], onDelete: Cascade)
+  facebookAdsets         FacebookAdset[]        @relation("AdSetLookalikeAudiences")
+
+  @@index([adAccountId])
+  @@index([companyId])
+  @@index([facebookAudienceId])
+  @@index([sourceAudienceId])
+  @@index([status])
+  @@map("facebook_lookalike_audiences")
+}
+
+model FacebookPage {
+  id                      String                   @id
+  pageId                  String                   @unique
+  pageAccessToken         String                   @db.Text
+  pageName                String
+  companyId               String?
+  status                  String                   @default("connected")
+  connectedAt             DateTime                 @default(now())
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime
+  disconnectedAt          DateTime?
+  blockedCustomersOnPages BlockedCustomersOnPage[]
+  companies               Company?                 @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("facebook_pages")
+}
+
+model FacebookPixelConfig {
+  id                        String             @id
+  storefrontSettingsId      String
+  pixelId                   String
+  pixelName                 String
+  accessToken               String?            @db.Text
+  isActive                  Boolean            @default(true)
+  isPrimary                 Boolean            @default(false)
+  trackPageView             Boolean            @default(true)
+  trackViewContent          Boolean            @default(true)
+  trackAddToCart            Boolean            @default(true)
+  trackInitiateCheckout     Boolean            @default(true)
+  trackPurchase             Boolean            @default(true)
+  trackSearch               Boolean            @default(true)
+  trackAddToWishlist        Boolean            @default(false)
+  trackLead                 Boolean            @default(false)
+  trackCompleteRegistration Boolean            @default(false)
+  lastTestAt                DateTime?
+  lastTestResult            String?            @default("not_tested")
+  lastEventSentAt           DateTime?
+  totalEventsSent           Int                @default(0)
+  errorCount                Int                @default(0)
+  lastError                 String?            @db.Text
+  tokenStatus               String?            @default("unknown")
+  tokenExpiresAt            DateTime?
+  eventMatchQuality         Float?
+  createdAt                 DateTime           @default(now())
+  updatedAt                 DateTime
+  storefrontSettings        StorefrontSettings @relation(fields: [storefrontSettingsId], references: [id], onDelete: Cascade)
+
+  @@unique([storefrontSettingsId, pixelId])
+  @@index([isActive])
+  @@index([storefrontSettingsId])
+  @@map("facebook_pixel_configs")
+}
+
+model FacebookProductCatalog {
+  id                      String                   @id
+  companyId               String
+  adAccountId             String?
+  name                    String
+  description             String?                  @db.Text
+  facebookCatalogId       String?
+  catalogType             String                   @default("PRODUCTS")
+  isActive                Boolean                  @default(true)
+  status                  String                   @default("ACTIVE")
+  lastSyncAt              DateTime?
+  lastSyncStatus          String?
+  totalProducts           Int                      @default(0)
+  syncedProducts          Int                      @default(0)
+  settings                String?                  @db.Text
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime
+  facebookCatalogProducts FacebookCatalogProduct[]
+  facebookDynamicAds      FacebookDynamicAd[]
+  facebookAdAccount       FacebookAdAccount?       @relation(fields: [adAccountId], references: [id])
+  companies               Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  facebookProductFeeds    FacebookProductFeed[]
+
+  @@unique([companyId, facebookCatalogId])
+  @@index([adAccountId])
+  @@index([companyId])
+  @@index([facebookCatalogId])
+  @@index([status])
+  @@map("facebook_product_catalogs")
+}
+
+model FacebookProductFeed {
+  id                     String                 @id
+  catalogId              String
+  name                   String
+  feedType               String                 @default("PRODUCT")
+  format                 String                 @default("CSV")
+  fileUrl                String?
+  fileName               String?
+  fileSize               Int?
+  facebookFeedId         String?
+  feedUrl                String?
+  schedule               String?
+  lastUploadedAt         DateTime?
+  nextUploadAt           DateTime?
+  status                 String                 @default("ACTIVE")
+  uploadStatus           String?
+  settings               String?                @db.Text
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime
+  facebookProductCatalog FacebookProductCatalog @relation(fields: [catalogId], references: [id], onDelete: Cascade)
+
+  @@index([catalogId])
+  @@index([facebookFeedId])
+  @@index([status])
+  @@map("facebook_product_feeds")
+}
+
+model WhatsAppNotificationLog {
+  id                              String                                @id
+  companyId                       String
+  templateId                      String?
+  sessionId                       String
+  recipientPhone                  String
+  recipientName                   String?
+  recipientType                   WhatsAppNotificationLogsRecipientType @default(CUSTOMER)
+  category                        WhatsAppNotificationLogsCategory
+  eventType                       WhatsAppNotificationLogsEventType
+  content                         String                                @db.Text
+  orderId                         String?
+  customerId                      String?
+  productId                       String?
+  employeeId                      String?
+  cartId                          String?
+  status                          WhatsAppNotificationLogsStatus        @default(PENDING)
+  sentAt                          DateTime?
+  deliveredAt                     DateTime?
+  readAt                          DateTime?
+  failedAt                        DateTime?
+  failureReason                   String?
+  clicked                         Boolean                               @default(false)
+  clickedAt                       DateTime?
+  responded                       Boolean                               @default(false)
+  respondedAt                     DateTime?
+  whatsappMessageId               String?
+  cost                            Decimal                               @default(0.0000) @db.Decimal(10, 4)
+  createdAt                       DateTime                              @default(now())
+  updatedAt                       DateTime
+  companies                       Company                               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customers                       Customer?                             @relation(fields: [customerId], references: [id])
+  orders                          Order?                                @relation(fields: [orderId], references: [id])
+  products                        Product?                              @relation(fields: [productId], references: [id])
+  whatsapp_notification_templates WhatsAppNotificationTemplate?         @relation(fields: [templateId], references: [id])
+
+  @@index([companyId, category, createdAt])
+  @@index([companyId, eventType, createdAt])
+  @@index([companyId, status, createdAt])
+  @@index([customerId])
+  @@index([orderId])
+  @@index([productId])
+  @@index([recipientPhone, companyId])
+  @@index([templateId])
+  @@map("whatsapp_notification_logs")
+}
+
+model WhatsAppNotificationQueue {
+  id             String                                 @id
+  companyId      String
+  templateId     String?
+  sessionId      String
+  recipientPhone String
+  recipientName  String?
+  recipientType  WhatsAppNotificationQueueRecipientType @default(CUSTOMER)
+  category       WhatsAppNotificationQueueCategory
+  eventType      WhatsAppNotificationQueueEventType
+  content        String                                 @db.Text
+  mediaUrl       String?
+  buttons        String?                                @db.Text
+  orderId        String?
+  customerId     String?
+  productId      String?
+  employeeId     String?
+  cartId         String?
+  scheduledAt    DateTime
+  priority       Int                                    @default(5)
+  retryCount     Int                                    @default(0)
+  maxRetries     Int                                    @default(3)
+  status         WhatsAppNotificationQueueStatus        @default(PENDING)
+  processedAt    DateTime?
+  createdAt      DateTime                               @default(now())
+  companies      Company                                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, status])
+  @@index([status, scheduledAt, priority])
+  @@map("whatsapp_notification_queue")
+}
+
+model WhatsAppNotificationSettings {
+  id                            String   @id
+  companyId                     String   @unique
+  isEnabled                     Boolean  @default(true)
+  defaultSessionId              String?
+  orderNotificationsEnabled     Boolean  @default(true)
+  orderCreatedEnabled           Boolean  @default(true)
+  orderConfirmedEnabled         Boolean  @default(true)
+  orderProcessingEnabled        Boolean  @default(true)
+  orderShippedEnabled           Boolean  @default(true)
+  orderDeliveredEnabled         Boolean  @default(true)
+  orderCancelledEnabled         Boolean  @default(true)
+  paymentReminderEnabled        Boolean  @default(true)
+  paymentReminderHours          Int      @default(24)
+  productNotificationsEnabled   Boolean  @default(true)
+  backInStockEnabled            Boolean  @default(true)
+  priceDropEnabled              Boolean  @default(true)
+  newProductEnabled             Boolean  @default(false)
+  abandonedCartEnabled          Boolean  @default(true)
+  abandonedCartFirstReminder    Int      @default(1)
+  abandonedCartSecondReminder   Int      @default(24)
+  abandonedCartThirdReminder    Int      @default(72)
+  abandonedCartDiscountEnabled  Boolean  @default(false)
+  abandonedCartDiscountPercent  Int      @default(10)
+  marketingNotificationsEnabled Boolean  @default(false)
+  promotionalEnabled            Boolean  @default(false)
+  couponEnabled                 Boolean  @default(false)
+  birthdayEnabled               Boolean  @default(false)
+  loyaltyEnabled                Boolean  @default(false)
+  hrNotificationsEnabled        Boolean  @default(false)
+  attendanceReminderEnabled     Boolean  @default(false)
+  leaveApprovalEnabled          Boolean  @default(false)
+  payrollEnabled                Boolean  @default(false)
+  birthdayWishEnabled           Boolean  @default(false)
+  warningNotificationEnabled    Boolean  @default(false)
+  rateLimitPerMinute            Int      @default(30)
+  quietHoursEnabled             Boolean  @default(true)
+  quietHoursStart               String   @default("22:00")
+  quietHoursEnd                 String   @default("08:00")
+  createdAt                     DateTime @default(now())
+  updatedAt                     DateTime
+  companies                     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("whatsapp_notification_settings")
+}
+
+model WhatsAppNotificationTemplate {
+  id                         String                                 @id
+  companyId                  String
+  name                       String
+  category                   WhatsAppNotificationTemplatesCategory
+  eventType                  WhatsAppNotificationTemplatesEventType
+  content                    String                                 @db.Text
+  contentWithMedia           Boolean                                @default(false)
+  mediaUrl                   String?
+  mediaType                  String?
+  hasButtons                 Boolean                                @default(false)
+  buttons                    String?                                @db.Text
+  hasList                    Boolean                                @default(false)
+  listData                   String?                                @db.Text
+  variables                  String?                                @db.Text
+  isActive                   Boolean                                @default(true)
+  isDefault                  Boolean                                @default(false)
+  sentCount                  Int                                    @default(0)
+  deliveredCount             Int                                    @default(0)
+  readCount                  Int                                    @default(0)
+  clickCount                 Int                                    @default(0)
+  createdAt                  DateTime                               @default(now())
+  updatedAt                  DateTime
+  whatsapp_notification_logs WhatsAppNotificationLog[]
+  companies                  Company                                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, eventType, isDefault])
+  @@index([companyId, category])
+  @@index([companyId, eventType])
+  @@map("whatsapp_notification_templates")
+}
+
+model ConversionEvent {
+  id        String   @id @default(cuid())
+  companyId String
+  sessionId String
+  eventType String
+  productId String?
+  orderId   String?
+  value     Decimal? @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+  metadata  String?  @db.Text
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, eventType, createdAt])
+  @@index([sessionId, companyId])
+  @@index([companyId, productId, eventType, createdAt])
+  @@index([productId, companyId])
+  @@map("conversion_events")
+}

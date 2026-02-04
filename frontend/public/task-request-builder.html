@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>مُنشئ طلب التعديلات (Task Request Builder)</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel-2: rgba(255, 255, 255, 0.09);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.68);
+        --border: rgba(255, 255, 255, 0.12);
+        --accent: #7c3aed;
+        --accent-2: #22c55e;
+        --danger: #ef4444;
+        --shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        --radius: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", "Noto Sans", sans-serif;
+        background: radial-gradient(1200px 600px at 20% -10%, rgba(124, 58, 237, 0.35), transparent 60%),
+          radial-gradient(1000px 500px at 85% 0%, rgba(34, 197, 94, 0.22), transparent 60%),
+          var(--bg);
+        color: var(--text);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 28px auto;
+        padding: 0 16px 40px;
+      }
+
+      header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        font-size: 22px;
+        margin: 0 0 6px 0;
+        letter-spacing: 0.2px;
+      }
+
+      .sub {
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.6;
+        font-size: 13px;
+      }
+
+      .top-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      button {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      button:hover {
+        background: var(--panel-2);
+        border-color: rgba(255, 255, 255, 0.22);
+        transform: translateY(-1px);
+      }
+
+      button.primary {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(124, 58, 237, 0.55));
+        border-color: rgba(124, 58, 237, 0.9);
+      }
+
+      button.primary:hover {
+        border-color: rgba(124, 58, 237, 1);
+      }
+
+      button.good {
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(34, 197, 94, 0.45));
+        border-color: rgba(34, 197, 94, 0.9);
+      }
+
+      button.danger {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(239, 68, 68, 0.45));
+        border-color: rgba(239, 68, 68, 0.9);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      @media (max-width: 980px) {
+        header {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .top-actions {
+          justify-content: flex-start;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .card h2 {
+        font-size: 14px;
+        margin: 0;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .content {
+        padding: 12px 14px 14px;
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin: 10px 0 6px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 12px;
+        padding: 10px 12px;
+        color: var(--text);
+        outline: none;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      textarea {
+        min-height: 92px;
+        resize: vertical;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      @media (max-width: 620px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .pill {
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 8px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--text);
+      }
+
+      .pill input {
+        margin: 0;
+      }
+
+      .output {
+        width: 100%;
+        min-height: 360px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.35);
+      }
+
+      .status {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .status strong {
+        color: var(--text);
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div>
+          <h1>مُنشئ طلب التعديلات</h1>
+          <p class="sub">
+            اكتب التفاصيل هنا، وفي الآخر اضغط <strong>توليد النص</strong> أو <strong>نسخ</strong>.
+            كل حاجة بتتسجل تلقائيًا على جهازك (LocalStorage).
+          </p>
+        </div>
+        <div class="top-actions">
+          <button id="btnExample">تعبئة مثال</button>
+          <button id="btnClear" class="danger">مسح الكل</button>
+          <button id="btnGenerate" class="primary">توليد النص</button>
+          <button id="btnCopy" class="good">نسخ النص</button>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="card">
+          <h2>
+            <span>المدخلات</span>
+            <span class="hint">املأ اللي تقدر عليه فقط</span>
+          </h2>
+          <div class="content">
+            <label>نوع الطلب</label>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="reqType" value="Bug fix" checked /> Bug fix</label>
+              <label class="pill"><input type="radio" name="reqType" value="Feature" /> Feature</label>
+              <label class="pill"><input type="radio" name="reqType" value="Refactor" /> Refactor</label>
+              <label class="pill"><input type="radio" name="reqType" value="Performance" /> Performance</label>
+              <label class="pill"><input type="radio" name="reqType" value="Other" /> Other</label>
+            </div>
+
+            <label for="title">عنوان مختصر</label>
+            <input id="title" type="text" placeholder="مثال: تحسين ردود aiAgent وتقليل الهلوسة" />
+
+            <label for="goal">الهدف (Goal)</label>
+            <textarea id="goal" placeholder="عايزين نحقق إيه؟ وليه دلوقتي؟"></textarea>
+
+            <label for="current">الوضع الحالي (Current behavior)</label>
+            <textarea id="current" placeholder="إيه اللي بيحصل دلوقتي؟ خطوات + expected vs actual + أي logs"></textarea>
+
+            <label for="desired">المطلوب (Desired behavior)</label>
+            <textarea id="desired" placeholder="إيه اللي لازم يحصل بعد التعديل؟"></textarea>
+
+            <div class="row">
+              <div>
+                <label for="inScope">داخل النطاق (In scope)</label>
+                <textarea id="inScope" placeholder="مثال: backend/services/aiAgent فقط"></textarea>
+              </div>
+              <div>
+                <label for="outScope">خارج النطاق (Out of scope)</label>
+                <textarea id="outScope" placeholder="مثال: تغييرات UI أو DB migrations"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="must">الأولوية - Must</label>
+                <textarea id="must" placeholder="كل سطر = نقطة"></textarea>
+              </div>
+              <div>
+                <label for="should">الأولوية - Should</label>
+                <textarea id="should" placeholder="كل سطر = نقطة"></textarea>
+              </div>
+            </div>
+
+            <label for="nice">الأولوية - Nice to have</label>
+            <textarea id="nice" placeholder="كل سطر = نقطة"></textarea>
+
+            <label for="constraints">قيود/ممنوع نكسر (Constraints)</label>
+            <textarea id="constraints" placeholder="مثال: latency لا تزيد عن 200ms / ما نكسرش API contracts / أمان وPII"></textarea>
+
+            <div class="row">
+              <div>
+                <label for="environment">بيئة التشغيل (Environment)</label>
+                <textarea id="environment" placeholder="OS / Node / DB / Browser / أي إعدادات"></textarea>
+              </div>
+              <div>
+                <label for="owners">أصحاب المصلحة (Stakeholders)</label>
+                <textarea id="owners" placeholder="مين المتأثر؟ مين يوافق؟"></textarea>
+              </div>
+            </div>
+
+            <label for="acceptance">معايير القبول (Acceptance criteria)</label>
+            <textarea id="acceptance" placeholder="كل سطر = شرط (يفضل Given/When/Then أو Checklist)"></textarea>
+
+            <label for="references">مراجع/لينكات/ملفات (References)</label>
+            <textarea id="references" placeholder="روابط، tickets، paths، صور، docs... كل سطر = مرجع"></textarea>
+
+            <label for="extra">ملاحظات إضافية</label>
+            <textarea id="extra" placeholder="أي تفاصيل تحسها مهمة"></textarea>
+
+            <p class="small">
+              Tip: لو ده Bug، اكتب خطوات إعادة الإنتاج + expected/actual + أي stack trace.
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>
+            <span>النص النهائي (جاهز للإرسال)</span>
+            <span class="hint" id="liveHint">اضغط “توليد النص”</span>
+          </h2>
+          <div class="content">
+            <textarea id="output" class="output" readonly placeholder="هتلاقي النص هنا بعد التوليد..."></textarea>
+            <div class="status">
+              <div>
+                <span>الحالة: </span><strong id="statusText">جاهز</strong>
+              </div>
+              <div>
+                <span>آخر حفظ: </span><strong id="lastSaved">—</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const STORAGE_KEY = "task_request_builder_v1";
+
+        const $ = (id) => document.getElementById(id);
+
+        const fields = [
+          "title",
+          "goal",
+          "current",
+          "desired",
+          "inScope",
+          "outScope",
+          "must",
+          "should",
+          "nice",
+          "constraints",
+          "environment",
+          "owners",
+          "acceptance",
+          "references",
+          "extra",
+        ];
+
+        function getReqType() {
+          const el = document.querySelector('input[name="reqType"]:checked');
+          return el ? el.value : "Other";
+        }
+
+        function setReqType(value) {
+          const el = document.querySelector(`input[name="reqType"][value="${CSS.escape(value)}"]`);
+          if (el) el.checked = true;
+        }
+
+        function nowStamp() {
+          const d = new Date();
+          return d.toLocaleString(undefined, { hour12: false });
+        }
+
+        function setStatus(text) {
+          $("statusText").textContent = text;
+        }
+
+        function setLastSaved(text) {
+          $("lastSaved").textContent = text;
+        }
+
+        function normalizeLines(text) {
+          return (text || "")
+            .split(/\r?\n/)
+            .map((l) => l.trim())
+            .filter(Boolean);
+        }
+
+        function section(title, body) {
+          if (!body || !String(body).trim()) return "";
+          return `## ${title}\n${body.trim()}\n`;
+        }
+
+        function bullets(lines, prefix = "- ") {
+          if (!lines || lines.length === 0) return "";
+          return lines.map((l) => `${prefix}${l}`).join("\n");
+        }
+
+        function buildOutput() {
+          const data = {};
+          fields.forEach((k) => (data[k] = $(k).value || ""));
+
+          const type = getReqType();
+          const title = data.title.trim() || "بدون عنوان";
+
+          const must = normalizeLines(data.must);
+          const should = normalizeLines(data.should);
+          const nice = normalizeLines(data.nice);
+
+          const acceptance = normalizeLines(data.acceptance);
+          const references = normalizeLines(data.references);
+
+          const scopeParts = [];
+          if (data.inScope.trim()) scopeParts.push(`- In scope:\n${bullets(normalizeLines(data.inScope), "  - ")}`);
+          if (data.outScope.trim()) scopeParts.push(`- Out of scope:\n${bullets(normalizeLines(data.outScope), "  - ")}`);
+          const scopeBody = scopeParts.length ? scopeParts.join("\n") : "";
+
+          const priorityParts = [];
+          if (must.length) priorityParts.push(`- Must:\n${bullets(must, "  - ")}`);
+          if (should.length) priorityParts.push(`- Should:\n${bullets(should, "  - ")}`);
+          if (nice.length) priorityParts.push(`- Nice to have:\n${bullets(nice, "  - ")}`);
+          const priorityBody = priorityParts.length ? priorityParts.join("\n") : "";
+
+          const acceptanceBody = acceptance.length ? bullets(acceptance, "- [ ] ") : (data.acceptance || "").trim();
+          const referencesBody = references.length ? bullets(references) : (data.references || "").trim();
+
+          let out = "";
+          out += `# طلب تعديلات / قائمة مهام\n`;
+          out += `- النوع: ${type}\n`;
+          out += `- العنوان: ${title}\n`;
+          out += `- التاريخ: ${nowStamp()}\n\n`;
+
+          out += section("الهدف (Goal)", data.goal);
+          out += section("الوضع الحالي (Current behavior)", data.current);
+          out += section("المطلوب (Desired behavior)", data.desired);
+          out += section("النطاق (Scope)", scopeBody);
+          out += section("الأولويات (Priority)", priorityBody);
+          out += section("القيود (Constraints)", data.constraints);
+          out += section("بيئة التشغيل (Environment)", data.environment);
+          out += section("أصحاب المصلحة (Stakeholders)", data.owners);
+          out += section("معايير القبول (Acceptance criteria)", acceptanceBody);
+          out += section("مراجع (References)", referencesBody);
+          out += section("ملاحظات إضافية", data.extra);
+
+          return out.trim() + "\n";
+        }
+
+        async function copyToClipboard(text) {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return true;
+          }
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.top = "-9999px";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return ok;
+        }
+
+        function save() {
+          const payload = { reqType: getReqType() };
+          fields.forEach((k) => (payload[k] = $(k).value || ""));
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+            setLastSaved(nowStamp());
+          } catch (e) {}
+        }
+
+        function load() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            const payload = JSON.parse(raw);
+            if (payload && typeof payload === "object") {
+              if (payload.reqType) setReqType(payload.reqType);
+              fields.forEach((k) => {
+                if (Object.prototype.hasOwnProperty.call(payload, k)) $(k).value = payload[k] || "";
+              });
+              setLastSaved("تم الاسترجاع");
+            }
+          } catch (e) {}
+        }
+
+        function clearAll() {
+          fields.forEach((k) => ($(k).value = ""));
+          setReqType("Bug fix");
+          $("output").value = "";
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch (e) {}
+          setLastSaved("—");
+          setStatus("تم المسح");
+        }
+
+        function fillExample() {
+          setReqType("Feature");
+          $("title").value = "صفحة لتجميع طلب التعديلات ونسخها بسهولة";
+          $("goal").value = "عايز صفحة مستقلة تساعدني أكتب طلب التعديلات بشكل منظم وأطلع نص جاهز للإرسال.";
+          $("current").value =
+            "حاليًا بكتب الطلب بشكل عشوائي وبنسى معلومات مهمة (نطاق/قيود/معايير قبول)، وده بيزود أسئلة المتابعة.";
+          $("desired").value =
+            "نموذج بسيط: املأ الخانات + زر يولد نص Markdown منظم + زر Copy + حفظ تلقائي في المتصفح.";
+          $("inScope").value = "ملف HTML مستقل\nنسخة داخل frontend/public";
+          $("outScope").value = "تعديل كبير في الواجهة الرئيسية\nإضافة باكدج جديدة";
+          $("must").value = "توليد نص نهائي منظم\nزر Copy يشتغل\nحفظ تلقائي";
+          $("should").value = "تعبئة مثال\nزر مسح الكل";
+          $("nice").value = "تحميل كملف .txt\nمعاينة Live";
+          $("constraints").value = "بدون أي Dependencies\nيشتغل Offline";
+          $("environment").value = "Windows 10\nمتصفح Chrome/Edge";
+          $("owners").value = "أنا المستخدم\nأنت (المساعد) لتنفيذ التعديلات";
+          $("acceptance").value =
+            "الصفحة تفتح بدون إعدادات\nتقدر تكتب كل الحقول\nالـ output يتولد بصيغة Markdown\nزر Copy ينسخ النص بالكامل";
+          $("references").value = "—";
+          $("extra").value = "عايزها RTL وداعمة للعربي.";
+        }
+
+        function wireAutosave() {
+          const onChange = () => {
+            save();
+            setStatus("تم الحفظ");
+          };
+          fields.forEach((k) => $(k).addEventListener("input", onChange));
+          document.querySelectorAll('input[name="reqType"]').forEach((el) => el.addEventListener("change", onChange));
+        }
+
+        $("btnGenerate").addEventListener("click", () => {
+          const out = buildOutput();
+          $("output").value = out;
+          $("liveHint").textContent = "اتولد النص — تقدر تنسخه";
+          setStatus("تم التوليد");
+          save();
+        });
+
+        $("btnCopy").addEventListener("click", async () => {
+          const text = $("output").value || buildOutput();
+          $("output").value = text;
+          try {
+            const ok = await copyToClipboard(text);
+            setStatus(ok ? "تم النسخ" : "فشل النسخ (جرب Ctrl+C)");
+          } catch (e) {
+            setStatus("فشل النسخ (جرب Ctrl+C)");
+          }
+        });
+
+        $("btnClear").addEventListener("click", () => {
+          if (!confirm("متأكد إنك عايز تمسح كل البيانات؟")) return;
+          clearAll();
+        });
+
+        $("btnExample").addEventListener("click", () => {
+          fillExample();
+          const out = buildOutput();
+          $("output").value = out;
+          $("liveHint").textContent = "اتولد مثال — عدّل عليه";
+          setStatus("تمت تعبئة مثال");
+          save();
+        });
+
+        load();
+        wireAutosave();
+      })();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

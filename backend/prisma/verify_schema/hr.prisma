@@ -1,0 +1,975 @@
+model HrDepartment {
+  id                   String         @id
+  companyId            String
+  name                 String
+  nameEn               String?
+  code                 String?
+  description          String?        @db.Text
+  managerId            String?
+  parentId             String?
+  color                String?        @default("#3B82F6")
+  icon                 String?
+  isActive             Boolean        @default(true)
+  sortOrder            Int            @default(0)
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime
+  companies            Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  hrDepartment         HrDepartment?  @relation("hr_departmentsTohr_departments", fields: [parentId], references: [id])
+  other_hr_departments HrDepartment[] @relation("hr_departmentsTohr_departments")
+  hrGoals              HrGoal[]
+  hrPositions          HrPosition[]
+  users                User[]
+
+  hrEmployees HrEmployee[] @relation("DepartmentManager")
+  HrEmployee  HrEmployee[]
+
+  @@unique([companyId, code])
+  @@index([companyId])
+  @@index([managerId])
+  @@index([parentId])
+  @@map("hr_departments")
+}
+
+model HrEmployee {
+  id                 String         @id @default(cuid())
+  companyId          String
+  userId             String?        @unique
+  employeeNumber     String
+  firstName          String
+  lastName           String
+  firstNameEn        String?
+  lastNameEn         String?
+  email              String?
+  phone              String?
+  mobile             String?
+  avatar             String?
+  dateOfBirth        DateTime?
+  gender             Gender?
+  nationality        String?
+  nationalId         String?
+  passportNumber     String?
+  maritalStatus      MaritalStatus?
+  address            String?        @db.Text
+  city               String?
+  country            String?
+  postalCode         String?
+  departmentId       String?
+  positionId         String?
+  managerId          String?
+  hireDate           DateTime
+  probationEndDate   DateTime?
+  contractType       ContractType   @default(FULL_TIME)
+  contractEndDate    DateTime?
+  workLocation       String?
+  baseSalary         Decimal?       @db.Decimal(12, 2)
+  currency           String         @default("EGP")
+  bankName           String?
+  bankAccountNumber  String?
+  bankIban           String?
+  annualLeaveBalance Int            @default(21)
+  sickLeaveBalance   Int            @default(15)
+  status             EmployeeStatus @default(ACTIVE)
+  terminationDate    DateTime?
+  terminationReason  String?        @db.Text
+  emergencyContact   String?        @db.Text
+  documents          String?        @db.Text
+  notes              String?        @db.Text
+  metadata           String?        @db.Text
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  company            Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user               User?                 @relation(fields: [userId], references: [id])
+  hrDepartment       HrDepartment?         @relation(fields: [departmentId], references: [id])
+  hrPosition         HrPosition?           @relation(fields: [positionId], references: [id])
+  manager            HrEmployee?           @relation("EmployeeManager", fields: [managerId], references: [id])
+  subordinates       HrEmployee[]          @relation("EmployeeManager")
+  managedDepartments HrDepartment[]        @relation("DepartmentManager")
+  reviewedReviews    HrPerformanceReview[] @relation("ReviewerReviews")
+  approvedLeaves     HrLeaveRequest[]      @relation("LeaveApprover")
+  benefitEnrollments HrBenefitEnrollment[]
+
+  leaveRequests   HrLeaveRequest[]   @relation("EmployeeLeaves")
+  hrAttendances   HrAttendance[]
+  advanceRequests HrAdvanceRequest[]
+  payrolls        HrPayroll[]
+
+  employeeDocuments  HrEmployeeDocument[]
+  employeeTrainings  HrEmployeeTraining[]
+  employeeWarnings   HrEmployeeWarning[]
+  goals              HrGoal[]
+  feedbacksReceived  HrFeedback[]          @relation("FeedbackTo")
+  feedbacksGiven     HrFeedback[]          @relation("FeedbackFrom")
+  resignations       Resignation[]
+  hrSalaryHistories  HrSalaryHistory[]
+  shiftAssignments   HrShiftAssignment[]
+  performanceReviews HrPerformanceReview[] @relation("EmployeeReviews")
+  LateWarning        LateWarning[]
+
+  @@unique([companyId, employeeNumber])
+  @@index([companyId])
+  @@index([departmentId])
+  @@index([managerId])
+  @@index([positionId])
+  @@index([status])
+  @@map("hr_employees")
+}
+
+model HrPosition {
+  id                                                       String        @id
+  companyId                                                String
+  departmentId                                             String?
+  title                                                    String
+  titleEn                                                  String?
+  code                                                     String?
+  description                                              String?       @db.Text
+  level                                                    Int           @default(1)
+  minSalary                                                Decimal?      @db.Decimal(12, 2)
+  maxSalary                                                Decimal?      @db.Decimal(12, 2)
+  requirements                                             String?       @db.Text
+  responsibilities                                         String?       @db.Text
+  isActive                                                 Boolean       @default(true)
+  createdAt                                                DateTime      @default(now())
+  updatedAt                                                DateTime
+  companies                                                Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  hrDepartment                                             HrDepartment? @relation(fields: [departmentId], references: [id])
+  hr_promotions_hr_promotions_fromPositionIdTohr_positions HrPromotion[] @relation("hr_promotions_fromPositionIdTohr_positions")
+  hr_promotions_hr_promotions_toPositionIdTohr_positions   HrPromotion[] @relation("hr_promotions_toPositionIdTohr_positions")
+  users                                                    User[]
+
+  hrEmployees HrEmployee[] @relation
+
+  @@unique([companyId, code])
+  @@index([companyId])
+  @@index([departmentId])
+  @@map("hr_positions")
+}
+
+model HrAttendance {
+  id                String             @id
+  companyId         String
+  userId            String
+  date              DateTime           @db.Date
+  checkIn           DateTime?
+  checkOut          DateTime?
+  checkInLocation   String?
+  checkOutLocation  String?
+  checkInMethod     String?
+  checkOutMethod    String?
+  workHours         Decimal?           @db.Decimal(5, 2)
+  overtimeHours     Decimal?           @db.Decimal(5, 2)
+  lateMinutes       Int?               @default(0)
+  earlyLeaveMinutes Int?               @default(0)
+  status            HrAttendanceStatus @default(PRESENT)
+  isApproved        Boolean            @default(false)
+  approvedBy        String?
+  notes             String?            @db.Text
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime
+  companies         Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  users             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@unique([userId, date])
+  @@index([companyId])
+  @@index([date])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_attendance")
+}
+
+model HrLeaveRequest {
+  id              String                @id
+  companyId       String
+  userId          String
+  type            HrLeaveRequestType
+  startDate       DateTime              @db.Date
+  endDate         DateTime              @db.Date
+  totalDays       Int
+  isHalfDay       Boolean               @default(false)
+  halfDayPeriod   String?
+  reason          String?               @db.Text
+  attachments     String?               @db.Text
+  status          HrLeaveRequestsStatus @default(PENDING)
+  approvedBy      String?
+  approvedAt      DateTime?
+  rejectionReason String?               @db.Text
+  substituteId    String?
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime
+  companies       Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeLeaveApprover   HrEmployee? @relation("LeaveApprover", fields: [hrEmployeeLeaveApproverId], references: [id])
+  hrEmployeeLeaveApproverId String?
+
+  hrEmployeeEmployeeLeaves   HrEmployee? @relation("EmployeeLeaves", fields: [hrEmployeeEmployeeLeavesId], references: [id])
+  hrEmployeeEmployeeLeavesId String?
+
+  @@index([approvedBy])
+  @@index([companyId])
+  @@index([startDate])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_leave_requests")
+}
+
+model HrPayroll {
+  id                  String          @id
+  companyId           String
+  userId              String
+  month               Int
+  year                Int
+  periodStart         DateTime        @db.Date
+  periodEnd           DateTime        @db.Date
+  baseSalary          Decimal         @db.Decimal(12, 2)
+  workingDays         Int             @default(30)
+  actualWorkDays      Int             @default(30)
+  allowances          String?         @db.Text
+  totalAllowances     Decimal         @default(0.00) @db.Decimal(12, 2)
+  deductions          String?         @db.Text
+  totalDeductions     Decimal         @default(0.00) @db.Decimal(12, 2)
+  overtimeHours       Decimal         @default(0.00) @db.Decimal(5, 2)
+  overtimeRate        Decimal         @default(1.50) @db.Decimal(3, 2)
+  overtimeAmount      Decimal         @default(0.00) @db.Decimal(12, 2)
+  bonuses             Decimal         @default(0.00) @db.Decimal(12, 2)
+  bonusNotes          String?         @db.Text
+  socialInsurance     Decimal         @default(0.00) @db.Decimal(12, 2)
+  taxAmount           Decimal         @default(0.00) @db.Decimal(12, 2)
+  grossSalary         Decimal         @db.Decimal(12, 2)
+  netSalary           Decimal         @db.Decimal(12, 2)
+  status              HrPayrollStatus @default(DRAFT)
+  paidAt              DateTime?
+  paymentMethod       String?
+  paymentReference    String?
+  notes               String?         @db.Text
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime
+  absentDays          Int             @default(0)
+  attendanceDeduction Decimal         @default(0.00) @db.Decimal(10, 2)
+  latePenalty         Decimal         @default(0.00) @db.Decimal(12, 2)
+  rewardDetails       String?         @db.Text
+  rewards             String?         @db.Text
+  totalRewards        Decimal         @default(0.00) @db.Decimal(12, 2)
+  companies           Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@unique([userId, month, year])
+  @@index([companyId])
+  @@index([month, year])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_payroll")
+}
+
+model HrPerformanceReview {
+  id               String                     @id
+  companyId        String
+  reviewerId       String
+  reviewPeriod     String
+  periodStart      DateTime                   @db.Date
+  periodEnd        DateTime                   @db.Date
+  overallRating    Decimal                    @db.Decimal(3, 2)
+  ratings          String?                    @db.Text
+  goals            String?                    @db.Text
+  goalsAchievement Decimal?                   @db.Decimal(5, 2)
+  strengths        String?                    @db.Text
+  improvements     String?                    @db.Text
+  reviewerComments String?                    @db.Text
+  employeeComments String?                    @db.Text
+  recommendations  String?                    @db.Text
+  status           HrPerformanceReviewsStatus @default(DRAFT)
+  submittedAt      DateTime?
+  acknowledgedAt   DateTime?
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime
+  userId           String?
+  companies        Company                    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeReviewerReviews   HrEmployee? @relation("ReviewerReviews", fields: [hrEmployeeReviewerReviewsId], references: [id])
+  hrEmployeeReviewerReviewsId String?
+
+  hrEmployeeEmployeeReviews   HrEmployee? @relation("EmployeeReviews", fields: [hrEmployeeEmployeeReviewsId], references: [id])
+  hrEmployeeEmployeeReviewsId String?
+
+  @@index([companyId])
+  @@index([reviewerId])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_performance_reviews")
+}
+
+model HrEmployeeDocument {
+  id         String    @id
+  companyId  String
+  name       String
+  type       String
+  fileUrl    String
+  fileSize   Int?
+  mimeType   String?
+  expiryDate DateTime?
+  isVerified Boolean   @default(false)
+  verifiedBy String?
+  verifiedAt DateTime?
+  notes      String?   @db.Text
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime
+  userId     String
+  companies  Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([type])
+  @@index([userId])
+  @@map("hr_employee_documents")
+}
+
+model HrSalaryHistory {
+  id               String   @id
+  companyId        String
+  previousSalary   Decimal  @db.Decimal(12, 2)
+  newSalary        Decimal  @db.Decimal(12, 2)
+  changeType       String
+  changePercentage Decimal? @db.Decimal(5, 2)
+  effectiveDate    DateTime @db.Date
+  reason           String?  @db.Text
+  approvedBy       String?
+  createdAt        DateTime @default(now())
+  userId           String
+  companies        Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([userId])
+  @@map("hr_salary_history")
+}
+
+model HrEmployeeWarning {
+  id               String                @id
+  companyId        String
+  type             HrEmployeeWarningType
+  severity         String                @default("minor")
+  title            String
+  description      String                @db.Text
+  incidentDate     DateTime              @db.Date
+  actionTaken      String?               @db.Text
+  issuedBy         String
+  acknowledgedAt   DateTime?
+  employeeResponse String?               @db.Text
+  attachments      String?               @db.Text
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime
+  userId           String?
+  companies        Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([userId])
+  @@map("hr_employee_warnings")
+}
+
+model HrEmployeeTraining {
+  id             String                   @id
+  companyId      String
+  trainingName   String
+  provider       String?
+  type           String
+  description    String?                  @db.Text
+  startDate      DateTime                 @db.Date
+  endDate        DateTime?                @db.Date
+  duration       Int?
+  cost           Decimal?                 @db.Decimal(12, 2)
+  currency       String                   @default("EGP")
+  status         HrEmployeeTrainingStatus @default(PLANNED)
+  completionDate DateTime?
+  certificateUrl String?
+  score          Decimal?                 @db.Decimal(5, 2)
+  feedback       String?                  @db.Text
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime
+  userId         String?
+  companies      Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_employee_training")
+}
+
+model HrShift {
+  id                 String              @id
+  companyId          String
+  name               String
+  startTime          String
+  endTime            String
+  breakDuration      Int                 @default(60)
+  color              String?             @default("#3B82F6")
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime
+  hrShiftAssignments HrShiftAssignment[]
+  companies          Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("hr_shifts")
+}
+
+model HrShiftAssignment {
+  id        String   @id
+  companyId String
+  shiftId   String
+  date      DateTime @db.Date
+  notes     String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  userId    String?
+  companies Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  hrShift   HrShift  @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  users     User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@unique([userId, shiftId, date])
+  @@index([companyId])
+  @@index([date])
+  @@index([shiftId])
+  @@index([userId])
+  @@map("hr_shift_assignments")
+}
+
+model HrBenefit {
+  id                   String                @id
+  companyId            String
+  name                 String
+  description          String?               @db.Text
+  type                 String
+  cost                 Decimal?              @db.Decimal(12, 2)
+  currency             String                @default("EGP")
+  isActive             Boolean               @default(true)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime
+  hrBenefitEnrollments HrBenefitEnrollment[]
+  companies            Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("hr_benefits")
+}
+
+model HrBenefitEnrollment {
+  id        String    @id
+  companyId String
+  benefitId String
+  startDate DateTime  @db.Date
+  endDate   DateTime? @db.Date
+  status    String    @default("ACTIVE")
+  notes     String?   @db.Text
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  userId    String
+  hrBenefit HrBenefit @relation(fields: [benefitId], references: [id], onDelete: Cascade)
+  companies Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([benefitId])
+  @@index([companyId])
+  @@index([userId])
+  @@map("hr_benefit_enrollments")
+}
+
+model HrGoal {
+  id           String        @id
+  companyId    String
+  departmentId String?
+  title        String
+  description  String?       @db.Text
+  targetValue  Decimal       @db.Decimal(12, 2)
+  currentValue Decimal       @default(0.00) @db.Decimal(12, 2)
+  unit         String?
+  startDate    DateTime      @db.Date
+  endDate      DateTime      @db.Date
+  status       String        @default("PENDING")
+  progress     Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime
+  userId       String?
+  companies    Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  hrDepartment HrDepartment? @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([departmentId])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_goals")
+}
+
+model HrFeedback {
+  id          String   @id
+  companyId   String
+  type        String   @default("PEER")
+  category    String?
+  content     String   @db.Text
+  rating      Int?
+  isAnonymous Boolean  @default(false)
+  status      String   @default("ACTIVE")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  fromUserId  String?
+  toUserId    String?
+  companies   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeFeedbackTo   HrEmployee? @relation("FeedbackTo", fields: [hrEmployeeFeedbackToId], references: [id])
+  hrEmployeeFeedbackToId String?
+
+  hrEmployeeFeedbackFrom   HrEmployee? @relation("FeedbackFrom", fields: [hrEmployeeFeedbackFromId], references: [id])
+  hrEmployeeFeedbackFromId String?
+
+  @@index([companyId])
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([type])
+  @@map("hr_feedback")
+}
+
+model Resignation {
+  id                    String                 @id
+  companyId             String
+  resignationDate       DateTime               @db.Date
+  lastWorkingDay        DateTime               @db.Date
+  reason                String?                @db.Text
+  exitInterview         String?                @db.Text
+  status                String                 @default("PENDING")
+  approvedBy            String?
+  approvedAt            DateTime?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime
+  actualLastDay         DateTime?              @db.Date
+  clearanceCompleted    Boolean                @default(false)
+  expectedLastDay       DateTime?              @db.Date
+  finalSettlement       Decimal?               @db.Decimal(10, 2)
+  noticePeriodDays      Int?
+  settlementPaid        Boolean                @default(false)
+  userId                String?
+  hrClearanceChecklists HrClearanceChecklist[]
+  companies             Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_resignations")
+}
+
+model HrHRAuditLog {
+  id         String   @id @default(cuid())
+  companyId  String
+  action     String // APPROVE, REJECT, CREATE, UPDATE, DELETE
+  entityType String // LEAVE_REQUEST, ADVANCE_REQUEST, RESIGNATION, SETTINGS
+  entityId   String?
+  actorId    String // UserID of who performed the action
+  actorName  String
+  details    String?  @db.Text // JSON string for details
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  actor   User    @relation(fields: [actorId], references: [id])
+
+  @@index([companyId])
+  @@index([entityType])
+  @@index([createdAt])
+  @@map("hr_audit_logs")
+}
+
+model HrHRSettings {
+  id        String @id @default(cuid())
+  companyId String @unique
+
+  // Work Schedule Settings
+  workDays String @default("[1,2,3,4,5]")
+
+  // Leave Settings
+  annualLeaveDefault Int @default(21)
+  sickLeaveDefault   Int @default(15)
+  carryOverLimit     Int @default(5)
+
+  // Advance Settings
+  maxAdvancePercentage   Float @default(50) // % of monthly salary
+  maxActiveAdvances      Int   @default(1) // Max concurrent advances
+  minMonthsForAdvance    Int   @default(3) // Min employment months
+  advanceRepaymentMonths Int   @default(6) // Max repayment period
+
+  // Resignation Settings
+  noticePeriodDays Int     @default(30)
+  requireClearance Boolean @default(true)
+  clearanceItems   String? @db.Text // JSON array
+
+  // Attendance Settings
+  monthlyLateLimit      Int     @default(3)
+  lateGracePeriod       Int     @default(15)
+  earlyLeaveGracePeriod Int     @default(15)
+  lateWarningThreshold  Int     @default(3) // Late days per month
+  lateWarningLevels     String? @db.Text // JSON array
+
+  // Auto Deduction Settings (New System)
+  autoDeductionEnabled          Boolean @default(false)
+  gracePeriodMinutes            Int     @default(60)
+  lateThresholdMinutes          Int     @default(10)
+  maxDailyDeductionDays         Decimal @default(1.0) @db.Decimal(3, 1) // Maximum deduction per day (e.g. 1.0 = one full day)
+  earlyCheckoutEnabled          Boolean @default(true)
+  earlyCheckoutThresholdMinutes Int     @default(0)
+  firstViolationMultiplier      Decimal @default(1.0) @db.Decimal(3, 1)
+  secondViolationMultiplier     Decimal @default(2.0) @db.Decimal(3, 1)
+  thirdViolationMultiplier      Decimal @default(3.0) @db.Decimal(3, 1)
+  notifyAtPercentage            Int     @default(75)
+  notifyOnDeduction             Boolean @default(true)
+  notifyOnGraceReset            Boolean @default(true)
+  deductionCalculationMethod    String  @default("minute") // minute, hourly, daily
+  workingDaysPerMonth           Int     @default(22)
+  workingHoursPerDay            Int     @default(8)
+  requireDeductionReview        Boolean @default(true)
+  absencePenaltyRate            Decimal @default(1.0) @db.Decimal(3, 1)
+  delayPenaltyTiers             String? @db.Text // JSON array of { minMinutes: number, deductionDays: number }
+
+  // Geofencing Settings (moved from Company model)
+  geofenceEnabled Boolean  @default(false)
+  officeLatitude  Decimal? @db.Decimal(10, 8)
+  officeLongitude Decimal? @db.Decimal(11, 8)
+  geofenceRadius  Int?     @default(200)
+
+  // Payroll Settings
+  payrollDay          Int     @default(25)
+  overtimeMinHours    Decimal @default(1.0) @db.Decimal(3, 1)
+  overtimeRate        Decimal @default(1.50) @db.Decimal(3, 2)
+  socialInsuranceRate Decimal @default(14.00) @db.Decimal(5, 2)
+  taxRate             Decimal @default(0.00) @db.Decimal(5, 2)
+  taxBrackets         String? @db.Text
+  publicHolidays      String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("hr_settings")
+}
+
+model HrAdvanceRequest {
+  id        String  @id @default(cuid())
+  companyId String
+  userId    String?
+
+  // Request Details
+  amount            Decimal @db.Decimal(10, 2)
+  reason            String  @db.Text
+  repaymentType     String // LUMP_SUM, INSTALLMENTS
+  installmentsCount Int     @default(1)
+  monthlyAmount     Decimal @db.Decimal(10, 2)
+
+  // Validation Fields (NEW)
+  employeeSalary    Decimal? @db.Decimal(10, 2) // Salary at request time
+  maxAllowedAmount  Decimal? @db.Decimal(10, 2) // Calculated max
+  installmentAmount Decimal? @db.Decimal(10, 2) // Monthly deduction
+  remainingBalance  Decimal  @default(0) @db.Decimal(10, 2)
+  isPaidOff         Boolean  @default(false)
+
+  // Status
+  status         String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  approvedBy     String?
+  approvedAt     DateTime?
+  rejectedReason String?   @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  // user     User?    @relation("AdvanceRequestUser", fields: [userId], references: [id], onDelete: Cascade)
+  // approver User?    @relation("AdvanceRequestApprover", fields: [approvedBy], references: [id])
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([userId])
+  @@index([status])
+  @@map("hr_advance_requests")
+}
+
+model HrClearanceChecklist {
+  id            String    @id @default(cuid())
+  resignationId String
+  itemName      String
+  description   String?
+  isCompleted   Boolean   @default(false)
+  completedBy   String?
+  completedAt   DateTime?
+  notes         String?   @db.Text
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  resignation     Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+  completedByUser User?       @relation(fields: [completedBy], references: [id])
+
+  @@index([resignationId])
+  @@map("clearance_checklists")
+}
+
+model LateWarning {
+  id             String    @id @default(cuid())
+  companyId      String
+  userId         String
+  month          Int
+  year           Int
+  lateCount      Int
+  totalMinutes   Int
+  warningLevel   Int // 1, 2, 3
+  issuedAt       DateTime  @default(now())
+  acknowledgedAt DateTime?
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  // user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  hrEmployeeRel   HrEmployee? @relation(fields: [hrEmployeeRelId], references: [id])
+  hrEmployeeRelId String?
+
+  @@index([companyId])
+  @@index([userId])
+  @@index([month, year])
+  @@map("late_warnings")
+}
+
+model HrKudos {
+  id                               String   @id
+  companyId                        String
+  fromUserId                       String
+  toUserId                         String
+  reason                           String   @db.Text
+  points                           Int      @default(1)
+  createdAt                        DateTime @default(now())
+  updatedAt                        DateTime
+  companies                        Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  users_hr_kudos_fromUserIdTousers User     @relation("hr_kudos_fromUserIdTousers", fields: [fromUserId], references: [id], onDelete: Cascade)
+  users_hr_kudos_toUserIdTousers   User     @relation("hr_kudos_toUserIdTousers", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@map("hr_kudos")
+}
+
+model HrLatenessBalance {
+  id                   String   @id
+  companyId            String
+  employeeId           String
+  month                Int
+  year                 Int
+  totalLateMinutes     Int      @default(0)
+  graceMinutesUsed     Int      @default(0)
+  deductedMinutes      Int      @default(0)
+  totalDeductionAmount Decimal  @default(0.00) @db.Decimal(10, 2)
+  lateCount            Int      @default(0)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime
+  companies            Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, month, year])
+  @@index([companyId])
+  @@index([employeeId])
+  @@index([month, year])
+  @@map("hr_lateness_balance")
+}
+
+model HrManualDeduction {
+  id               String                   @id
+  companyId        String
+  employeeId       String
+  type             HrManualDeductionType    @default(OTHER)
+  category         String?
+  amount           Decimal                  @db.Decimal(10, 2)
+  reason           String                   @db.Text
+  description      String?                  @db.Text
+  date             DateTime                 @db.Date
+  effectiveMonth   Int
+  effectiveYear    Int
+  status           HrManualDeductionsStatus @default(PENDING)
+  approvedBy       String?
+  approvedAt       DateTime?
+  rejectedBy       String?
+  rejectedAt       DateTime?
+  rejectionReason  String?                  @db.Text
+  appliedToPayroll Boolean                  @default(false)
+  payrollId        String?
+  attachments      String?                  @db.Text
+  notes            String?                  @db.Text
+  createdBy        String
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime
+  companies        Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([createdBy])
+  @@index([effectiveMonth, effectiveYear])
+  @@index([employeeId])
+  @@index([status])
+  @@map("hr_manual_deductions")
+}
+
+model HrPromotion {
+  id                                                      String             @id
+  companyId                                               String
+  fromPositionId                                          String?
+  toPositionId                                            String
+  fromPositionName                                        String?
+  toPositionName                                          String
+  fromSalary                                              Decimal?           @db.Decimal(12, 2)
+  toSalary                                                Decimal?           @db.Decimal(12, 2)
+  promotionDate                                           DateTime           @db.Date
+  effectiveDate                                           DateTime           @db.Date
+  reason                                                  String             @db.Text
+  status                                                  HrPromotionsStatus @default(PENDING)
+  approvedBy                                              String?
+  approvedAt                                              DateTime?
+  rejectedAt                                              DateTime?
+  rejectionReason                                         String?            @db.Text
+  notes                                                   String?            @db.Text
+  createdAt                                               DateTime           @default(now())
+  updatedAt                                               DateTime
+  userId                                                  String?
+  companies                                               Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  hr_positions_hr_promotions_fromPositionIdTohr_positions HrPosition?        @relation("hr_promotions_fromPositionIdTohr_positions", fields: [fromPositionId], references: [id])
+  hr_positions_hr_promotions_toPositionIdTohr_positions   HrPosition         @relation("hr_promotions_toPositionIdTohr_positions", fields: [toPositionId], references: [id])
+
+  @@index([companyId])
+  @@index([fromPositionId])
+  @@index([promotionDate])
+  @@index([toPositionId])
+  @@index([userId])
+  @@map("hr_promotions")
+}
+
+model HrRewardEligibilityLog {
+  id                 String   @id
+  companyId          String
+  userId             String
+  rewardTypeId       String
+  evaluationDate     DateTime @default(now())
+  periodStart        DateTime @db.Date
+  periodEnd          DateTime @db.Date
+  isEligible         Boolean
+  eligibilityDetails String?  @db.Text
+  conditionsChecked  String?  @db.Text
+  createdAt          DateTime @default(now())
+  companies          Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  users              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([evaluationDate])
+  @@index([rewardTypeId])
+  @@index([userId])
+  @@map("hr_reward_eligibility_logs")
+}
+
+model HrRewardRecord {
+  id                  String                        @id
+  companyId           String
+  userId              String
+  rewardTypeId        String?
+  rewardName          String
+  rewardCategory      HrRewardRecordsRewardCategory
+  calculatedValue     Decimal                       @db.Decimal(12, 2)
+  calculationDetails  String?                       @db.Text
+  periodStart         DateTime                      @db.Date
+  periodEnd           DateTime                      @db.Date
+  appliedMonth        Int
+  appliedYear         Int
+  reason              String?                       @db.Text
+  eligibilityMet      String?                       @db.Text
+  status              HrRewardRecordsStatus         @default(PENDING)
+  approvedBy          String?
+  approvedAt          DateTime?
+  appliedAt           DateTime?
+  payrollId           String?
+  isIncludedInPayroll Boolean                       @default(false)
+  isLocked            Boolean                       @default(false)
+  voidedBy            String?
+  voidedAt            DateTime?
+  voidReason          String?                       @db.Text
+  createdAt           DateTime                      @default(now())
+  updatedAt           DateTime
+  companies           Company                       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  hrRewardType        HrRewardType?                 @relation(fields: [rewardTypeId], references: [id])
+  users               User                          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([appliedMonth, appliedYear])
+  @@index([companyId])
+  @@index([rewardTypeId])
+  @@index([status])
+  @@index([userId])
+  @@map("hr_reward_records")
+}
+
+model HrRewardSettings {
+  id                         String   @id
+  companyId                  String   @unique
+  allowRewardDeductionOffset Boolean  @default(false)
+  applyRewardsBeforeTax      Boolean  @default(true)
+  autoEvaluationEnabled      Boolean  @default(true)
+  evaluationDayOfMonth       Int      @default(1)
+  requireManagerApproval     Boolean  @default(false)
+  requireHRApproval          Boolean  @default(true)
+  notifyEmployeeOnReward     Boolean  @default(true)
+  notifyManagerOnReward      Boolean  @default(true)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime
+  companies                  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("hr_reward_settings")
+}
+
+model HrRewardType {
+  id                    String                         @id
+  companyId             String
+  name                  String
+  nameAr                String?
+  description           String?                        @db.Text
+  category              HrRewardTypesCategory
+  calculationMethod     HrRewardTypesCalculationMethod
+  value                 Decimal                        @db.Decimal(12, 2)
+  maxCap                Decimal?                       @db.Decimal(12, 2)
+  eligibilityConditions String?                        @db.Text
+  triggerType           HrRewardTypesTriggerType
+  frequency             HrRewardTypesFrequency
+  isActive              Boolean                        @default(true)
+  priority              Int                            @default(1)
+  effectiveFrom         DateTime?                      @db.Date
+  effectiveTo           DateTime?                      @db.Date
+  createdBy             String
+  createdAt             DateTime                       @default(now())
+  updatedAt             DateTime
+  hrRewardRecords       HrRewardRecord[]
+  companies             Company                        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([category])
+  @@index([companyId])
+  @@index([isActive])
+  @@map("hr_reward_types")
+}

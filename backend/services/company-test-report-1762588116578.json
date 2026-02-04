@@ -1,0 +1,1894 @@
+{
+  "metadata": {
+    "testDate": "2025-11-08T07:48:36.578Z",
+    "totalQuestions": 45,
+    "successfulTests": 24,
+    "failedTests": 21,
+    "totalTime": "475.88s",
+    "companyId": "cmem8ayyr004cufakqkcsyn97",
+    "customerId": "test-customer-1762587640703",
+    "conversationId": null,
+    "dbConversationId": null,
+    "testChatUrl": "/test-chat?conversationId=null",
+    "source": "company_data"
+  },
+  "summary": {
+    "averageScore": "49.38",
+    "averagePercentage": "49.4%"
+  },
+  "statsByCategory": {
+    "product_inquiry": {
+      "name": "product_inquiry",
+      "total": 30,
+      "averageScore": 50.333333333333336,
+      "passed": 16,
+      "questions": [
+        {
+          "questionId": 1,
+          "question": "عندك كوتشي سوان سكوتشي؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك! أنا سامح معاك، سعيد جداً بتواصلك معانا لأول مرة. 👋\n\nبالنسبة لسؤالك عن كوتشي سوان سكوتشي، أيوه المنتج متوفر حالياً وبسعر 349 جنيه.\nده كوتشي اسكوتش عالي الجودة بخامات مستوردة ونعل طبي مريح جداً.\nمتاح منه ألوان الأبيض والأسود والبيج، والمقاسات المتوفرة من 37 لـ 41 والقالب بتاعه مظبوط.\n\nالصور الخاصة بيه هتتبعتلك دلوقتي تلقائياً.\nتحب تعرف أي تفاصيل تانية عنه أو عن أي منتج تاني عندنا؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 15,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 100,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "ℹ️ أول رسالة، لا يوجد سياق سابق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 25489,
+          "success": true,
+          "percentage": "100.0"
+        },
+        {
+          "questionId": 3,
+          "question": "ممكن صور كوتشي سوان سكوتشي؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا عميل اختبار! أنا سامح معاك.\n\nبالتأكيد، كوتشي سوان سكوتشي منتج رائع ومتاح عندنا. الصور هتوصلك تلقائياً دلوقتي.\n\nلو عندك أي استفسار تاني عن الكوتشي أو أي منتج تاني، أنا موجود للمساعدة.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 12609,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 4,
+          "question": "عندك كوتشي سوان سكوتشي في مقاس كبير؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً وسهلاً بحضرتك يا فندم، أنا سامح من خدمة العملاء.\n\nبخصوص كوتشي سوان سكوتشي، هو متوفر حالياً وسعره 349 جنيه.\nالمقاسات المتاحة منه هي من 37 لـ 41، والقالب بتاعه مظبوط.\nالألوان المتوفرة هي الأبيض والأسود والبيج.\n\nتحب أبعت لحضرتك الصور بتاعته أو عندك أي أسئلة تانية؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 22418,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 5,
+          "question": "عندك كوتشي شانكي؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً وسهلاً بيك يا عميل اختبار، أنا سامح معاك. 👋\n\nبالتأكيد، كوتشي شانكي متوفر حاليًا عندنا. سعره 430 جنيه، ومتاح منه الألوان الأبيض والأسود والبيج.\n\nتحب أساعدك في أي تفاصيل تانية عنه أو عن أي منتج تاني؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 17940,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 7,
+          "question": "ممكن صور كوتشي شانكي؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا عميل اختبار، أنا سامح معاك.\nبخصوص كوتشي شانكي، للأسف الصور مش متاحة حالياً. لكن ممكن أقولك كل التفاصيل اللي تحب تعرفها عنه.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 30,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 90,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 13283,
+          "success": true,
+          "percentage": "90.0"
+        },
+        {
+          "questionId": 8,
+          "question": "عندك Shiny Half Boot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا عميل اختبار، أنا سامح معاك.\n\nبالتأكيد، المنتج Shiny Half Boot متوفر وسعره 699 جنيه. هبعتلك صورته دلوقتي.\n\nلو تحب تعرف أي تفاصيل تانية عنه أو عن أي منتج آخر، أنا موجود للمساعدة!",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 22740,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 10,
+          "question": "ممكن صور Shiny Half Boot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا عميل اختبار، أنا سامح من خدمة العملاء.\nبالتأكيد، تم إرسال صور الـ Shiny Half Boot لحضرتك.\nلو عندك أي استفسار تاني عن المنتج أو محتاج مساعدة في أي حاجة، أنا موجود.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 17095,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 11,
+          "question": "عندك GlamBoot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا عميل اختبار! أنا سامح معاك من خدمة العملاء.\n\nأيوه، الـ GlamBoot متوفر عندنا وسعره 699 جنيه. الصور بتاعته هتتبعت لحضرتك دلوقتي.\n\nتحب تعرف أي تفاصيل تانية عنه أو عن أي منتج تاني؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 23008,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 13,
+          "question": "ممكن صور GlamBoot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا عميل اختبار! سعيد بوجودك معانا في أول تواصل.\n\nبالتأكيد، صور منتج GlamBoot سيتم إرسالها لك الآن تلقائياً.\n\nلو عندك أي أسئلة تانية عن المنتج أو حابب تعرف تفاصيل أكتر، أنا موجود للمساعدة.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 10085,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 14,
+          "question": "عندك Belle Boot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك عميل اختبار! 👋\n\nنعم، المنتج Belle Boot متوفر لدينا. سعره 530 جنيه. هل تود معرفة أي تفاصيل أخرى عنه؟\n",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 46718,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 16,
+          "question": "ممكن صور Belle Boot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح ويسعدني خدمتك.\n\nبالتأكيد، سيتم إرسال صور Belle Boot الآن. هل لديك أي أسئلة أخرى بخصوص المنتج؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 8006,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 17,
+          "question": "عندك Fiora Fur Boot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك عميل اختبار، أنا سامح، وموجود لمساعدتك. نعم، لدينا Fiora Fur Boot متوفر. سعره 750 جنيه. هل تود معرفة تفاصيل أكثر عنه؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 10920,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 19,
+          "question": "ممكن صور Fiora Fur Boot؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار! أنا سامح، وموجود لمساعدتك.\n\nبالتأكيد، سيتم إرسال صور Fiora Fur Boot الآن. هل هناك أي شيء آخر يمكنني مساعدتك به؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 7236,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 20,
+          "question": "عندك 80/091 سابوه حريمي؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا أستاذ/ة عميل اختبار، أنا سامح وموجود لمساعدتك. نعم، المنتج 80/091 سابوه حريمي متوفر لدينا. هو سابوه ناعم بتصميم مريح وأنيق 👡✨مصنوع من خامة قطيفة عالية الجودة بملمس ناعم يديك إحساس خفيف وراحة طول اليوم، مع تفصيلة معدنية أنيقة تضيف لمسة فخامة بسيطة. سعره 349 جنيه. هل تود/ين معرفة المزيد عنه أو طلبه؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 14023,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 22,
+          "question": "ممكن صور 80/091 سابوه حريمي؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح وتحت أمرك.\n\nبالتأكيد، الصور الخاصة بـ 80/091 سابوه حريمي في طريقها إليك الآن. لو فيه أي استفسار تاني عن المنتج، أنا موجود.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 30,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 10
+          },
+          "totalScore": 85,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "⚠️ رد جيد ولكن لا يوجه المحادثة"
+          ],
+          "processingTime": 7927,
+          "success": true,
+          "percentage": "85.0"
+        },
+        {
+          "questionId": 23,
+          "question": "عندك بالرينا 83/176؟",
+          "expectedIntent": "product_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بك يا أستاذ/ة \"عميل اختبار\"! أنا سامح، ومبسوط جداً إنك أول مرة تتواصل معانا.\n\nبالفعل، متوفر عندنا بالرينا 83/176، وهي بالرينا قطيفة ناعمة سعرها 299 جنيه. تحب/ي تعرف/ي عنها تفاصيل أكتر؟\n\nولو حابب/ة تشوفي تشكيلة تانية من الأحذية الحريمي، عندنا كمان:\n\n*   **كوتشي سوان سكوتشي:** خامات مستوردة ونعل طبي، وسعره 349 جنيه. متوفر منه ألوان أبيض، أسود، وبيج.\n*   **سابوه حريمي 80/091:** بتصميم مريح وأنيق، وسعره 349 جنيه.\n\nإيه رأيك؟ حابب/ة أبعتلك صورهم؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 12429,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 25,
+          "question": "ممكن صور بالرينا 83/176؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 26,
+          "question": "عندك هاڤ 92/287؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 28,
+          "question": "ممكن صور هاڤ 92/287؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 29,
+          "question": "عندك هاڤ90/068؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 31,
+          "question": "ممكن صور هاڤ90/068؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 32,
+          "question": "عندك هاف حريمي 90/420؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 34,
+          "question": "ممكن صور هاف حريمي 90/420؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 35,
+          "question": "عندك هاف UGG؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 37,
+          "question": "ممكن صور هاف UGG؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 38,
+          "question": "عندك إيه في سلبيرات حريمي؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 39,
+          "question": "عندك إيه في احذيه حريمي؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 40,
+          "question": "عندك إيه في Woman's Shoes؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 41,
+          "question": "عندك إيه في بوتات؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 42,
+          "question": "عندك إيه في كوتشيات؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        }
+      ]
+    },
+    "price_inquiry": {
+      "name": "price_inquiry",
+      "total": 12,
+      "averageScore": 59.333333333333336,
+      "passed": 8,
+      "questions": [
+        {
+          "questionId": 2,
+          "question": "كام سعر كوتشي سوان سكوتشي؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً وسهلاً بيك يا عميل اختبار، منورنا في أول تواصل ليك معانا! 👋\n\nبالنسبة لسؤالك، سعر كوتشي سوان سكوتشي هو **349 جنيه** بس.\n\nممكن أعرف حضرتك من أي محافظة عشان أقدر أساعدك أكتر وأقولك على تفاصيل الشحن؟",
+          "scores": {
+            "intentDetection": 10,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 85,
+          "comments": [
+            "⚠️ النية قريبة ولكن ليست دقيقة تماماً",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 14174,
+          "success": true,
+          "percentage": "85.0"
+        },
+        {
+          "questionId": 6,
+          "question": "كام سعر كوتشي شانكي؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "product_inquiry",
+          "response": "أهلاً بيك يا عميل اختبار!\n\nسعر كوتشي شانكي 430 جنيه. متوفر منه 4 ألوان: الأبيض والأسود والبيج.\n\nتحب تعرف تفاصيل تانية عنه؟",
+          "scores": {
+            "intentDetection": 10,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 85,
+          "comments": [
+            "⚠️ النية قريبة ولكن ليست دقيقة تماماً",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 5470,
+          "success": true,
+          "percentage": "85.0"
+        },
+        {
+          "questionId": 9,
+          "question": "كام سعر Shiny Half Boot؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "price_inquiry",
+          "response": "أهلاً بك يا فندم، أنا سامح من خدمة العملاء.\n\nسعر الـ Shiny Half Boot هو 699 جنيه مصري. الصور هتتبعت لحضرتك تلقائياً.\n\nتحب أساعدك في أي حاجة تانية أو عندك أي استفسار عن المنتج؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 4566,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 12,
+          "question": "كام سعر GlamBoot؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "price_inquiry",
+          "response": "أهلاً بك يا عميل اختبار! أنا سامح، سعيد بوجودك معانا.\n\nبخصوص سعر GlamBoot، هو 699 جنيه.\n\nلو عندك أي استفسار تاني عن المنتج أو أي منتجات تانية، أنا تحت أمرك.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 30,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 10
+          },
+          "totalScore": 85,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "⚠️ رد جيد ولكن لا يوجه المحادثة"
+          ],
+          "processingTime": 6939,
+          "success": true,
+          "percentage": "85.0"
+        },
+        {
+          "questionId": 15,
+          "question": "كام سعر Belle Boot؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "price_inquiry",
+          "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح وموجود لمساعدتك.\n\nسعر Belle Boot هو 530 جنيه.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 7,
+            "conversationFlow": 10
+          },
+          "totalScore": 82,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "⚠️ لم يطلب توضيح بشكل واضح",
+            "⚠️ رد جيد ولكن لا يوجه المحادثة"
+          ],
+          "processingTime": 3334,
+          "success": true,
+          "percentage": "82.0"
+        },
+        {
+          "questionId": 18,
+          "question": "كام سعر Fiora Fur Boot؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "price_inquiry",
+          "response": "أهلاً بك يا أستاذ عميل اختبار، أنا سامح وموجود لمساعدتك.\n\nسعر Fiora Fur Boot هو 750 جنيه. هل لديك أي أسئلة أخرى بخصوص المنتج؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 3230,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 21,
+          "question": "كام سعر 80/091 سابوه حريمي؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "price_inquiry",
+          "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح وتحت أمرك.\n\nسعر سابوه حريمي 80/091 هو 349 جنيه. متاح منه كمية وممكن نجهزه لحضرتك فوراً. تحب/تحبي أعمل لك أوردر؟",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 35,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 95,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 3964,
+          "success": true,
+          "percentage": "95.0"
+        },
+        {
+          "questionId": 24,
+          "question": "كام سعر بالرينا 83/176؟",
+          "expectedIntent": "price_inquiry",
+          "detectedIntent": "price_inquiry",
+          "response": "أهلاً بحضرتك يا فندم، معاك سامح.\nسعر بالرينا 83/176 هو 299 جنيه.\n\nالبالرينا مصنوعة من خامة قطيفة ناعمة ومريحة جداً في اللبس، ونعلها مرن وثابت لراحة أكتر طول اليوم.\n\nلو حابب تطلبها ممكن تأكد عليا.",
+          "scores": {
+            "intentDetection": 20,
+            "responseQuality": 30,
+            "contextAwareness": 10,
+            "handlingAmbiguity": 15,
+            "conversationFlow": 15
+          },
+          "totalScore": 90,
+          "comments": [
+            "✅ تم فهم النية بشكل صحيح",
+            "✅ رد شامل ومفيد",
+            "⚠️ استخدام جزئي للسياق",
+            "✅ طلب توضيح بشكل مناسب",
+            "✅ يوجه المحادثة بشكل صحيح"
+          ],
+          "processingTime": 25375,
+          "success": true,
+          "percentage": "90.0"
+        },
+        {
+          "questionId": 27,
+          "question": "كام سعر هاڤ 92/287؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 30,
+          "question": "كام سعر هاڤ90/068؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 33,
+          "question": "كام سعر هاف حريمي 90/420؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        },
+        {
+          "questionId": 36,
+          "question": "كام سعر هاف UGG؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        }
+      ]
+    },
+    "greeting": {
+      "name": "greeting",
+      "total": 1,
+      "averageScore": 0,
+      "passed": 0,
+      "questions": [
+        {
+          "questionId": 43,
+          "question": "السلام عليكم",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        }
+      ]
+    },
+    "shipping_inquiry": {
+      "name": "shipping_inquiry",
+      "total": 1,
+      "averageScore": 0,
+      "passed": 0,
+      "questions": [
+        {
+          "questionId": 44,
+          "question": "الشحن كام؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        }
+      ]
+    },
+    "support_inquiry": {
+      "name": "support_inquiry",
+      "total": 1,
+      "averageScore": 0,
+      "passed": 0,
+      "questions": [
+        {
+          "questionId": 45,
+          "question": "ازاي أدفع؟",
+          "success": false,
+          "error": "Empty response from AI",
+          "scores": {
+            "intentDetection": 0,
+            "responseQuality": 0,
+            "contextAwareness": 0,
+            "handlingAmbiguity": 0,
+            "conversationFlow": 0
+          },
+          "totalScore": 0,
+          "percentage": 0
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "questionId": 1,
+      "question": "عندك كوتشي سوان سكوتشي؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك! أنا سامح معاك، سعيد جداً بتواصلك معانا لأول مرة. 👋\n\nبالنسبة لسؤالك عن كوتشي سوان سكوتشي، أيوه المنتج متوفر حالياً وبسعر 349 جنيه.\nده كوتشي اسكوتش عالي الجودة بخامات مستوردة ونعل طبي مريح جداً.\nمتاح منه ألوان الأبيض والأسود والبيج، والمقاسات المتوفرة من 37 لـ 41 والقالب بتاعه مظبوط.\n\nالصور الخاصة بيه هتتبعتلك دلوقتي تلقائياً.\nتحب تعرف أي تفاصيل تانية عنه أو عن أي منتج تاني عندنا؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 15,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 100,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "ℹ️ أول رسالة، لا يوجد سياق سابق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 25489,
+      "success": true,
+      "percentage": "100.0"
+    },
+    {
+      "questionId": 2,
+      "question": "كام سعر كوتشي سوان سكوتشي؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً وسهلاً بيك يا عميل اختبار، منورنا في أول تواصل ليك معانا! 👋\n\nبالنسبة لسؤالك، سعر كوتشي سوان سكوتشي هو **349 جنيه** بس.\n\nممكن أعرف حضرتك من أي محافظة عشان أقدر أساعدك أكتر وأقولك على تفاصيل الشحن؟",
+      "scores": {
+        "intentDetection": 10,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 85,
+      "comments": [
+        "⚠️ النية قريبة ولكن ليست دقيقة تماماً",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 14174,
+      "success": true,
+      "percentage": "85.0"
+    },
+    {
+      "questionId": 3,
+      "question": "ممكن صور كوتشي سوان سكوتشي؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا عميل اختبار! أنا سامح معاك.\n\nبالتأكيد، كوتشي سوان سكوتشي منتج رائع ومتاح عندنا. الصور هتوصلك تلقائياً دلوقتي.\n\nلو عندك أي استفسار تاني عن الكوتشي أو أي منتج تاني، أنا موجود للمساعدة.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 12609,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 4,
+      "question": "عندك كوتشي سوان سكوتشي في مقاس كبير؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً وسهلاً بحضرتك يا فندم، أنا سامح من خدمة العملاء.\n\nبخصوص كوتشي سوان سكوتشي، هو متوفر حالياً وسعره 349 جنيه.\nالمقاسات المتاحة منه هي من 37 لـ 41، والقالب بتاعه مظبوط.\nالألوان المتوفرة هي الأبيض والأسود والبيج.\n\nتحب أبعت لحضرتك الصور بتاعته أو عندك أي أسئلة تانية؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 22418,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 5,
+      "question": "عندك كوتشي شانكي؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً وسهلاً بيك يا عميل اختبار، أنا سامح معاك. 👋\n\nبالتأكيد، كوتشي شانكي متوفر حاليًا عندنا. سعره 430 جنيه، ومتاح منه الألوان الأبيض والأسود والبيج.\n\nتحب أساعدك في أي تفاصيل تانية عنه أو عن أي منتج تاني؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 17940,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 6,
+      "question": "كام سعر كوتشي شانكي؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بيك يا عميل اختبار!\n\nسعر كوتشي شانكي 430 جنيه. متوفر منه 4 ألوان: الأبيض والأسود والبيج.\n\nتحب تعرف تفاصيل تانية عنه؟",
+      "scores": {
+        "intentDetection": 10,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 85,
+      "comments": [
+        "⚠️ النية قريبة ولكن ليست دقيقة تماماً",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 5470,
+      "success": true,
+      "percentage": "85.0"
+    },
+    {
+      "questionId": 7,
+      "question": "ممكن صور كوتشي شانكي؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا عميل اختبار، أنا سامح معاك.\nبخصوص كوتشي شانكي، للأسف الصور مش متاحة حالياً. لكن ممكن أقولك كل التفاصيل اللي تحب تعرفها عنه.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 30,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 90,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 13283,
+      "success": true,
+      "percentage": "90.0"
+    },
+    {
+      "questionId": 8,
+      "question": "عندك Shiny Half Boot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا عميل اختبار، أنا سامح معاك.\n\nبالتأكيد، المنتج Shiny Half Boot متوفر وسعره 699 جنيه. هبعتلك صورته دلوقتي.\n\nلو تحب تعرف أي تفاصيل تانية عنه أو عن أي منتج آخر، أنا موجود للمساعدة!",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 22740,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 9,
+      "question": "كام سعر Shiny Half Boot؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "price_inquiry",
+      "response": "أهلاً بك يا فندم، أنا سامح من خدمة العملاء.\n\nسعر الـ Shiny Half Boot هو 699 جنيه مصري. الصور هتتبعت لحضرتك تلقائياً.\n\nتحب أساعدك في أي حاجة تانية أو عندك أي استفسار عن المنتج؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 4566,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 10,
+      "question": "ممكن صور Shiny Half Boot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا عميل اختبار، أنا سامح من خدمة العملاء.\nبالتأكيد، تم إرسال صور الـ Shiny Half Boot لحضرتك.\nلو عندك أي استفسار تاني عن المنتج أو محتاج مساعدة في أي حاجة، أنا موجود.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 17095,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 11,
+      "question": "عندك GlamBoot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا عميل اختبار! أنا سامح معاك من خدمة العملاء.\n\nأيوه، الـ GlamBoot متوفر عندنا وسعره 699 جنيه. الصور بتاعته هتتبعت لحضرتك دلوقتي.\n\nتحب تعرف أي تفاصيل تانية عنه أو عن أي منتج تاني؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 23008,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 12,
+      "question": "كام سعر GlamBoot؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "price_inquiry",
+      "response": "أهلاً بك يا عميل اختبار! أنا سامح، سعيد بوجودك معانا.\n\nبخصوص سعر GlamBoot، هو 699 جنيه.\n\nلو عندك أي استفسار تاني عن المنتج أو أي منتجات تانية، أنا تحت أمرك.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 30,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 10
+      },
+      "totalScore": 85,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "⚠️ رد جيد ولكن لا يوجه المحادثة"
+      ],
+      "processingTime": 6939,
+      "success": true,
+      "percentage": "85.0"
+    },
+    {
+      "questionId": 13,
+      "question": "ممكن صور GlamBoot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا عميل اختبار! سعيد بوجودك معانا في أول تواصل.\n\nبالتأكيد، صور منتج GlamBoot سيتم إرسالها لك الآن تلقائياً.\n\nلو عندك أي أسئلة تانية عن المنتج أو حابب تعرف تفاصيل أكتر، أنا موجود للمساعدة.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 10085,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 14,
+      "question": "عندك Belle Boot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك عميل اختبار! 👋\n\nنعم، المنتج Belle Boot متوفر لدينا. سعره 530 جنيه. هل تود معرفة أي تفاصيل أخرى عنه؟\n",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 46718,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 15,
+      "question": "كام سعر Belle Boot؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "price_inquiry",
+      "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح وموجود لمساعدتك.\n\nسعر Belle Boot هو 530 جنيه.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 7,
+        "conversationFlow": 10
+      },
+      "totalScore": 82,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "⚠️ لم يطلب توضيح بشكل واضح",
+        "⚠️ رد جيد ولكن لا يوجه المحادثة"
+      ],
+      "processingTime": 3334,
+      "success": true,
+      "percentage": "82.0"
+    },
+    {
+      "questionId": 16,
+      "question": "ممكن صور Belle Boot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح ويسعدني خدمتك.\n\nبالتأكيد، سيتم إرسال صور Belle Boot الآن. هل لديك أي أسئلة أخرى بخصوص المنتج؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 8006,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 17,
+      "question": "عندك Fiora Fur Boot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك عميل اختبار، أنا سامح، وموجود لمساعدتك. نعم، لدينا Fiora Fur Boot متوفر. سعره 750 جنيه. هل تود معرفة تفاصيل أكثر عنه؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 10920,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 18,
+      "question": "كام سعر Fiora Fur Boot؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "price_inquiry",
+      "response": "أهلاً بك يا أستاذ عميل اختبار، أنا سامح وموجود لمساعدتك.\n\nسعر Fiora Fur Boot هو 750 جنيه. هل لديك أي أسئلة أخرى بخصوص المنتج؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 3230,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 19,
+      "question": "ممكن صور Fiora Fur Boot؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار! أنا سامح، وموجود لمساعدتك.\n\nبالتأكيد، سيتم إرسال صور Fiora Fur Boot الآن. هل هناك أي شيء آخر يمكنني مساعدتك به؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 7236,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 20,
+      "question": "عندك 80/091 سابوه حريمي؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا أستاذ/ة عميل اختبار، أنا سامح وموجود لمساعدتك. نعم، المنتج 80/091 سابوه حريمي متوفر لدينا. هو سابوه ناعم بتصميم مريح وأنيق 👡✨مصنوع من خامة قطيفة عالية الجودة بملمس ناعم يديك إحساس خفيف وراحة طول اليوم، مع تفصيلة معدنية أنيقة تضيف لمسة فخامة بسيطة. سعره 349 جنيه. هل تود/ين معرفة المزيد عنه أو طلبه؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 14023,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 21,
+      "question": "كام سعر 80/091 سابوه حريمي؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "price_inquiry",
+      "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح وتحت أمرك.\n\nسعر سابوه حريمي 80/091 هو 349 جنيه. متاح منه كمية وممكن نجهزه لحضرتك فوراً. تحب/تحبي أعمل لك أوردر؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 3964,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 22,
+      "question": "ممكن صور 80/091 سابوه حريمي؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا أستاذ/أستاذة عميل اختبار، أنا سامح وتحت أمرك.\n\nبالتأكيد، الصور الخاصة بـ 80/091 سابوه حريمي في طريقها إليك الآن. لو فيه أي استفسار تاني عن المنتج، أنا موجود.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 30,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 10
+      },
+      "totalScore": 85,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "⚠️ رد جيد ولكن لا يوجه المحادثة"
+      ],
+      "processingTime": 7927,
+      "success": true,
+      "percentage": "85.0"
+    },
+    {
+      "questionId": 23,
+      "question": "عندك بالرينا 83/176؟",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "أهلاً بك يا أستاذ/ة \"عميل اختبار\"! أنا سامح، ومبسوط جداً إنك أول مرة تتواصل معانا.\n\nبالفعل، متوفر عندنا بالرينا 83/176، وهي بالرينا قطيفة ناعمة سعرها 299 جنيه. تحب/ي تعرف/ي عنها تفاصيل أكتر؟\n\nولو حابب/ة تشوفي تشكيلة تانية من الأحذية الحريمي، عندنا كمان:\n\n*   **كوتشي سوان سكوتشي:** خامات مستوردة ونعل طبي، وسعره 349 جنيه. متوفر منه ألوان أبيض، أسود، وبيج.\n*   **سابوه حريمي 80/091:** بتصميم مريح وأنيق، وسعره 349 جنيه.\n\nإيه رأيك؟ حابب/ة أبعتلك صورهم؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 12429,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 24,
+      "question": "كام سعر بالرينا 83/176؟",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "price_inquiry",
+      "response": "أهلاً بحضرتك يا فندم، معاك سامح.\nسعر بالرينا 83/176 هو 299 جنيه.\n\nالبالرينا مصنوعة من خامة قطيفة ناعمة ومريحة جداً في اللبس، ونعلها مرن وثابت لراحة أكتر طول اليوم.\n\nلو حابب تطلبها ممكن تأكد عليا.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 30,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 90,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 25375,
+      "success": true,
+      "percentage": "90.0"
+    },
+    {
+      "questionId": 25,
+      "question": "ممكن صور بالرينا 83/176؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 26,
+      "question": "عندك هاڤ 92/287؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 27,
+      "question": "كام سعر هاڤ 92/287؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 28,
+      "question": "ممكن صور هاڤ 92/287؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 29,
+      "question": "عندك هاڤ90/068؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 30,
+      "question": "كام سعر هاڤ90/068؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 31,
+      "question": "ممكن صور هاڤ90/068؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 32,
+      "question": "عندك هاف حريمي 90/420؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 33,
+      "question": "كام سعر هاف حريمي 90/420؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 34,
+      "question": "ممكن صور هاف حريمي 90/420؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 35,
+      "question": "عندك هاف UGG؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 36,
+      "question": "كام سعر هاف UGG؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 37,
+      "question": "ممكن صور هاف UGG؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 38,
+      "question": "عندك إيه في سلبيرات حريمي؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 39,
+      "question": "عندك إيه في احذيه حريمي؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 40,
+      "question": "عندك إيه في Woman's Shoes؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 41,
+      "question": "عندك إيه في بوتات؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 42,
+      "question": "عندك إيه في كوتشيات؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 43,
+      "question": "السلام عليكم",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 44,
+      "question": "الشحن كام؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 45,
+      "question": "ازاي أدفع؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    }
+  ],
+  "issues": []
+}

@@ -1,0 +1,597 @@
+ /// UNUSED - Legacy feature
+model PromptTemplate {
+  id          String   @id @default(cuid())
+  companyId   String
+  key         String
+  content     String
+  description String?
+  category    String   @default("general")
+  variables   String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([companyId, key])
+  @@index([companyId])
+}
+
+model CheckoutFormSettings {
+  id                     String   @id @default(cuid())
+  companyId              String   @unique
+  showGuestName          Boolean  @default(true)
+  requireGuestName       Boolean  @default(true)
+  showGuestPhone         Boolean  @default(true)
+  requireGuestPhone      Boolean  @default(true)
+  showGuestEmail         Boolean  @default(true)
+  requireGuestEmail      Boolean  @default(false)
+  showCity               Boolean  @default(true)
+  requireCity            Boolean  @default(true)
+  showShippingAddress    Boolean  @default(true)
+  requireShippingAddress Boolean  @default(true)
+  showPaymentMethod      Boolean  @default(true)
+  showNotes              Boolean  @default(true)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  company              Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("checkout_form_settings")
+}
+
+/// UNUSED - Planned feature for AI few-shot learning
+model FewShotExample {
+  id              String    @id @default(cuid())
+  companyId       String
+  customerMessage String    @db.Text
+  aiResponse      String    @db.Text
+  category        String?
+  tags            String?   @db.Text
+  priority        Int       @default(0)
+  isActive        Boolean   @default(true)
+  usageCount      Int       @default(0)
+  lastUsedAt      DateTime?
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([category])
+  @@index([companyId])
+  @@index([isActive])
+  @@index([priority])
+  @@map("few_shot_examples")
+}
+
+/// UNUSED - Planned feature for AI few-shot learning
+model FewShotSettings {
+  id                   String   @id @default(cuid())
+  companyId            String   @unique
+  enabled              Boolean  @default(false)
+  maxExamplesPerPrompt Int      @default(3)
+  selectionStrategy    String   @default("priority")
+  autoLearnFromGood    Boolean  @default(false)
+  minQualityScore      Float    @default(80)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@map("few_shot_settings")
+}
+
+model FooterSettings {
+  id             String   @id @default(cuid())
+  companyId      String   @unique
+  aboutStore     String?  @db.Text
+  showAboutStore Boolean  @default(true)
+  email          String?
+  showEmail      Boolean  @default(true)
+  phone          String?
+  showPhone      Boolean  @default(true)
+  address        String?  @db.Text
+  showAddress    Boolean  @default(true)
+  showQuickLinks Boolean  @default(true)
+  copyrightText  String?  @db.Text
+  showCopyright  Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  company      Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("footer_settings")
+}
+
+model GlobalAiConfig {
+  id              String                         @id @default(cuid())
+  defaultProvider GlobalAiConfigsDefaultProvider @default(GOOGLE)
+  isActive        Boolean                        @default(true)
+  settings        String?                        @db.Text
+  createdAt       DateTime                       @default(now())
+  updatedAt       DateTime                       @updatedAt
+  enableFailover  Boolean                        @default(true)
+
+  @@map("global_ai_configs")
+}
+
+model HomepageTemplate {
+  id          String   @id @default(cuid())
+  companyId   String
+  name        String
+  description String?  @db.Text
+  content     String   @db.LongText
+  thumbnail   String?  @db.Text
+  isActive    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([isActive])
+  @@map("homepage_templates")
+}
+
+/// UNUSED - Legacy feature
+model PageResponseSettings {
+  id                    String   @id @default(cuid())
+  pageId                String
+  companyId             String
+  responseMethod        String
+  fixedMessengerMessage String?  @db.Text
+  aiPrompt              String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  commentMessages       String?  @db.Text
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([pageId, companyId])
+  @@index([companyId])
+  @@index([pageId])
+  @@map("page_response_settings")
+}
+
+/// UNUSED - Legacy feature
+model PlanConfiguration {
+  id            String    @id @default(cuid())
+  planType      String    @unique
+  price         Float
+  currency      String    @default("EGP")
+  billingCycle  String    @default("monthly")
+  features      String    @db.LongText
+  description   String?
+  descriptionEn String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  companies     Company[]
+
+  @@map("plan_configurations")
+}
+
+/// UNUSED - Legacy feature
+model PostResponseSettings {
+  id                    String   @id @default(cuid())
+  postId                String
+  companyId             String
+  responseMethod        String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  aiPrompt              String?  @db.Text
+  fixedMessengerMessage String?  @db.Text
+  commentMessages       String?  @db.Text
+  featuredProductId     String?
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  product              Product? @relation(fields: [featuredProductId], references: [id])
+
+  @@unique([postId, companyId])
+  @@index([companyId])
+  @@index([featuredProductId])
+  @@index([postId])
+  @@map("post_response_settings")
+}
+
+/// UNUSED - Planned feature for prompt management
+model PromptLibrary {
+  id             String   @id @default(cuid())
+  name           String
+  nameAr         String?
+  description    String   @db.Text
+  descriptionAr  String?  @db.Text
+  category       String
+  businessType   String?
+  promptContent  String   @db.Text
+  responsePrompt String?  @db.Text
+  variables      String?  @db.Text
+  tags           String?  @db.Text
+  icon           String?
+  previewImage   String?
+  isActive       Boolean  @default(true)
+  isFeatured     Boolean  @default(false)
+  usageCount     Int      @default(0)
+  rating         Float    @default(0)
+  sortOrder      Int      @default(0)
+  createdBy      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([businessType])
+  @@index([category])
+  @@index([isActive])
+  @@index([isFeatured])
+  @@map("prompt_library")
+}
+
+/// UNUSED - Legacy feature
+model StorePage {
+  id              String             @id @default(cuid())
+  companyId       String
+  title           String
+  slug            String
+  content         String             @db.Text
+  pageType        StorePagesPageType @default(CUSTOM)
+  isActive        Boolean            @default(true)
+  showInFooter    Boolean            @default(true)
+  showInMenu      Boolean            @default(false)
+  order           Int                @default(0)
+  metaTitle       String?
+  metaDescription String?            @db.Text
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  company       Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, slug])
+  @@index([companyId])
+  @@index([isActive])
+  @@index([slug])
+  @@map("store_pages")
+}
+
+model StorePromotionSettings {
+  id                    String   @id @default(cuid())
+  companyId             String   @unique
+  freeShippingEnabled   Boolean  @default(false)
+  freeShippingThreshold Decimal  @default(0.00) @db.Decimal(10, 2)
+  freeShippingMessage   String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("store_promotion_settings")
+}
+
+model StorefrontSettings {
+  id                               String                @id @default(cuid())
+  companyId                        String                @unique
+  quickViewEnabled                 Boolean               @default(true)
+  quickViewShowAddToCart           Boolean               @default(true)
+  quickViewShowWishlist            Boolean               @default(true)
+  comparisonEnabled                Boolean               @default(true)
+  maxComparisonProducts            Int                   @default(4)
+  comparisonShowPrice              Boolean               @default(true)
+  comparisonShowSpecs              Boolean               @default(true)
+  wishlistEnabled                  Boolean               @default(true)
+  wishlistRequireLogin             Boolean               @default(false)
+  wishlistMaxItems                 Int                   @default(100)
+  advancedFiltersEnabled           Boolean               @default(true)
+  filterByPrice                    Boolean               @default(true)
+  filterByRating                   Boolean               @default(true)
+  filterByBrand                    Boolean               @default(false)
+  filterByAttributes               Boolean               @default(true)
+  reviewsEnabled                   Boolean               @default(true)
+  reviewsRequirePurchase           Boolean               @default(false)
+  reviewsModerationEnabled         Boolean               @default(true)
+  reviewsShowRating                Boolean               @default(true)
+  minRatingToDisplay               Int                   @default(1)
+  countdownEnabled                 Boolean               @default(true)
+  countdownShowOnProduct           Boolean               @default(true)
+  countdownShowOnListing           Boolean               @default(false)
+  backInStockEnabled               Boolean               @default(true)
+  backInStockNotifyEmail           Boolean               @default(true)
+  backInStockNotifySMS             Boolean               @default(false)
+  recentlyViewedEnabled            Boolean               @default(true)
+  recentlyViewedCount              Int                   @default(8)
+  recentlyViewedDays               Int                   @default(30)
+  imageZoomEnabled                 Boolean               @default(true)
+  imageZoomType                    String                @default("hover")
+  productVideosEnabled             Boolean               @default(true)
+  videoAutoplay                    Boolean               @default(false)
+  videoShowControls                Boolean               @default(true)
+  sizeGuideEnabled                 Boolean               @default(true)
+  sizeGuideShowOnProduct           Boolean               @default(true)
+  socialSharingEnabled             Boolean               @default(true)
+  shareFacebook                    Boolean               @default(true)
+  shareTwitter                     Boolean               @default(true)
+  shareWhatsApp                    Boolean               @default(true)
+  shareTelegram                    Boolean               @default(true)
+  badgesEnabled                    Boolean               @default(true)
+  badgeNew                         Boolean               @default(true)
+  badgeBestSeller                  Boolean               @default(true)
+  badgeOnSale                      Boolean               @default(true)
+  badgeOutOfStock                  Boolean               @default(true)
+  tabsEnabled                      Boolean               @default(true)
+  tabDescription                   Boolean               @default(true)
+  tabSpecifications                Boolean               @default(true)
+  tabReviews                       Boolean               @default(true)
+  tabShipping                      Boolean               @default(true)
+  stickyAddToCartEnabled           Boolean               @default(true)
+  stickyShowOnMobile               Boolean               @default(true)
+  stickyShowOnDesktop              Boolean               @default(true)
+  seoEnabled                       Boolean               @default(true)
+  seoMetaDescription               Boolean               @default(true)
+  seoStructuredData                Boolean               @default(true)
+  seoSitemap                       Boolean               @default(true)
+  seoOpenGraph                     Boolean               @default(true)
+  multiLanguageEnabled             Boolean               @default(false)
+  defaultLanguage                  String                @default("ar")
+  supportedLanguages               String                @db.LongText
+  createdAt                        DateTime              @default(now())
+  updatedAt                        DateTime              @updatedAt
+  capiStatus                       String?               @default("not_configured")
+  capiTrackAddToCart               Boolean               @default(true)
+  capiTrackInitiateCheckout        Boolean               @default(true)
+  capiTrackPageView                Boolean               @default(true)
+  capiTrackPurchase                Boolean               @default(true)
+  capiTrackSearch                  Boolean               @default(true)
+  capiTrackViewContent             Boolean               @default(true)
+  eventDeduplicationEnabled        Boolean               @default(true)
+  eventMatchQualityTarget          Int                   @default(8)
+  facebookConvApiEnabled           Boolean               @default(false)
+  facebookConvApiTestCode          String?
+  facebookConvApiToken             String?               @db.Text
+  facebookPixelEnabled             Boolean               @default(false)
+  facebookPixelId                  String?
+  gdprCompliant                    Boolean               @default(true)
+  hashUserData                     Boolean               @default(true)
+  lastCapiTest                     DateTime?
+  lastPixelTest                    DateTime?
+  pixelStatus                      String?               @default("not_configured")
+  pixelTrackAddToCart              Boolean               @default(true)
+  pixelTrackAddToWishlist          Boolean               @default(false)
+  pixelTrackInitiateCheckout       Boolean               @default(true)
+  pixelTrackPageView               Boolean               @default(true)
+  pixelTrackPurchase               Boolean               @default(true)
+  pixelTrackSearch                 Boolean               @default(true)
+  pixelTrackViewContent            Boolean               @default(true)
+  stickyAutoScrollToCheckout       Boolean               @default(false)
+  stickyScrollThreshold            Int                   @default(300)
+  stickyShowBuyNow                 Boolean               @default(true)
+  stickyTrackAnalytics             Boolean               @default(true)
+  stickyShowAddToCartButton        Boolean               @default(true)
+  stickyShowProductImage           Boolean               @default(true)
+  stickyShowProductName            Boolean               @default(true)
+  stickyShowQuantity               Boolean               @default(true)
+  badgeBuyerProtection             Boolean               @default(true)
+  badgeCashOnDelivery              Boolean               @default(true)
+  badgeCustom1                     Boolean               @default(false)
+  badgeCustom1Text                 String?
+  badgeCustom2                     Boolean               @default(false)
+  badgeCustom2Text                 String?
+  badgeFreeShipping                Boolean               @default(true)
+  badgeHighRating                  Boolean               @default(true)
+  badgeLayout                      String                @default("horizontal")
+  badgeQualityGuarantee            Boolean               @default(true)
+  badgeSecurePayment               Boolean               @default(true)
+  keyboardShortcuts                Boolean               @default(true)
+  navigationEnabled                Boolean               @default(false)
+  navigationType                   String                @default("sameCategory")
+  onlineVisitorsEnabled            Boolean               @default(false)
+  onlineVisitorsMax                Int                   @default(50)
+  onlineVisitorsMin                Int                   @default(5)
+  onlineVisitorsText               String                @default("{count} شخص يشاهدون هذا المنتج الآن")
+  onlineVisitorsType               String                @default("fake")
+  onlineVisitorsUpdateInterval     Int                   @default(30)
+  reasonsToPurchaseEnabled         Boolean               @default(false)
+  reasonsToPurchaseList            String?               @db.Text
+  reasonsToPurchaseMaxItems        Int                   @default(4)
+  reasonsToPurchaseStyle           String                @default("list")
+  reasonsToPurchaseType            String                @default("global")
+  securityBadgesEnabled            Boolean               @default(false)
+  showNavigationButtons            Boolean               @default(true)
+  soldNumberEnabled                Boolean               @default(false)
+  soldNumberMax                    Int                   @default(500)
+  soldNumberMin                    Int                   @default(10)
+  soldNumberText                   String                @default("تم بيع {count} قطعة")
+  soldNumberType                   String                @default("real")
+  stockProgressEnabled             Boolean               @default(false)
+  stockProgressHighColor           String                @default("#10b981")
+  stockProgressLowColor            String                @default("#ef4444")
+  stockProgressMediumColor         String                @default("#f59e0b")
+  stockProgressThreshold           Int                   @default(10)
+  stockProgressType                String                @default("percentage")
+  variantColorShowName             Boolean               @default(true)
+  variantColorSize                 String                @default("medium")
+  variantColorStyle                String                @default("buttons")
+  variantSizeShowGuide             Boolean               @default(false)
+  variantSizeShowStock             Boolean               @default(true)
+  variantSizeStyle                 String                @default("buttons")
+  estimatedDeliveryDefaultText     String                @default("التوصيل خلال {time}")
+  estimatedDeliveryEnabled         Boolean               @default(false)
+  estimatedDeliveryShowOnProduct   Boolean               @default(true)
+  fomoDelay                        Int                   @default(30)
+  fomoEnabled                      Boolean               @default(false)
+  fomoMessage                      String?               @db.Text
+  fomoShowOncePerSession           Boolean               @default(true)
+  fomoTrigger                      String                @default("time")
+  fomoType                         String                @default("soldCount")
+  productPageLayoutEnabled         Boolean               @default(false)
+  productPageOrder                 String?               @db.Text
+  productPageShowActions           Boolean               @default(true)
+  productPageShowBackInStock       Boolean               @default(true)
+  productPageShowBadges            Boolean               @default(true)
+  productPageShowCategory          Boolean               @default(true)
+  productPageShowCheckoutForm      Boolean               @default(true)
+  productPageShowCountdown         Boolean               @default(true)
+  productPageShowDescription       Boolean               @default(true)
+  productPageShowEstimatedDelivery Boolean               @default(true)
+  productPageShowFreeShipping      Boolean               @default(true)
+  productPageShowOnlineVisitors    Boolean               @default(true)
+  productPageShowPreOrder          Boolean               @default(true)
+  productPageShowPrice             Boolean               @default(true)
+  productPageShowQuantity          Boolean               @default(true)
+  productPageShowReasonsToPurchase Boolean               @default(true)
+  productPageShowSKU               Boolean               @default(true)
+  productPageShowSecurityBadges    Boolean               @default(true)
+  productPageShowSizeGuide         Boolean               @default(true)
+  productPageShowSocialSharing     Boolean               @default(true)
+  productPageShowSoldNumber        Boolean               @default(true)
+  productPageShowStockProgress     Boolean               @default(true)
+  productPageShowStockStatus       Boolean               @default(true)
+  productPageShowTabs              Boolean               @default(true)
+  productPageShowTitle             Boolean               @default(true)
+  productPageShowVariants          Boolean               @default(true)
+  productPageShowVolumeDiscounts   Boolean               @default(true)
+  galleryLayout                    String                @default("bottom")
+  galleryStyle                     String                @default("slider")
+  imageBorderRadius                Int                   @default(8)
+  imageHoverEffect                 String                @default("zoom")
+  imageLoadingEffect               String                @default("skeleton")
+  imagePlaceholder                 String                @default("?")
+  imageShadow                      Boolean               @default(true)
+  lightboxBackgroundColor          String                @default("rgba(0,0,0,0.9)")
+  lightboxCloseOnOverlay           Boolean               @default(true)
+  lightboxEnabled                  Boolean               @default(true)
+  lightboxKeyboardNav              Boolean               @default(true)
+  lightboxShowArrows               Boolean               @default(true)
+  lightboxShowCounter              Boolean               @default(true)
+  lightboxShowThumbnails           Boolean               @default(true)
+  lightboxZoomEnabled              Boolean               @default(true)
+  mainImageAspectRatio             String                @default("1:1")
+  mobileFullscreenOnTap            Boolean               @default(true)
+  mobileGalleryLayout              String                @default("slider")
+  mobilePinchZoom                  Boolean               @default(true)
+  mobileShowThumbnails             Boolean               @default(false)
+  mobileSwipeEnabled               Boolean               @default(true)
+  mouseWheelZoom                   Boolean               @default(false)
+  sliderAutoplay                   Boolean               @default(false)
+  sliderAutoplaySpeed              Int                   @default(3000)
+  sliderEnabled                    Boolean               @default(true)
+  sliderInfiniteLoop               Boolean               @default(true)
+  sliderShowArrows                 Boolean               @default(true)
+  sliderShowDots                   Boolean               @default(false)
+  sliderTransitionEffect           String                @default("slide")
+  sliderTransitionSpeed            Int                   @default(300)
+  thumbnailBorderRadius            Int                   @default(8)
+  thumbnailSize                    String                @default("medium")
+  thumbnailSpacing                 Int                   @default(8)
+  thumbnailsPerRow                 Int                   @default(4)
+  variationImagesAnimation         String                @default("fade")
+  variationImagesBehavior          String                @default("replace")
+  variationImagesEnabled           Boolean               @default(true)
+  videoMuted                       Boolean               @default(true)
+  videoPlayMode                    String                @default("inline")
+  videoPosition                    String                @default("end")
+  videoSources                     String                @default("[\"youtube\", \"vimeo\", \"self-hosted\"]")
+  videoThumbnailIcon               Boolean               @default(true)
+  view360AutoRotate                Boolean               @default(true)
+  view360Enabled                   Boolean               @default(false)
+  view360RotateSpeed               Int                   @default(5)
+  view360ShowControls              Boolean               @default(true)
+  zoomLensShape                    String                @default("square")
+  zoomLensSize                     Int                   @default(150)
+  zoomLevel                        Float                 @default(2.5)
+  zoomStyle                        String                @default("side")
+  zoomWindowPosition               String                @default("right")
+  zoomWindowSize                   Int                   @default(400)
+  mobileBottomNavbarEnabled        Boolean               @default(true)
+  mobileBottomNavbarShowAccount    Boolean               @default(true)
+  mobileBottomNavbarShowCart       Boolean               @default(false)
+  mobileBottomNavbarShowCompare    Boolean               @default(true)
+  mobileBottomNavbarShowHome       Boolean               @default(true)
+  mobileBottomNavbarShowSearch     Boolean               @default(false)
+  mobileBottomNavbarShowShop       Boolean               @default(true)
+  mobileBottomNavbarShowWishlist   Boolean               @default(true)
+  facebookPixelConfigs             FacebookPixelConfig[]
+  company                        Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([facebookConvApiEnabled])
+  @@index([facebookPixelEnabled])
+  @@map("storefront_settings")
+}
+
+/// UNUSED - Legacy feature
+model Subscription {
+  id              String                @id @default(cuid())
+  companyId       String
+  planType        SubscriptionsPlanType
+  status          SubscriptionsStatus   @default(ACTIVE)
+  startDate       DateTime              @default(now())
+  endDate         DateTime?
+  nextBillingDate DateTime?
+  billingCycle    String                @default("monthly")
+  price           Float
+  currency        String                @default("EGP")
+  autoRenew       Boolean               @default(true)
+  trialEndDate    DateTime?
+  cancelledAt     DateTime?
+  cancelReason    String?
+  metadata        String?               @db.LongText
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  invoices        Invoice[]
+  payments        Payment[]
+  company       Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("subscriptions")
+}
+
+model SystemPrompt {
+  id        String   @id @default(cuid())
+  name      String
+  content   String   @db.Text
+  category  String   @default("general")
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  companyId String?
+  company Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("system_prompts")
+}
+
+model SystemSettings {
+  id               String    @id @default(cuid())
+  systemName       String    @unique
+  displayName      String
+  description      String?
+  category         String    @default("general")
+  isEnabled        Boolean   @default(true)
+  config           String?   @db.LongText
+  resourceUsage    String?   @db.LongText
+  lastStatusChange DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @default(now())
+
+  @@map("system_settings")
+}
+
+model ReturnSettings {
+  id                 String   @id @default(cuid())
+  companyId          String   @unique
+  excellentThreshold Int      @default(90)
+  goodThreshold      Int      @default(70)
+  minOrdersForRating Int      @default(3)
+  autoApproveScore   Int      @default(95)
+  enableAutoApproval Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  company          Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("return_settings")
+}
+
+model ImageStudioSettings {
+  id                  String   @id @default(cuid())
+  enabled             Boolean  @default(true)
+  basicModelName      String   @default("gemini-2.5-flash-image")
+  proModelName        String   @default("gemini-3-pro-image-preview")
+  defaultModel        String   @default("basic")
+  maxImagesPerRequest Int      @default(1)
+  maxRequestsPerDay   Int      @default(50)
+  allowedCompanies    String?  @db.Text
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  selectedKeyId       String?
+
+  @@map("image_studio_settings")
+}

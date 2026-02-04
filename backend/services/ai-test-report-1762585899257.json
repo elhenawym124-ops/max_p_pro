@@ -1,0 +1,1141 @@
+{
+  "metadata": {
+    "testDate": "2025-11-08T07:11:39.256Z",
+    "totalQuestions": 50,
+    "successfulTests": 5,
+    "failedTests": 45,
+    "totalTime": "338.38s",
+    "companyId": "cmem8ayyr004cufakqkcsyn97",
+    "customerId": "test-customer-1762585560874",
+    "conversationId": "test-conversation-1762585560874"
+  },
+  "summary": {
+    "averageScore": "9.14",
+    "averagePercentage": "9.1%",
+    "averageIntentDetection": "8.0%",
+    "averageResponseQuality": "3.30",
+    "averageContextAwareness": "1.10",
+    "averageHandlingAmbiguity": "1.44",
+    "averageConversationFlow": "1.50"
+  },
+  "statsByCategory": {
+    "greeting": {
+      "name": "التحيات والبدايات",
+      "total": 5,
+      "averageScore": 73,
+      "passed": 4
+    },
+    "product_inquiry": {
+      "name": "استفسارات المنتجات",
+      "total": 10,
+      "averageScore": 9.2,
+      "passed": 1
+    },
+    "price_inquiry": {
+      "name": "استفسارات الأسعار",
+      "total": 8,
+      "averageScore": 0,
+      "passed": 0
+    },
+    "shipping_inquiry": {
+      "name": "استفسارات الشحن",
+      "total": 7,
+      "averageScore": 0,
+      "passed": 0
+    },
+    "order_inquiry": {
+      "name": "طلبات الشراء والتأكيد",
+      "total": 10,
+      "averageScore": 0,
+      "passed": 0
+    },
+    "complex_cases": {
+      "name": "حالات معقدة وغامضة",
+      "total": 5,
+      "averageScore": 0,
+      "passed": 0
+    },
+    "support_inquiry": {
+      "name": "استفسارات الدعم والمساعدة",
+      "total": 5,
+      "averageScore": 0,
+      "passed": 0
+    }
+  },
+  "statsByDifficulty": {
+    "easy": {
+      "total": 22,
+      "averageScore": 13.181818181818182,
+      "passed": 3
+    },
+    "medium": {
+      "total": 19,
+      "averageScore": 8.789473684210526,
+      "passed": 2
+    },
+    "hard": {
+      "total": 9,
+      "averageScore": 0,
+      "passed": 0
+    }
+  },
+  "results": [
+    {
+      "questionId": 1,
+      "question": "السلام عليكم",
+      "expectedIntent": "greeting",
+      "detectedIntent": "greeting",
+      "response": "وعليكم السلام يا فندم، أهلاً بك في [اسم المتجر/الشركة].\nمعاك سامح من خدمة العملاء، إزاي أقدر أساعدك النهاردة؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 15,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 100,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "ℹ️ أول رسالة، لا يوجد سياق سابق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 21672,
+      "success": true,
+      "percentage": "100.0"
+    },
+    {
+      "questionId": 2,
+      "question": "أهلاً، عندك إيه من المنتجات؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 3,
+      "question": "ازيك؟",
+      "expectedIntent": "greeting",
+      "detectedIntent": "greeting",
+      "response": "الحمد لله بخير يا فندم، وأنت عامل ايه؟ تحت أمرك في أي استفسار عن منتجاتنا.",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 12965,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 4,
+      "question": "هلو",
+      "expectedIntent": "greeting",
+      "detectedIntent": "greeting",
+      "response": "هلو يا فندم. تحت أمرك، ممكن أعرف ايه اللي بتدور عليه أو محتاج تعرف تفاصيل عنه من منتجاتنا؟ عندنا تشكيلة كبيرة من [اذكر أنواع المنتجات التي تبيعها الشركة، مثال: الملابس، الأدوات المنزلية، الإلكترونيات، إلخ].",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 95,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 13330,
+      "success": true,
+      "percentage": "95.0"
+    },
+    {
+      "questionId": 5,
+      "question": "عايز أعرف الأسعار",
+      "expectedIntent": "price_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "بالتأكيد يا فندم، تحت أمرك. بناءً على المنتجات المتوفرة لدينا حالياً:\n\n*   **كوتشي سوان سكوتشي:** سعره 349 جنيه ومتاح منه ألوان أبيض، أسود، وبيج.\n*   **كوتشي شانكي:** سعره 430 جنيه ومتاح منه 4 ألوان أبيض، أسود، وبيج.\n*   **Shiny Half Boot:** سعره 699 جنيه.\n*   **GlamBoot:** سعره 699 جنيه.\n*   **Belle Boot:** سعره 530 جنيه.\n*   **Fiora Fur Boot:** سعره 750 جنيه.\n*   **80/091 سابوه حريمي:** سعره 349 جنيه.\n*   **بالرينا 83/176:** سعره 299 جنيه.\n*   **هاف UGG:** سعره 625 جنيه.\n*   **هاڤ 92/287:** سعره 399 جنيه ولكن غير متوفر حالياً.\n*   **هاڤ90/068:** سعره 559 جنيه ولكن غير متوفر حالياً.\n*   **هاف حريمي 90/420:** سعره 565 جنيه ولكن غير متوفر حالياً.\n\nهل تحب أرسل لك صور للمنتجات المتوفرة؟\n",
+      "scores": {
+        "intentDetection": 10,
+        "responseQuality": 25,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 15,
+        "conversationFlow": 15
+      },
+      "totalScore": 75,
+      "comments": [
+        "⚠️ النية قريبة ولكن ليست دقيقة تماماً",
+        "⚠️ رد متوسط الطول",
+        "⚠️ استخدام جزئي للسياق",
+        "✅ طلب توضيح بشكل مناسب",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 13974,
+      "success": true,
+      "percentage": "75.0"
+    },
+    {
+      "questionId": 6,
+      "question": "ممكن صور المنتج ده",
+      "expectedIntent": "product_inquiry",
+      "detectedIntent": "product_inquiry",
+      "response": "تمام يا فندم، صور الـ Shiny Half Boot سيتم إرسالها لحضرتك فوراً.\nالمنتج ده سعره 699 جنيه.\n\nهل تحب تعرف المقاسات المتاحة أو عندك أي استفسار تاني عنه؟",
+      "scores": {
+        "intentDetection": 20,
+        "responseQuality": 35,
+        "contextAwareness": 10,
+        "handlingAmbiguity": 12,
+        "conversationFlow": 15
+      },
+      "totalScore": 92,
+      "comments": [
+        "✅ تم فهم النية بشكل صحيح",
+        "✅ رد شامل ومفيد",
+        "⚠️ استخدام جزئي للسياق",
+        "ℹ️ السؤال واضح، لا يحتاج توضيح",
+        "✅ يوجه المحادثة بشكل صحيح"
+      ],
+      "processingTime": 13369,
+      "success": true,
+      "percentage": "92.0"
+    },
+    {
+      "questionId": 7,
+      "question": "عايز أشوف صور",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 8,
+      "question": "عندك كوتشي Nike؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 9,
+      "question": "عايز حاجة للرياضة",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 10,
+      "question": "عندك iPhone 15 Pro Max؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 11,
+      "question": "عايز أعرف تفاصيل عن هذا المنتج",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 12,
+      "question": "ممكن صور الكوتشي الأحمر",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 13,
+      "question": "عندك مقاس 42 في الكوتشي ده؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 14,
+      "question": "عندك كوتشاي نايك؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 15,
+      "question": "عايز أشوف كوتشي وشنطة رياضية",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 16,
+      "question": "كام سعر الكوتشي ده؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 17,
+      "question": "كام السعر؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 18,
+      "question": "كام الفرق بين الكوتشي ده والتاني؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 19,
+      "question": "في خصم على المنتج ده؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 20,
+      "question": "شحال ثمن هاد الشي؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 21,
+      "question": "كام هيطلع لو اشتريت 3 قطع؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 22,
+      "question": "كام هيطلع مع الشحن؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 23,
+      "question": "عندك حاجة أرخص شوية؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 24,
+      "question": "الشحن كام؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 25,
+      "question": "هيوصل امتى لو طلبت النهاردة؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 26,
+      "question": "الشحن لأسوان كام؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 27,
+      "question": "الشحن مجاني ولا لا؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 28,
+      "question": "عندك توصيل سريع؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 29,
+      "question": "ازاي أتابع طلبي؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 30,
+      "question": "بتشحنوا برة مصر؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 31,
+      "question": "عايز أطلب الكوتشي ده",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 32,
+      "question": "الاسم: أحمد محمد، الهاتف: 01234567890، العنوان: القاهرة، حي الزمالك",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 33,
+      "question": "تمام، اكد الطلب",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 34,
+      "question": "ماشي",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 35,
+      "question": "لا مش عايز ده، عايز التاني",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 36,
+      "question": "ممكن أغير المقاس لمقاس أكبر؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 37,
+      "question": "مش عايز الطلب، الغيه",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 38,
+      "question": "عايز أطلب كوتشي مقاس 42 وشنطة رياضية",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 39,
+      "question": "عايز أطلب بس لو في خصم",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 40,
+      "question": "تمام، خلاص اكد",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 41,
+      "question": "ممكن",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 42,
+      "question": "عايز حاجة حلوة",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 43,
+      "question": "السلام عليكم، عايز أشوف كوتشي Nike، كام سعره؟ ولو في خصم ممكن أطلب",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 44,
+      "question": "عايز اكوتشاي نايك مقاس 42 بكام وهوصله امتي",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 45,
+      "question": "ممكن أخش الموقع بتاعك؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 46,
+      "question": "ازاي أدفع؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 47,
+      "question": "في ضمان على المنتج ده؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 48,
+      "question": "ممكن أرجع المنتج لو مش ناسبني؟",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 49,
+      "question": "المنتج اللي جابلي إياه مش زي الصورة",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    },
+    {
+      "questionId": 50,
+      "question": "شكراً، أنت خدمة ممتازة",
+      "success": false,
+      "error": "Empty response from AI",
+      "scores": {
+        "intentDetection": 0,
+        "responseQuality": 0,
+        "contextAwareness": 0,
+        "handlingAmbiguity": 0,
+        "conversationFlow": 0
+      },
+      "totalScore": 0,
+      "percentage": 0
+    }
+  ],
+  "issues": [
+    {
+      "type": "intent_detection",
+      "severity": "high",
+      "count": 45,
+      "questions": [
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "type": "response_quality",
+      "severity": "high",
+      "count": 45,
+      "questions": [
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "type": "context_awareness",
+      "severity": "medium",
+      "count": 45,
+      "questions": [
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "type": "complete_failure",
+      "severity": "critical",
+      "count": 45,
+      "questions": [
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "errors": [
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI",
+        "Empty response from AI"
+      ]
+    }
+  ]
+}

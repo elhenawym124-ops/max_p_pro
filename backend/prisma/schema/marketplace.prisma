@@ -1,0 +1,204 @@
+/// UNUSED - Planned feature for app marketplace
+model MarketplaceApp {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  description String  @db.Text
+  logo        String?
+  images      Json?
+
+  monthlyPrice Decimal @db.Decimal(10, 2)
+  yearlyPrice  Decimal @db.Decimal(10, 2)
+
+  features Json?
+
+  isActive   Boolean @default(true)
+  isPublic   Boolean @default(true)
+  isFeatured Boolean @default(false)
+
+  installations CompanyApp[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  mainRoute  String?
+  adminRoute String?
+
+  category String @default("general")
+
+  reviews      AppReview[]
+  pricingRules AppPricingRule[]
+
+  rating      Float @default(0)
+  reviewCount Int   @default(0)
+  installCount Int  @default(0)
+  isPopular    Boolean @default(false)
+  requiredApps Json?
+  trialDays    Int      @default(14)
+  icon         String?
+
+  @@map("marketplace_apps")
+}
+
+/// UNUSED - Planned feature for app marketplace
+model CompanyApp {
+  id        String @id @default(cuid())
+  companyId String
+  appId     String
+
+  status String @default("ACTIVE") // ACTIVE, TRIAL, CANCELLED, EXPIRED
+
+  trialEndsAt DateTime?
+  validUntil  DateTime?
+
+  settings Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  app     MarketplaceApp @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  usageLogs AppUsageLog[]
+
+  @@unique([companyId, appId])
+  @@map("company_apps")
+}
+
+/// UNUSED - Planned feature for app marketplace
+model AppUsageLog {
+  id           String     @id @default(cuid())
+  companyAppId String
+  feature      String?
+  quantity     Int        @default(1)
+  totalCost    Decimal    @default(0) @db.Decimal(10, 2)
+  metadata     Json?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  companyApp   CompanyApp @relation(fields: [companyAppId], references: [id], onDelete: Cascade)
+
+  @@index([companyAppId])
+  @@index([createdAt])
+  @@index([feature])
+  @@map("app_usage_logs")
+}
+
+/// UNUSED - Planned feature for app marketplace
+model AppReview {
+  id        String   @id @default(cuid())
+  appId     String
+  companyId String
+  userId    String
+  rating    Int
+  title     String?
+  comment   String?  @db.Text
+  isVerified Boolean @default(false)
+  isPublished Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  app     MarketplaceApp @relation(fields: [appId], references: [id], onDelete: Cascade)
+  company Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([appId, companyId])
+  @@index([appId])
+  @@index([companyId])
+  @@index([userId])
+  @@map("app_reviews")
+}
+
+/// UNUSED - Planned feature for app marketplace
+model AppPricingRule {
+  id        String   @id @default(cuid())
+  appId     String
+  name      String
+  condition Json
+  action    Json
+  priority  Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  app MarketplaceApp @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  @@index([appId])
+  @@map("app_pricing_rules")
+}
+
+/// UNUSED - Planned feature for app marketplace
+model AppBundle {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  nameEn      String?
+  description String  @db.Text
+
+  appIds Json
+
+  monthlyPrice Decimal  @db.Decimal(10, 2)
+  yearlyPrice  Decimal? @db.Decimal(10, 2)
+
+  discount Decimal @db.Decimal(5, 2)
+
+  isActive   Boolean @default(true)
+  isFeatured Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+  @@map("app_bundles")
+}
+
+/// UNUSED - Planned feature for company wallet system
+model CompanyWallet {
+  id        String  @id @default(cuid())
+  companyId String  @unique
+  balance   Decimal @default(0) @db.Decimal(10, 2)
+  currency  String  @default("EGP")
+
+  updatedAt DateTime @updatedAt
+
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@map("company_wallets")
+}
+
+/// UNUSED - Planned feature for company wallet system
+model Transaction {
+  id          String  @id @default(cuid())
+  walletId    String
+  amount      Decimal @db.Decimal(10, 2)
+  type        String // DEPOSIT, WITHDRAWAL, PAYMENT, REFUND
+  status      String  @default("COMPLETED")
+  description String?
+  referenceId String?
+
+  createdAt DateTime @default(now())
+
+  wallet CompanyWallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId])
+  @@map("transactions")
+}
+
+model EnterprisePlan {
+  id          String   @id @default(cuid())
+  companyId   String
+  name        String
+  price       Decimal  @db.Decimal(10, 2)
+  description String?  @db.Text
+  features    Json?    @default("[]")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("enterprise_plans")
+}

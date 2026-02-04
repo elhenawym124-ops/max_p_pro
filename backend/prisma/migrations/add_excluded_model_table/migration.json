@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "description": "Add ExcludedModel table for tracking excluded models with retry logic",
+  "steps": [
+    {
+      "kind": "CreateTable",
+      "table": "excluded_models"
+    }
+  ]
+}
+

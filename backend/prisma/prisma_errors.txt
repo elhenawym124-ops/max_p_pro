@@ -1,0 +1,633 @@
+Environment variables loaded from ..\.env
+Prisma schema loaded from schema.prisma
+Error: Prisma schema validation - (get-dmmf wasm)
+Error code: P1012
+error: The model with database name "hr_audit_logs" could not be defined because another model or view with this name exists: "hr_audit_logs"
+  -->  schema.prisma:6437
+   | 
+6436 |   @@index([createdAt])
+6437 |   @@map("hr_audit_logs")
+   | 
+error: The model with database name "hr_settings" could not be defined because another model or view with this name exists: "hr_settings"
+  -->  schema.prisma:6514
+   | 
+6513 | 
+6514 |   @@map("hr_settings")
+   | 
+error: The model with database name "hr_advance_requests" could not be defined because another model or view with this name exists: "hr_advance_requests"
+  -->  schema.prisma:6552
+   | 
+6551 |   @@index([status])
+6552 |   @@map("hr_advance_requests")
+   | 
+error: The model with database name "clearance_checklists" could not be defined because another model or view with this name exists: "clearance_checklists"
+  -->  schema.prisma:6571
+   | 
+6570 |   @@index([resignationId])
+6571 |   @@map("clearance_checklists")
+   | 
+error: The model with database name "late_warnings" could not be defined because another model or view with this name exists: "late_warnings"
+  -->  schema.prisma:6592
+   | 
+6591 |   @@index([month, year])
+6592 |   @@map("late_warnings")
+   | 
+error: The model with database name "assets" could not be defined because another model or view with this name exists: "assets"
+  -->  schema.prisma:6690
+   | 
+6689 |   @@index([branchId])
+6690 |   @@map("assets")
+   | 
+error: The model with database name "asset_categories" could not be defined because another model or view with this name exists: "asset_categories"
+  -->  schema.prisma:6706
+   | 
+6705 |   @@index([companyId])
+6706 |   @@map("asset_categories")
+   | 
+error: The model with database name "asset_assignments" could not be defined because another model or view with this name exists: "asset_assignments"
+  -->  schema.prisma:6726
+   | 
+6725 |   @@index([assignedBy])
+6726 |   @@map("asset_assignments")
+   | 
+error: The model with database name "asset_maintenance" could not be defined because another model or view with this name exists: "asset_maintenance"
+  -->  schema.prisma:6746
+   | 
+6745 |   @@index([assetId])
+6746 |   @@map("asset_maintenance")
+   | 
+error: The model with database name "appointments" could not be defined because another model or view with this name exists: "appointments"
+  -->  schema.prisma:6902
+   | 
+6901 |   @@index([status])
+6902 |   @@map("appointments")
+   | 
+error: The model with database name "ai_traces" could not be defined because another model or view with this name exists: "ai_traces"
+  -->  schema.prisma:6920
+   | 
+6919 |   @@index([createdAt])
+6920 |   @@map("ai_traces")
+   | 
+error: The model with database name "ai_trace_steps" could not be defined because another model or view with this name exists: "ai_trace_steps"
+  -->  schema.prisma:6938
+   | 
+6937 |   @@index([createdAt])
+6938 |   @@map("ai_trace_steps")
+   | 
+error: The model with database name "store_visits" could not be defined because another model or view with this name exists: "store_visits"
+  -->  schema.prisma:6958
+   | 
+6957 |   @@index([sessionId, companyId])
+6958 |   @@map("store_visits")
+   | 
+error: The model with database name "product_visits" could not be defined because another model or view with this name exists: "product_visits"
+  -->  schema.prisma:6976
+   | 
+6975 |   @@index([sessionId, companyId])
+6976 |   @@map("product_visits")
+   | 
+error: The model with database name "daily_analytics" could not be defined because another model or view with this name exists: "daily_analytics"
+  -->  schema.prisma:7019
+   | 
+7018 |   @@index([companyId, date])
+7019 |   @@map("daily_analytics")
+   | 
+error: The model with database name "product_analytics" could not be defined because another model or view with this name exists: "product_analytics"
+  -->  schema.prisma:7040
+   | 
+7039 |   @@index([productId, companyId])
+7040 |   @@map("product_analytics")
+   | 
+error: Error parsing attribute "@relation": The given constraint name `ai_trace_steps_traceId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:469
+   | 
+468 |   createdAt DateTime  @default(now())
+469 |   ai_traces ai_traces @relation(fields: [traceId], references: [id], onDelete: Cascade)
+
+470 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `ai_traces_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:484
+   | 
+483 |   ai_trace_steps ai_trace_steps[]
+484 |   companies      Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+485 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `appointments_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:512
+   | 
+511 |   updatedAt       DateTime
+512 |   companies       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+513 |   customers       Customer? @relation(fields: [customerId], references: [id])
+   | 
+error: Error parsing attribute "@relation": The given constraint name `appointments_customerId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:513
+   | 
+512 |   companies       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+513 |   customers       Customer? @relation(fields: [customerId], references: [id])
+
+514 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `asset_assignments_assetId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:540
+   | 
+539 |   updatedAt         DateTime
+540 |   assets            assets                               @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+541 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `asset_categories_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:555
+   | 
+554 |   updatedAt   DateTime
+555 |   companies   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+556 |   assets      assets[]
+   | 
+error: Error parsing attribute "@relation": The given constraint name `asset_maintenance_assetId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:575
+   | 
+574 |   updatedAt      DateTime
+575 |   assets         assets    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+576 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `assets_categoryId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:604
+   | 
+603 |   asset_maintenance asset_maintenance[]
+604 |   asset_categories  asset_categories?   @relation(fields: [categoryId], references: [id])
+
+605 |   companies         Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `assets_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:605
+   | 
+604 |   asset_categories  asset_categories?   @relation(fields: [categoryId], references: [id])
+605 |   companies         Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+606 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `clearance_checklists_completedBy_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:836
+   | 
+835 |   updatedAt       DateTime
+836 |   users           User?          @relation(fields: [completedBy], references: [id])
+
+837 |   hr_resignations Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `clearance_checklists_resignationId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:837
+   | 
+836 |   users           User?          @relation(fields: [completedBy], references: [id])
+837 |   hr_resignations Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+
+838 | 
+   | 
+error: Error validating field `dev_projects` in model `Company`: The relation field `dev_projects` on model `Company` is missing an opposite relation field on the model `DevProject`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:1044
+   | 
+1043 |   user_companies                    user_companies[]
+1044 |   dev_projects                      DevProject[]
+
+1045 |   dev_team_members                  DevTeamMember[]
+   | 
+error: Error validating field `dev_team_members` in model `Company`: The relation field `dev_team_members` on model `Company` is missing an opposite relation field on the model `DevTeamMember`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:1045
+   | 
+1044 |   dev_projects                      DevProject[]
+1045 |   dev_team_members                  DevTeamMember[]
+
+1046 |   dev_tasks                         DevTask[]
+   | 
+error: Error validating field `dev_tasks` in model `Company`: The relation field `dev_tasks` on model `Company` is missing an opposite relation field on the model `DevTask`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:1046
+   | 
+1045 |   dev_team_members                  DevTeamMember[]
+1046 |   dev_tasks                         DevTask[]
+
+1047 |   users                             User[]
+   | 
+error: Error parsing attribute "@relation": The given constraint name `daily_analytics_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:1422
+   | 
+1421 |   avgSessionDuration Int       @default(0)
+1422 |   companies          Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+1423 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_advance_requests_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:2444
+   | 
+2443 |   userId            String?
+2444 |   companies         Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+2445 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_audit_logs_actorId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:2493
+   | 
+2492 |   createdAt  DateTime  @default(now())
+2493 |   users      User     @relation(fields: [actorId], references: [id])
+
+2494 |   companies  Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_audit_logs_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:2494
+   | 
+2493 |   users      User     @relation(fields: [actorId], references: [id])
+2494 |   companies  Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+2495 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_settings_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:3121
+   | 
+3120 |   taxRate                       Decimal   @default(0.00) @db.Decimal(5, 2)
+3121 |   companies                     Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+3122 | }
+   | 
+error: Error parsing attribute "@relation": The given constraint name `late_warnings_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:3345
+   | 
+3344 |   userId         String
+3345 |   companies      Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+3346 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_analytics_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:3909
+   | 
+3908 |   avgViewDuration Int       @default(0)
+3909 |   companies       Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+3910 |   products    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_analytics_productId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:3910
+   | 
+3909 |   companies       Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+3910 |   products    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+3911 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_visits_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:3976
+   | 
+3975 |   purchased   Boolean   @default(false)
+3976 |   companies   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+3977 |   products    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_visits_productId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:3977
+   | 
+3976 |   companies   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+3977 |   products    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+3978 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `store_visits_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:4614
+   | 
+4613 |   pagesViewed Int       @default(1)
+4614 |   companies   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+4615 | 
+   | 
+error: Error validating field `companies` in model `user_invitations`: The relation field `companies` on model `user_invitations` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:5329
+   | 
+5328 |   updatedAt  DateTime
+5329 |   companies  Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+5330 |   users      User                   @relation(fields: [invitedBy], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_audit_logs_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6431
+   | 
+6430 | 
+6431 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6432 |   actor   User    @relation(fields: [actorId], references: [id])
+   | 
+error: Error validating field `company` in model `HRAuditLog`: The relation field `company` on model `HRAuditLog` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6431
+   | 
+6430 | 
+6431 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6432 |   actor   User    @relation(fields: [actorId], references: [id])
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_audit_logs_actorId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6432
+   | 
+6431 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+6432 |   actor   User    @relation(fields: [actorId], references: [id])
+
+6433 | 
+   | 
+error: Error validating field `actor` in model `HRAuditLog`: The relation field `actor` on model `HRAuditLog` is missing an opposite relation field on the model `User`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6432
+   | 
+6431 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+6432 |   actor   User    @relation(fields: [actorId], references: [id])
+
+6433 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_settings_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6512
+   | 
+6511 | 
+6512 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6513 | 
+   | 
+error: Error validating field `company` in model `HRSettings`: The relation field `company` on model `HRSettings` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6512
+   | 
+6511 | 
+6512 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6513 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `hr_advance_requests_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6545
+   | 
+6544 | 
+6545 |   company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6546 |   // user     User?    @relation("AdvanceRequestUser", fields: [userId], references: [id], onDelete: Cascade)
+   | 
+error: Error validating field `company` in model `AdvanceRequest`: The relation field `company` on model `AdvanceRequest` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6545
+   | 
+6544 | 
+6545 |   company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6546 |   // user     User?    @relation("AdvanceRequestUser", fields: [userId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `clearance_checklists_resignationId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6567
+   | 
+6566 | 
+6567 |   resignation     Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+
+6568 |   completedByUser User?       @relation(fields: [completedBy], references: [id])
+   | 
+error: Error validating field `resignation` in model `ClearanceChecklist`: The relation field `resignation` on model `ClearanceChecklist` is missing an opposite relation field on the model `Resignation`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6567
+   | 
+6566 | 
+6567 |   resignation     Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+
+6568 |   completedByUser User?       @relation(fields: [completedBy], references: [id])
+   | 
+error: Error parsing attribute "@relation": The given constraint name `clearance_checklists_completedBy_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6568
+   | 
+6567 |   resignation     Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+6568 |   completedByUser User?       @relation(fields: [completedBy], references: [id])
+
+6569 | 
+   | 
+error: Error validating field `completedByUser` in model `ClearanceChecklist`: The relation field `completedByUser` on model `ClearanceChecklist` is missing an opposite relation field on the model `User`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6568
+   | 
+6567 |   resignation     Resignation @relation(fields: [resignationId], references: [id], onDelete: Cascade)
+6568 |   completedByUser User?       @relation(fields: [completedBy], references: [id])
+
+6569 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `late_warnings_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6586
+   | 
+6585 | 
+6586 |   company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6587 |   // user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+   | 
+error: Error validating field `company` in model `LateWarning`: The relation field `company` on model `LateWarning` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6586
+   | 
+6585 | 
+6586 |   company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6587 |   // user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `assets_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6674
+   | 
+6673 | 
+6674 |   company       Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6675 |   category      AssetCategory?     @relation(fields: [categoryId], references: [id])
+   | 
+error: Error validating field `company` in model `Asset`: The relation field `company` on model `Asset` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6674
+   | 
+6673 | 
+6674 |   company       Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6675 |   category      AssetCategory?     @relation(fields: [categoryId], references: [id])
+   | 
+error: Error parsing attribute "@relation": The given constraint name `assets_categoryId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6675
+   | 
+6674 |   company       Company            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+6675 |   category      AssetCategory?     @relation(fields: [categoryId], references: [id])
+
+6676 |   // currentHolder User?              @relation("CurrentAssetHolder", fields: [assignedToId], references: [id])
+   | 
+error: Error parsing attribute "@relation": The given constraint name `asset_categories_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6701
+   | 
+6700 | 
+6701 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6702 |   assets  Asset[]
+   | 
+error: Error validating field `company` in model `AssetCategory`: The relation field `company` on model `AssetCategory` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6701
+   | 
+6700 | 
+6701 |   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6702 |   assets  Asset[]
+   | 
+error: Error parsing attribute "@relation": The given constraint name `asset_assignments_assetId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6719
+   | 
+6718 | 
+6719 |   asset    Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+6720 |   // user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `asset_maintenance_assetId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6743
+   | 
+6742 | 
+6743 |   asset Asset @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+6744 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `appointments_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6894
+   | 
+6893 | 
+6894 |   company  Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6895 |   customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+   | 
+error: Error validating field `company` in model `Appointment`: The relation field `company` on model `Appointment` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6894
+   | 
+6893 | 
+6894 |   company  Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6895 |   customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `appointments_customerId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6895
+   | 
+6894 |   company  Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+6895 |   customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+6896 | 
+   | 
+error: Error validating field `customer` in model `Appointment`: The relation field `customer` on model `Appointment` is missing an opposite relation field on the model `Customer`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6895
+   | 
+6894 |   company  Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+6895 |   customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+6896 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `ai_traces_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6915
+   | 
+6914 |   
+6915 |   company     Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6916 |   steps       AiTraceStep[]
+   | 
+error: Error validating field `company` in model `AiTrace`: The relation field `company` on model `AiTrace` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6915
+   | 
+6914 |   
+6915 |   company     Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6916 |   steps       AiTraceStep[]
+   | 
+error: Error parsing attribute "@relation": The given constraint name `ai_trace_steps_traceId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6934
+   | 
+6933 |   
+6934 |   trace     AiTrace  @relation(fields: [traceId], references: [id], onDelete: Cascade)
+
+6935 | 
+   | 
+error: Error parsing attribute "@relation": The given constraint name `store_visits_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6954
+   | 
+6953 |   pagesViewed   Int      @default(1)
+6954 |   company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6955 |   
+   | 
+error: Error validating field `company` in model `StoreVisit`: The relation field `company` on model `StoreVisit` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6954
+   | 
+6953 |   pagesViewed   Int      @default(1)
+6954 |   company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6955 |   
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_visits_productId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6971
+   | 
+6970 |   purchased     Boolean  @default(false)
+6971 |   product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+6972 |   company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+   | 
+error: Error validating field `product` in model `ProductVisit`: The relation field `product` on model `ProductVisit` is missing an opposite relation field on the model `Product`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6971
+   | 
+6970 |   purchased     Boolean  @default(false)
+6971 |   product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+6972 |   company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_visits_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:6972
+   | 
+6971 |   product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+6972 |   company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6973 |   
+   | 
+error: Error validating field `company` in model `ProductVisit`: The relation field `company` on model `ProductVisit` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:6972
+   | 
+6971 |   product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+6972 |   company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+6973 |   
+   | 
+error: Error parsing attribute "@relation": The given constraint name `daily_analytics_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:7015
+   | 
+7014 |   avgSessionDuration    Int      @default(0)
+7015 |   company               Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+7016 |   
+   | 
+error: Error validating field `company` in model `DailyAnalytics`: The relation field `company` on model `DailyAnalytics` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:7015
+   | 
+7014 |   avgSessionDuration    Int      @default(0)
+7015 |   company               Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+7016 |   
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_analytics_productId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:7034
+   | 
+7033 |   avgViewDuration   Int      @default(0)
+7034 |   product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+7035 |   company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+   | 
+error: Error validating field `product` in model `ProductAnalytics`: The relation field `product` on model `ProductAnalytics` is missing an opposite relation field on the model `Product`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:7034
+   | 
+7033 |   avgViewDuration   Int      @default(0)
+7034 |   product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+7035 |   company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+   | 
+error: Error parsing attribute "@relation": The given constraint name `product_analytics_companyId_fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  schema.prisma:7035
+   | 
+7034 |   product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+7035 |   company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+7036 |   
+   | 
+error: Error validating field `company` in model `ProductAnalytics`: The relation field `company` on model `ProductAnalytics` is missing an opposite relation field on the model `Company`. Either run `prisma format` or add it manually.
+  -->  schema.prisma:7035
+   | 
+7034 |   product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+7035 |   company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+7036 |   
+   | 
+
+Validation Error Count: 82
+[Context: getDmmf]
+
+Prisma CLI Version : 6.12.0

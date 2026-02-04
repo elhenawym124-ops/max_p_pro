@@ -1,0 +1,33 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/postgres"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model PostgresTest {
+  id        Int      @id @default(autoincrement())
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id                    String    @id
+  name                  String
+  description           String?
+  price                 Decimal   @db.Decimal(10, 2)
+  stock                 Int       @default(0)
+  companyId             String    @map("company_id")
+  categoryId            String?   @map("category_id")
+  isActive              Boolean   @default(true) @map("is_active")
+  embedding             Float[]
+  embeddingGeneratedAt  DateTime? @map("embedding_generated_at")
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updated_at            DateTime  @updatedAt @map("updated_at")
+
+  @@map("products")
+  @@index([companyId])
+}

@@ -1,0 +1,9 @@
+Add this line after line 513 in App.tsx:
+
+                <Route path="/bulk-search" element={<Layout><BulkSearchPage /></Layout>} />
+
+This should be inserted between:
+- Line 513: <Route path="/returns" element={<Layout><ReturnManagementPage /></Layout>} />
+- Line 514: <Route path="/orders/manual" element={<Layout><ManualOrderPage /></Layout>} />
+
+The BulkSearchPage import is already added at line 238.

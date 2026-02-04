@@ -1,0 +1,156 @@
+model AffiliatePayout {
+  id                  String                        @id
+  affiliateId         String
+  amount              Decimal                       @db.Decimal(10, 2)
+  currency            String                        @default("EGP")
+  status              AffiliatePayoutsStatus        @default(PENDING)
+  paymentMethod       AffiliatePayoutsPaymentMethod
+  paymentDetails      String?                       @db.Text
+  transactionId       String?
+  externalReference   String?
+  processedAt         DateTime?
+  processedBy         String?
+  isExternalPayment   Boolean                       @default(true)
+  externalPaymentDate DateTime?
+  notes               String?                       @db.Text
+  createdAt           DateTime                      @default(now())
+  updatedAt           DateTime
+  affiliate           Affiliate                     @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  commissions         Commission[]
+
+  @@index([affiliateId])
+  @@index([paymentMethod])
+  @@index([status])
+  @@map("affiliate_payouts")
+}
+
+model AffiliateProduct {
+  id          String    @id
+  affiliateId String
+  productId   String
+  basePrice   Decimal   @db.Decimal(10, 2)
+  markup      Decimal   @db.Decimal(10, 2)
+  finalPrice  Decimal   @db.Decimal(10, 2)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  affiliate   Affiliate @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([affiliateId, productId])
+  @@index([affiliateId])
+  @@index([productId])
+  @@map("affiliate_products")
+}
+
+model AffiliateReferral {
+  id           String    @id
+  affiliateId  String
+  customerId   String?
+  orderId      String?   @unique
+  referralCode String
+  referralUrl  String?   @db.Text
+  ipAddress    String?
+  userAgent    String?
+  source       String?
+  converted    Boolean   @default(false)
+  convertedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  affiliate    Affiliate @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  customer     Customer? @relation(fields: [customerId], references: [id])
+  order        Order?    @relation("OrderAffiliateReferral", references: [id], fields: [orderId])
+
+  @@index([affiliateId])
+  @@index([converted])
+  @@index([customerId])
+  @@index([orderId])
+  @@index([referralCode])
+  @@map("affiliate_referrals")
+}
+
+model AffiliateSetting {
+  id                  String   @id
+  companyId           String   @unique
+  commissionType      String   @default("PERCENTAGE")
+  commissionRate      Float    @default(5)
+  cookieDuration      Int      @default(30)
+  termsAndConditions  String?  @db.Text
+  isActive            Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime
+  platformMarginType  String   @default("FIXED")
+  platformMarginValue Float    @default(0)
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("affiliate_settings")
+}
+
+model Affiliate {
+  id                       String                   @id
+  userId                   String                   @unique
+  companyId                String?
+  affiliateCode            String                   @unique
+  commissionType           AffiliatesCommissionType @default(PERCENTAGE)
+  commissionRate           Float                    @default(5)
+  status                   AffiliatesStatus         @default(PENDING)
+  totalEarnings            Decimal                  @default(0.00) @db.Decimal(12, 2)
+  paidEarnings             Decimal                  @default(0.00) @db.Decimal(12, 2)
+  pendingEarnings          Decimal                  @default(0.00) @db.Decimal(12, 2)
+  totalSales               Int                      @default(0)
+  totalClicks              Int                      @default(0)
+  conversionRate           Float                    @default(0)
+  paymentMethod            AffiliatesPaymentMethod?
+  paymentDetails           String?                  @db.Text
+  minPayout                Decimal                  @default(100.00) @db.Decimal(10, 2)
+  canCreateOrdersForOthers Boolean                  @default(true)
+  canViewCustomerData      Boolean                  @default(true)
+  createdAt                DateTime                 @default(now())
+  updatedAt                DateTime
+  affiliate_payouts        AffiliatePayout[]
+  affiliate_products       AffiliateProduct[]
+  affiliate_referrals      AffiliateReferral[]
+  company                  Company?                 @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user                     User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  commissions              Commission[]
+  guestOrders              GuestOrder[]
+  orders                   Order[]
+
+  @@index([affiliateCode])
+  @@index([companyId])
+  @@index([status])
+  @@map("affiliates")
+}
+
+model Commission {
+  id                String                      @id
+  orderId           String
+  affiliateId       String?
+  merchantId        String?
+  type              CommissionType
+  calculationType   CommissionsCalculationType?
+  amount            Decimal                     @db.Decimal(10, 2)
+  rate              Float?
+  markup            Decimal?                    @db.Decimal(10, 2)
+  baseAmount        Decimal?                    @db.Decimal(10, 2)
+  status            CommissionsStatus           @default(CONFIRMED)
+  orderTotal        Decimal                     @db.Decimal(10, 2)
+  companyId         String
+  paidAt            DateTime?
+  payoutId          String?
+  notes             String?                     @db.Text
+  createdAt         DateTime                    @default(now())
+  updatedAt         DateTime
+  affiliate         Affiliate?                  @relation(fields: [affiliateId], references: [id])
+  company           Company                     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  merchant          Merchant?                   @relation(fields: [merchantId], references: [id])
+  order             Order                       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  affiliate_payout  AffiliatePayout?            @relation(fields: [payoutId], references: [id])
+
+  @@index([affiliateId])
+  @@index([companyId])
+  @@index([merchantId])
+  @@index([orderId])
+  @@index([payoutId])
+  @@index([status])
+  @@map("commissions")
+}

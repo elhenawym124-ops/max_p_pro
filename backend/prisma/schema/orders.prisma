@@ -1,0 +1,510 @@
+model Branche {
+  id           String   @id @default(cuid())
+  name         String
+  address      String?
+  city         String?
+  phone        String
+  email        String?
+  workingHours String?
+  isActive     Boolean  @default(true)
+  companyId    String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([isActive])
+  @@map("branches")
+}
+
+model DeliveryOption {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?  @db.Text
+  deliveryTime String
+  price        Decimal  @db.Decimal(10, 2)
+  isDefault    Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  icon         String?
+  sortOrder    Int      @default(0)
+  companyId    String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([isActive])
+  @@map("delivery_options")
+}
+
+model GuestCart {
+  id        String   @id @default(cuid())
+  cartId    String   @unique
+  items     String   @db.LongText
+  total     Decimal  @default(0.00) @db.Decimal(10, 2)
+  companyId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([cartId])
+  @@index([companyId])
+  @@index([expiresAt])
+  @@map("guest_carts")
+}
+
+model GuestOrder {
+  id                  String               @id @default(cuid())
+  orderNumber         String
+  guestEmail          String
+  guestPhone          String
+  guestName           String
+  items               String               @db.LongText
+  total               Decimal              @db.Decimal(10, 2)
+  shippingCost        Decimal              @default(0.00) @db.Decimal(10, 2)
+  discountAmount      Decimal              @default(0.00) @db.Decimal(10, 2)
+  finalTotal          Decimal              @db.Decimal(10, 2)
+  shippingAddress     String               @db.LongText
+  paymentMethod       String
+  status              String               @default("pending")
+  notes               String?              @db.Text
+  companyId           String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  isViewed            Boolean              @default(false)
+  metadata            String?              @db.Text
+  affiliateId         String?
+  turboLabelUrl       String?              @db.Text
+  turboMetadata       String?              @db.Text
+  turboShipmentId     String?
+  turboShipmentStatus String?
+  turboTrackingNumber String?
+  createdBy           String?
+  createdByName       String?
+  OrderStatusHistory  OrderStatusHistory[]
+  affiliate           Affiliate?           @relation(fields: [affiliateId], references: [id])
+  company             Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user                User?                @relation(fields: [createdBy], references: [id])
+  orderNotes          OrderNote[]
+
+  @@unique([companyId, orderNumber])
+  @@index([affiliateId])
+  @@index([companyId])
+  @@index([createdAt])
+  @@index([createdBy])
+  @@index([guestEmail])
+  @@index([orderNumber])
+  @@index([status])
+  @@index([turboShipmentId])
+  @@index([turboTrackingNumber])
+  @@map("guest_orders")
+}
+
+/// UNUSED - Legacy feature
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Float    @default(1)
+  unitPrice   Float
+  totalPrice  Float
+  metadata    String?  @db.LongText
+  createdAt   DateTime @default(now())
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+  @@map("invoice_items")
+}
+
+/// UNUSED - Legacy feature
+model Invoice {
+  id              String           @id @default(cuid())
+  invoiceNumber   String           @unique
+  subscriptionId  String?
+  companyId       String
+  status          InvoicesStatus   @default(DRAFT)
+  type            InvoiceType      @default(SUBSCRIPTION)
+  issueDate       DateTime         @default(now())
+  dueDate         DateTime
+  paidDate        DateTime?
+  subtotal        Float
+  taxAmount       Float            @default(0)
+  discountAmount  Float            @default(0)
+  totalAmount     Float
+  currency        String           @default("EGP")
+  notes           String?
+  paymentTerms    String?          @default("Net 30")
+  metadata        String?          @db.LongText
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  invoiceItems    InvoiceItem[]
+  company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  subscription    Subscription?    @relation(fields: [subscriptionId], references: [id])
+  paymentReceipts PaymentReceipt[]
+  payments        Payment[]
+
+  @@index([companyId])
+  @@index([subscriptionId])
+  @@map("invoices")
+}
+
+model OrderItem {
+  id               String          @id @default(cuid())
+  orderId          String
+  productId        String?
+  quantity         Int
+  price            Decimal         @db.Decimal(10, 2)
+  total            Decimal         @db.Decimal(10, 2)
+  productName      String?
+  productColor     String?
+  productSize      String?
+  productSku       String?
+  metadata         String?         @db.Text
+  variantId        String?
+  extractionSource String?         @default("ai")
+  confidence       Float?
+  productImage     String?
+  productDetails   String?
+  basePrice        Decimal?        @db.Decimal(10, 2)
+  merchantPrice    Decimal?        @db.Decimal(10, 2)
+  order            Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product          Product?        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productVariant   ProductVariant? @relation(fields: [variantId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+  @@index([variantId])
+  @@map("order_items")
+}
+
+/// UNUSED - Legacy feature
+model OrderNote {
+  id           String      @id @default(cuid())
+  content      String      @db.Text
+  orderId      String?
+  guestOrderId String?
+  authorId     String?
+  authorName   String
+  createdAt    DateTime    @default(now())
+  user         User?       @relation(fields: [authorId], references: [id])
+  guestOrder   GuestOrder? @relation(fields: [guestOrderId], references: [id])
+  order        Order?      @relation(fields: [orderId], references: [id])
+
+  @@index([authorId])
+  @@index([guestOrderId])
+  @@index([orderId])
+  @@map("order_notes")
+}
+
+model OrderStatusConfig {
+  id                  String   @id @default(cuid())
+  companyId           String
+  code                String
+  name                String
+  nameEn              String?
+  description         String?  @db.Text
+  color               String   @default("#6B7280")
+  icon                String?
+  sortOrder           Int      @default(0)
+  statusType          String   @default("order")
+  source              String   @default("system")
+  isSystemStatus      Boolean  @default(false)
+  isActive            Boolean  @default(true)
+  mapsToSystem        String?
+  wooCommerceStatus   String?
+  allowedNextStatuses String?  @db.Text
+  autoActions         String?  @db.Text
+  notifyCustomer      Boolean  @default(false)
+  notifyAdmin         Boolean  @default(false)
+  emailTemplate       String?  @db.Text
+  smsTemplate         String?  @db.Text
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, code])
+  @@index([companyId])
+  @@index([source])
+  @@index([statusType])
+  @@map("order_status_configs")
+}
+
+model Order {
+  id                     String                    @id @default(cuid())
+  orderNumber            String
+  customerId             String
+  conversationId         String?
+  status                 OrderStatus               @default(PENDING)
+  isViewed               Boolean                   @default(false)
+  paymentStatus          PaymentStatus             @default(PENDING)
+  paymentMethod          PaymentMethod             @default(CASH)
+  subtotal               Decimal                   @db.Decimal(10, 2)
+  tax                    Decimal                   @default(0.00) @db.Decimal(10, 2)
+  shipping               Decimal                   @default(0.00) @db.Decimal(10, 2)
+  discount               Decimal                   @default(0.00) @db.Decimal(10, 2)
+  total                  Decimal                   @db.Decimal(10, 2)
+  currency               String                    @default("EGP")
+  notes                  String?
+  shippingAddress        String?                   @db.Text
+  billingAddress         String?                   @db.Text
+  customerName           String?
+  customerPhone          String?
+  customerEmail          String?
+  city                   String?
+  governorate            String?
+  customerAddress        String?
+  dataQuality            String?                   @db.Text
+  extractionMethod       String?                   @default("ai_enhanced")
+  confidence             Float?
+  validationStatus       String?                   @default("pending")
+  sourceType             String?                   @default("ai_conversation")
+  extractionTimestamp    DateTime?
+  metadata               String?                   @db.Text
+  companyId              String
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @updatedAt
+  lastSyncAt             DateTime?
+  syncedFromWoo          Boolean                   @default(false)
+  syncedToWoo            Boolean                   @default(false)
+  wooCommerceDateCreated DateTime?
+  wooCommerceId          String?
+  wooCommerceOrderKey    String?
+  wooCommerceStatus      String?
+  wooCommerceUrl         String?
+  turboBranchId          String?
+  turboLabelUrl          String?
+  statusHistory          OrderStatusHistory[]
+  turboMetadata          String?                   @db.Text
+  turboShipmentId        String?
+  turboShipmentStatus    String?
+  turboTrackingNumber    String?
+  orderItems             OrderItem[]
+  orderNotes             OrderNote[]
+  company                Company                   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  conversation           Conversation?             @relation(fields: [conversationId], references: [id])
+  customer               Customer                  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  returnRequests         ReturnRequest[]
+  callAttempts           Int                       @default(0)
+  lastCallAttemptAt      DateTime?
+  callAttemptLogs        CallAttemptLog[]
+  orderInvoice           OrderInvoice?
+  conversionEvents       ConversionEvent[]
+  notificationLogs       WhatsAppNotificationLog[]
+
+  scheduledDeliveryDate   DateTime?
+  isScheduled             Boolean   @default(false)
+  scheduledNotes          String?   @db.Text
+  autoTransitionEnabled   Boolean   @default(true)
+  scheduledTransitionedAt DateTime?
+
+  // Affiliate & Dropshipping fields
+  affiliateReferralId String?     @unique // ربط بالإحالة (إن كان الطلب عن طريق رابط)
+  affiliateId         String? // ربط مباشر بالمسوق (للطلبات المباشرة أو الإحالات)
+  merchantOrderId     String?     @unique // ربط بطلب التاجر
+  isDropshipped       Boolean     @default(false)
+  orderSource         OrderSource @default(REGULAR) // REGULAR, AFFILIATE_REFERRAL, AFFILIATE_DIRECT
+
+  // Order Creator fields
+  createdBy     String? // معرف المستخدم الذي أنشأ الطلب
+  createdByName String? // اسم المستخدم الذي أنشأ الطلب
+
+  affiliateReferral AffiliateReferral? @relation("OrderAffiliateReferral")
+  affiliate         Affiliate?         @relation(fields: [affiliateId], references: [id])
+  merchantOrder     MerchantOrder?     @relation("OrderMerchantOrder")
+  commissions       Commission[]
+  createdByUser     User?              @relation("OrderCreatedBy", fields: [createdBy], references: [id])
+
+  // Wallet relations
+  walletTransactions WalletTransaction[]
+
+  userRel   User?   @relation(fields: [userRelId], references: [id])
+  userRelId String?
+
+  @@unique([companyId, orderNumber])
+  @@index([affiliateId])
+  @@index([companyId])
+  @@index([conversationId])
+  @@index([createdBy])
+  @@index([customerId])
+  @@index([isScheduled])
+  @@index([orderSource])
+  @@index([scheduledDeliveryDate])
+  @@index([turboTrackingNumber])
+  @@index([wooCommerceId])
+  @@map("orders")
+}
+
+/// UNUSED - Legacy feature
+model PaymentReceipt {
+  id             String       @id @default(cuid())
+  invoiceId      String
+  walletNumberId String
+  receiptImage   String
+  status         String       @default("PENDING")
+  submittedAt    DateTime     @default(now())
+  reviewedAt     DateTime?
+  reviewedBy     String?
+  notes          String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  invoice        Invoice      @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  walletNumber   WalletNumber @relation(fields: [walletNumberId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+  @@index([walletNumberId])
+  @@map("payment_receipts")
+}
+
+/// UNUSED - Legacy feature
+model Payment {
+  id               String         @id @default(cuid())
+  paymentNumber    String         @unique
+  invoiceId        String?
+  subscriptionId   String?
+  companyId        String
+  amount           Float
+  currency         String         @default("EGP")
+  status           PaymentsStatus @default(PENDING)
+  method           PaymentsMethod @default(BANK_TRANSFER)
+  gateway          String?
+  gatewayPaymentId String?
+  transactionId    String?
+  paidAt           DateTime?
+  failedAt         DateTime?
+  failureReason    String?
+  metadata         String?        @db.LongText
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  company          Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  invoice          Invoice?       @relation(fields: [invoiceId], references: [id])
+  subscription     Subscription?  @relation(fields: [subscriptionId], references: [id])
+
+  @@index([companyId])
+  @@index([invoiceId])
+  @@index([subscriptionId])
+  @@map("payments")
+}
+
+model ShippingZone {
+  id                    String           @id @default(cuid())
+  governorates          String           @db.LongText
+  price                 Decimal          @default(0.00) @db.Decimal(10, 2)
+  deliveryTime          String
+  isActive              Boolean          @default(true)
+  companyId             String
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+  deliveryTimeType      String           @default("custom")
+  freeShippingThreshold Decimal?         @db.Decimal(10, 2)
+  name                  String           @default("")
+  pricingTiers          String?          @db.LongText
+  pricingType           String           @default("flat")
+  shippingMethods       ShippingMethod[]
+  company             Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([isActive])
+  @@index([pricingType])
+  @@map("shipping_zones")
+}
+
+model OrderStatusHistory {
+  id           String      @id @default(cuid())
+  orderId      String?
+  status       String
+  oldStatus    String?
+  changedBy    String?
+  userName     String?
+  reason       String?
+  createdAt    DateTime    @default(now())
+  guestOrderId String?
+  guestOrder   GuestOrder? @relation(fields: [guestOrderId], references: [id], onDelete: Cascade)
+  order       Order?      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([guestOrderId])
+  @@index([orderId])
+}
+
+model OrderInvoiceSettings {
+  id                     String   @id @default(cuid())
+  companyId              String   @unique
+  autoGenerate           Boolean  @default(false)
+  autoGenerateOnStatus   String?
+  invoicePrefix          String   @default("INV")
+  invoiceNumberFormat    String   @default("INV-YYYYMMDD-XXXXXX")
+  nextInvoiceNumber      Int      @default(1)
+  defaultTaxRate         Float    @default(0)
+  defaultTerms           String?  @db.Text
+  defaultNotes           String?  @db.Text
+  defaultDueDays         Int      @default(7)
+  showCompanyLogo        Boolean  @default(true)
+  showTaxBreakdown       Boolean  @default(true)
+  showPaymentMethod      Boolean  @default(true)
+  showOrderItems         Boolean  @default(true)
+  autoEmailToCustomer    Boolean  @default(false)
+  emailSubject           String?
+  emailBody              String?  @db.Text
+  pdfPageSize            String   @default("A4")
+  pdfOrientation         String   @default("portrait")
+  primaryColor           String   @default("#4F46E5")
+  secondaryColor         String   @default("#6B7280")
+  fontFamily             String   @default("Arial")
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  enableSequentialOrders Boolean  @default(false)
+  nextOrderNumber        Int      @default(1)
+  orderNumberFormat      String   @default("PREFIX-XXXXXX")
+  orderPrefix            String   @default("ORD")
+  company                Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@map("order_invoice_settings")
+}
+
+model OrderInvoice {
+  id              String    @id @default(cuid())
+  invoiceNumber   String    @unique
+  orderId         String    @unique
+  companyId       String
+  issueDate       DateTime  @default(now())
+  dueDate         DateTime?
+  subtotal        Decimal   @db.Decimal(10, 2)
+  tax             Decimal   @default(0.00) @db.Decimal(10, 2)
+  taxRate         Float     @default(0)
+  shipping        Decimal   @default(0.00) @db.Decimal(10, 2)
+  discount        Decimal   @default(0.00) @db.Decimal(10, 2)
+  totalAmount     Decimal   @db.Decimal(10, 2)
+  currency        String    @default("EGP")
+  customerName    String
+  customerPhone   String?
+  customerEmail   String?
+  customerAddress String?   @db.Text
+  city            String?
+  governorate     String?
+  companyName     String
+  companyPhone    String?
+  companyEmail    String?
+  companyAddress  String?   @db.Text
+  companyLogo     String?
+  paymentMethod   String?
+  paymentStatus   String    @default("PENDING")
+  paidAt          DateTime?
+  notes           String?   @db.Text
+  terms           String?   @db.Text
+  generatedBy     String?
+  printedAt       DateTime?
+  printCount      Int       @default(0)
+  emailedAt       DateTime?
+  emailCount      Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  order          Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([invoiceNumber])
+  @@index([issueDate])
+  @@index([orderId])
+  @@index([paymentStatus])
+  @@map("order_invoices")
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار زر التحكم في الذكاء الاصطناعي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .ai-button {
+            transition: all 0.2s;
+        }
+        .ai-enabled {
+            color: #16a34a;
+            background-color: #f0fdf4;
+        }
+        .ai-enabled:hover {
+            background-color: #dcfce7;
+        }
+        .ai-disabled {
+            color: #dc2626;
+            background-color: #fef2f2;
+        }
+        .ai-disabled:hover {
+            background-color: #fee2e2;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-center mb-6">اختبار زر التحكم في الذكاء الاصطناعي</h1>
+        
+        <div class="space-y-4">
+            <!-- محاكاة header المحادثة -->
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
+                            ع
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">عميل تجريبي</h3>
+                            <p class="text-sm text-gray-500">متصل الآن</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2 space-x-reverse">
+                        <!-- زر التحكم في الذكاء الاصطناعي -->
+                        <button 
+                            id="aiToggleBtn"
+                            class="ai-button p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="تشغيل/إيقاف الذكاء الاصطناعي"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </button>
+                        
+                        <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- معلومات الحالة -->
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">حالة الذكاء الاصطناعي:</h4>
+                <p id="aiStatus" class="text-lg font-bold"></p>
+                <p id="conversationId" class="text-sm text-gray-600 mt-1">معرف المحادثة: test-conversation-123</p>
+            </div>
+            
+            <!-- أزرار الاختبار -->
+            <div class="space-y-2">
+                <button id="testApiBtn" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                    اختبار API
+                </button>
+                <button id="resetBtn" class="w-full bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">
+                    إعادة تعيين
+                </button>
+            </div>
+            
+            <!-- سجل الأحداث -->
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">سجل الأحداث:</h4>
+                <div id="eventLog" class="text-sm space-y-1 max-h-40 overflow-y-auto"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let aiEnabled = true;
+        let isToggling = false;
+        
+        const aiToggleBtn = document.getElementById('aiToggleBtn');
+        const aiStatus = document.getElementById('aiStatus');
+        const eventLog = document.getElementById('eventLog');
+        const testApiBtn = document.getElementById('testApiBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        function logEvent(message) {
+            const timestamp = new Date().toLocaleTimeString('ar-EG');
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `${timestamp}: ${message}`;
+            eventLog.appendChild(logEntry);
+            eventLog.scrollTop = eventLog.scrollHeight;
+        }
+        
+        function updateUI() {
+            if (aiEnabled) {
+                aiToggleBtn.className = 'ai-button ai-enabled p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed';
+                aiToggleBtn.title = 'إيقاف الذكاء الاصطناعي';
+                aiStatus.textContent = '🟢 مفعل';
+                aiStatus.className = 'text-lg font-bold text-green-600';
+            } else {
+                aiToggleBtn.className = 'ai-button ai-disabled p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed';
+                aiToggleBtn.title = 'تفعيل الذكاء الاصطناعي';
+                aiStatus.textContent = '🔴 معطل';
+                aiStatus.className = 'text-lg font-bold text-red-600';
+            }
+            
+            aiToggleBtn.disabled = isToggling;
+            
+            if (isToggling) {
+                aiToggleBtn.innerHTML = '<div class="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></div>';
+            } else {
+                aiToggleBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>';
+            }
+        }
+        
+        async function toggleAI() {
+            if (isToggling) return;
+            
+            isToggling = true;
+            updateUI();
+            
+            const newStatus = !aiEnabled;
+            logEvent(`محاولة ${newStatus ? 'تفعيل' : 'إيقاف'} الذكاء الاصطناعي...`);
+            
+            try {
+                // محاكاة API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                aiEnabled = newStatus;
+                logEvent(`✅ تم ${newStatus ? 'تفعيل' : 'إيقاف'} الذكاء الاصطناعي بنجاح`);
+            } catch (error) {
+                logEvent(`❌ خطأ: ${error.message}`);
+            } finally {
+                isToggling = false;
+                updateUI();
+            }
+        }
+        
+        async function testAPI() {
+            logEvent('اختبار API...');
+            try {
+                // Get the current base URL dynamically
+                const baseUrl = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:3001/api/v1'
+                    : 'https://www.maxp-ai.pro/api/v1';
+                
+                const response = await fetch(`${baseUrl}/conversations/test-conversation-123/ai-status`);
+                const data = await response.json();
+                logEvent(`API Response: ${JSON.stringify(data)}`);
+            } catch (error) {
+                logEvent(`❌ خطأ في API: ${error.message}`);
+            }
+        }
+        
+        function reset() {
+            aiEnabled = true;
+            isToggling = false;
+            updateUI();
+            eventLog.innerHTML = '';
+            logEvent('تم إعادة التعيين');
+        }
+        
+        // Event listeners
+        aiToggleBtn.addEventListener('click', toggleAI);
+        testApiBtn.addEventListener('click', testAPI);
+        resetBtn.addEventListener('click', reset);
+        
+        // Initialize
+        updateUI();
+        logEvent('تم تحميل صفحة الاختبار');
+    </script>
+</body>
+</html>

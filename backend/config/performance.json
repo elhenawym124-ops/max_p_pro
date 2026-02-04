@@ -1,0 +1,22 @@
+{
+  "modelSelection": {
+    "maxRetries": 3,
+    "timeoutMs": 5000,
+    "fallbackToAnyModel": true
+  },
+  "apiCalls": {
+    "timeoutMs": 30000,
+    "maxRetries": 2,
+    "retryDelayMs": 1000
+  },
+  "caching": {
+    "modelCacheTtl": 300000,
+    "quotaCacheTtl": 60000,
+    "clearOnError": true
+  },
+  "performance": {
+    "maxConcurrentRequests": 5,
+    "requestQueueSize": 100,
+    "enableMetrics": true
+  }
+}

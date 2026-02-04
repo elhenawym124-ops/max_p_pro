@@ -1,0 +1,485 @@
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  COMPLETED
+  ON_HOLD
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  COMPANY_ADMIN
+  MANAGER
+  AGENT
+}
+
+enum SubscriptionPlan {
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  CANCELLED
+  EXPIRED
+  TRIAL
+  SUSPENDED
+}
+
+enum AIKeyType {
+  COMPANY
+  CENTRAL
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+  REFUNDED
+}
+
+enum InvoiceType {
+  SUBSCRIPTION
+  ONE_TIME
+  UPGRADE
+  DOWNGRADE
+  REFUND
+}
+
+enum CustomerStatus {
+  LEAD
+  PROSPECT
+  CUSTOMER
+  VIP
+  INACTIVE
+}
+
+enum CommunicationChannel {
+  FACEBOOK
+  WHATSAPP
+  TELEGRAM
+  EMAIL
+  SMS
+  PHONE
+  WEBSITE
+  TEST
+}
+
+enum ConversationStatus {
+  ACTIVE
+  PENDING
+  RESOLVED
+  CLOSED
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  FILE
+  LOCATION
+  STICKER
+  EMOJI
+  TEMPLATE
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  CREDIT_CARD
+  BANK_TRANSFER
+  PAYPAL
+  STRIPE
+}
+
+enum StockMovementType {
+  IN
+  OUT
+  ADJUSTMENT
+  TRANSFER
+  RETURN
+}
+
+enum StockMovementReason {
+  PURCHASE
+  SALE
+  DAMAGE
+  EXPIRED
+  LOST
+  FOUND
+  TRANSFER
+  RETURN
+  ADJUSTMENT
+}
+
+enum AlertPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum GlobalAiProvider {
+  GOOGLE
+  DEEPSEEK
+  OPENAI
+  ANTHROPIC
+  HUGGINGFACE
+  OLLAMA
+}
+
+enum StockAlertType {
+  LOW_STOCK
+  OUT_OF_STOCK
+  OVERSTOCK
+  EXPIRY_WARNING
+}
+
+enum AiKeyProvider {
+  GOOGLE
+  DEEPSEEK
+  OPENAI
+  ANTHROPIC
+  HUGGINGFACE
+  OLLAMA
+}
+
+enum SubscriptionPlanType {
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+enum StockAlertPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum hr_leave_requests_type {
+  ANNUAL
+  SICK
+  UNPAID
+  MATERNITY
+  PATERNITY
+  BEREAVEMENT
+  MARRIAGE
+  HAJJ
+  STUDY
+  EMERGENCY
+  OTHER
+}
+
+enum DevTaskType {
+  BUG
+  FEATURE
+  ENHANCEMENT
+  DOCUMENTATION
+  SECURITY
+  PERFORMANCE
+  TESTING
+  REFACTOR
+  MAINTENANCE
+  HOTFIX
+}
+
+enum hr_employee_warnings_type {
+  VERBAL
+  WRITTEN
+  FINAL
+  TERMINATION
+}
+
+enum TaskTemplateStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum DevProjectStatus {
+  PLANNING
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum UsercompanyRole {
+  SUPER_ADMIN
+  COMPANY_ADMIN
+  MANAGER
+  AGENT
+}
+
+enum DevTaskStatus {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  TESTING
+  DONE
+  CANCELLED
+}
+
+enum TaskTemplatePriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum DevReleaseStatus {
+  PLANNING
+  IN_PROGRESS
+  READY
+  RELEASED
+  CANCELLED
+}
+
+enum WhatsAppSessionStatus {
+  CONNECTED
+  DISCONNECTED
+  QR_PENDING
+  CONNECTING
+  LOGGED_OUT
+}
+
+enum dev_projects_priority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum WhatsAppStatusType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  STICKER
+  LOCATION
+  CONTACT
+  POLL
+  PRODUCT
+  ORDER
+  CATALOG
+  INTERACTIVE
+  BUTTON_REPLY
+  LIST_REPLY
+  TEMPLATE
+}
+
+enum ProjectPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ReturnStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+enum DevTaskPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum StorePageType {
+  SHIPPING_POLICY
+  RETURN_POLICY
+  REFUND_POLICY
+  PRIVACY_POLICY
+  TERMS_CONDITIONS
+  ABOUT_US
+  CONTACT_US
+  FAQ
+  PAYMENT_METHODS
+  CUSTOM
+}
+
+enum SupportTicket_status {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+enum WhatsAppMessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  STICKER
+  LOCATION
+  CONTACT
+  REACTION
+  POLL
+  TEMPLATE
+  BUTTONS
+  LIST
+  PRODUCT
+  INTERACTIVE
+}
+
+enum CouponType {
+  PERCENTAGE
+  FIXED
+  FREE_SHIPPING
+}
+
+enum AiKeyType {
+  COMPANY
+  CENTRAL
+}
+
+enum companies_plan {
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum TrainingStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum SupportPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum whatsapp_messages_status {
+  PENDING
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+  ON_LEAVE
+  HOLIDAY
+  WEEKEND
+  REMOTE
+}
+
+enum CustomerRating {
+  EXCELLENT
+  GOOD
+  AVERAGE
+  BAD
+  UNKNOWN
+}
+
+enum ReviewStatus {
+  DRAFT
+  SUBMITTED
+  ACKNOWLEDGED
+  COMPLETED
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  DIVORCED
+  WIDOWED
+}
+
+enum PayrollStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  PAID
+  CANCELLED
+}
+
+enum ContractType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  TEMPORARY
+  INTERNSHIP
+  FREELANCE
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+  ON_LEAVE
+  SUSPENDED
+  TERMINATED
+  RESIGNED
+}
+

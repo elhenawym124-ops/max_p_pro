@@ -1,0 +1,135 @@
+{
+  "version": "5.0.0",
+  "steps": [
+    {
+      "tag": "CreateTable",
+      "table": "merchants"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "merchant_products"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "affiliates"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "affiliate_products"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "affiliate_referrals"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "commissions"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "merchant_orders"
+    },
+    {
+      "tag": "CreateTable",
+      "table": "affiliate_payouts"
+    },
+    {
+      "tag": "AlterTable",
+      "table": "orders",
+      "alterations": [
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "affiliateReferralId",
+            "type": "String?",
+            "default": null
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "affiliateId",
+            "type": "String?",
+            "default": null
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "merchantOrderId",
+            "type": "String?",
+            "default": null
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "isDropshipped",
+            "type": "Boolean",
+            "default": false
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "orderSource",
+            "type": "OrderSource",
+            "default": "REGULAR"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "AlterTable",
+      "table": "products",
+      "alterations": [
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "isDropshipped",
+            "type": "Boolean",
+            "default": false
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "merchantProductId",
+            "type": "String?",
+            "default": null
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "basePrice",
+            "type": "Decimal?",
+            "default": null
+          }
+        },
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "allowAffiliateMarkup",
+            "type": "Boolean",
+            "default": false
+          }
+        }
+      ]
+    },
+    {
+      "tag": "AlterTable",
+      "table": "companies",
+      "alterations": [
+        {
+          "tag": "AddColumn",
+          "column": {
+            "name": "platformCommissionRate",
+            "type": "Float?",
+            "default": 5.0
+          }
+        }
+      ]
+    }
+  ]
+}

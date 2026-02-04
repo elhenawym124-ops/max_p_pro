@@ -1,0 +1,506 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "createdAt": "2025-01-15",
+    "description": "50 سؤال لاختبار ذكاء الذكاء الاصطناعي في الرد",
+    "totalQuestions": 50
+  },
+  "categories": {
+    "greeting": {
+      "name": "التحيات والبدايات",
+      "count": 5,
+      "questions": [
+        {
+          "id": 1,
+          "question": "السلام عليكم",
+          "expectedIntent": "greeting",
+          "context": null,
+          "expectedResponse": "رد ترحيبي ودود يطلب كيف يمكن المساعدة",
+          "difficulty": "easy"
+        },
+        {
+          "id": 2,
+          "question": "أهلاً، عندك إيه من المنتجات؟",
+          "expectedIntent": "greeting",
+          "context": null,
+          "expectedResponse": "تحية + عرض للمنتجات المتاحة",
+          "difficulty": "easy"
+        },
+        {
+          "id": 3,
+          "question": "ازيك؟",
+          "expectedIntent": "greeting",
+          "context": null,
+          "expectedResponse": "رد ودود باللهجة المصرية + عرض المساعدة",
+          "difficulty": "easy"
+        },
+        {
+          "id": 4,
+          "question": "هلو",
+          "expectedIntent": "greeting",
+          "context": null,
+          "expectedResponse": "رد ترحيبي + طلب توضيح كيف يمكن المساعدة",
+          "difficulty": "easy"
+        },
+        {
+          "id": 5,
+          "question": "عايز أعرف الأسعار",
+          "expectedIntent": "price_inquiry",
+          "context": null,
+          "expectedResponse": "رد مهذب + طلب معلومات عن المنتج المطلوب",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    "product_inquiry": {
+      "name": "استفسارات المنتجات",
+      "count": 10,
+      "questions": [
+        {
+          "id": 6,
+          "question": "ممكن صور المنتج ده",
+          "expectedIntent": "product_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج معين في المحادثة السابقة"
+          },
+          "expectedResponse": "إرسال صور المنتج المذكور (إذا كان متاح) + معلومات إضافية",
+          "difficulty": "medium"
+        },
+        {
+          "id": 7,
+          "question": "عايز أشوف صور",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "طلب توضيح أي منتج بالضبط + عرض منتجات مميزة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 8,
+          "question": "عندك كوتشي Nike؟",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "البحث عن المنتج + عرض إذا كان متاح أو اقتراح بدائل",
+          "difficulty": "easy"
+        },
+        {
+          "id": 9,
+          "question": "عايز حاجة للرياضة",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "عرض منتجات رياضية + طلب تفاصيل أكثر",
+          "difficulty": "medium"
+        },
+        {
+          "id": 10,
+          "question": "عندك iPhone 15 Pro Max؟",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "اعتذار لطيف + عرض منتجات مشابهة أو طلب إشعار عند التوفر",
+          "difficulty": "easy"
+        },
+        {
+          "id": 11,
+          "question": "عايز أعرف تفاصيل عن هذا المنتج",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "طلب اسم أو رابط المنتج + عرض معلومات المنتج",
+          "difficulty": "medium"
+        },
+        {
+          "id": 12,
+          "question": "ممكن صور الكوتشي الأحمر",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "البحث عن المنتجات الحمراء + إرسال الصور",
+          "difficulty": "medium"
+        },
+        {
+          "id": 13,
+          "question": "عندك مقاس 42 في الكوتشي ده؟",
+          "expectedIntent": "product_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج كوتشي معين"
+          },
+          "expectedResponse": "التحقق من المقاس المتوفر + معلومات المخزون",
+          "difficulty": "medium"
+        },
+        {
+          "id": 14,
+          "question": "عندك كوتشاي نايك؟",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "فهم الخطأ الإملائي + عرض منتجات Nike المتاحة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 15,
+          "question": "عايز أشوف كوتشي وشنطة رياضية",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "عرض كلا النوعين من المنتجات + إمكانية الطلب",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    "price_inquiry": {
+      "name": "استفسارات الأسعار",
+      "count": 8,
+      "questions": [
+        {
+          "id": 16,
+          "question": "كام سعر الكوتشي ده؟",
+          "expectedIntent": "price_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج كوتشي"
+          },
+          "expectedResponse": "عرض السعر بوضوح + معلومات إضافية (خصومات، شحن)",
+          "difficulty": "easy"
+        },
+        {
+          "id": 17,
+          "question": "كام السعر؟",
+          "expectedIntent": "price_inquiry",
+          "context": null,
+          "expectedResponse": "طلب تحديد المنتج + عرض الأسعار للبضائع المميزة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 18,
+          "question": "كام الفرق بين الكوتشي ده والتاني؟",
+          "expectedIntent": "price_inquiry",
+          "context": {
+            "previousMessage": "تم عرض منتجين للعميل"
+          },
+          "expectedResponse": "مقارنة الأسعار + الفروقات في المواصفات",
+          "difficulty": "medium"
+        },
+        {
+          "id": 19,
+          "question": "في خصم على المنتج ده؟",
+          "expectedIntent": "price_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج معين"
+          },
+          "expectedResponse": "معلومات عن الخصومات المتاحة + شروط التطبيق",
+          "difficulty": "easy"
+        },
+        {
+          "id": 20,
+          "question": "شحال ثمن هاد الشي؟",
+          "expectedIntent": "price_inquiry",
+          "context": null,
+          "expectedResponse": "فهم اللهجة + عرض السعر بوضوح",
+          "difficulty": "medium"
+        },
+        {
+          "id": 21,
+          "question": "كام هيطلع لو اشتريت 3 قطع؟",
+          "expectedIntent": "price_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج معين"
+          },
+          "expectedResponse": "حساب السعر الإجمالي + معلومات عن الخصومات عند الشراء بالجملة",
+          "difficulty": "medium"
+        },
+        {
+          "id": 22,
+          "question": "كام هيطلع مع الشحن؟",
+          "expectedIntent": "price_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج وسعره"
+          },
+          "expectedResponse": "حساب السعر + تكلفة الشحن + الإجمالي",
+          "difficulty": "medium"
+        },
+        {
+          "id": 23,
+          "question": "عندك حاجة أرخص شوية؟",
+          "expectedIntent": "price_inquiry",
+          "context": null,
+          "expectedResponse": "عرض منتجات في نطاق سعر أقل + مقارنة بسيطة",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    "shipping_inquiry": {
+      "name": "استفسارات الشحن",
+      "count": 7,
+      "questions": [
+        {
+          "id": 24,
+          "question": "الشحن كام؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "عرض أسعار الشحن حسب المحافظة + وقت التوصيل",
+          "difficulty": "easy"
+        },
+        {
+          "id": 25,
+          "question": "هيوصل امتى لو طلبت النهاردة؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "تقدير وقت التوصيل + طريقة الشحن",
+          "difficulty": "easy"
+        },
+        {
+          "id": 26,
+          "question": "الشحن لأسوان كام؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "عرض سعر الشحن لأسوان + وقت التوصيل المتوقع",
+          "difficulty": "easy"
+        },
+        {
+          "id": 27,
+          "question": "الشحن مجاني ولا لا؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "معلومات عن شروط الشحن المجاني + الحد الأدنى للطلب",
+          "difficulty": "easy"
+        },
+        {
+          "id": 28,
+          "question": "عندك توصيل سريع؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "عرض طرق الشحن المتاحة + الأوقات والأسعار",
+          "difficulty": "easy"
+        },
+        {
+          "id": 29,
+          "question": "ازاي أتابع طلبي؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "شرح طريقة التتبع + طلب رقم الطلب إذا كان متاح",
+          "difficulty": "medium"
+        },
+        {
+          "id": 30,
+          "question": "بتشحنوا برة مصر؟",
+          "expectedIntent": "shipping_inquiry",
+          "context": null,
+          "expectedResponse": "معلومات عن إمكانية الشحن الدولي + الشروط",
+          "difficulty": "easy"
+        }
+      ]
+    },
+    "order_inquiry": {
+      "name": "طلبات الشراء والتأكيد",
+      "count": 10,
+      "questions": [
+        {
+          "id": 31,
+          "question": "عايز أطلب الكوتشي ده",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم عرض منتج كوتشي"
+          },
+          "expectedResponse": "تأكيد الطلب + طلب البيانات (الاسم، الهاتف، العنوان)",
+          "difficulty": "easy"
+        },
+        {
+          "id": 32,
+          "question": "الاسم: أحمد محمد، الهاتف: 01234567890، العنوان: القاهرة، حي الزمالك",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "النظام طلب البيانات"
+          },
+          "expectedResponse": "تأكيد استلام البيانات + تأكيد الطلب + رقم الطلب",
+          "difficulty": "easy"
+        },
+        {
+          "id": 33,
+          "question": "تمام، اكد الطلب",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم عرض المنتج والسعر"
+          },
+          "expectedResponse": "طلب البيانات المطلوبة لإتمام الطلب",
+          "difficulty": "medium"
+        },
+        {
+          "id": 34,
+          "question": "ماشي",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم عرض المنتج والسعر"
+          },
+          "expectedResponse": "التأكد من النية (طلب أم استفسار) + المتابعة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 35,
+          "question": "لا مش عايز ده، عايز التاني",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم عرض منتج"
+          },
+          "expectedResponse": "فهم التغيير + عرض المنتج الآخر + متابعة الطلب",
+          "difficulty": "medium"
+        },
+        {
+          "id": 36,
+          "question": "ممكن أغير المقاس لمقاس أكبر؟",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم تأكيد طلب"
+          },
+          "expectedResponse": "التحقق من إمكانية التعديل + تحديث الطلب",
+          "difficulty": "medium"
+        },
+        {
+          "id": 37,
+          "question": "مش عايز الطلب، الغيه",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم تأكيد طلب"
+          },
+          "expectedResponse": "تأكيد الإلغاء + إجراءات الإلغاء + اعتذار",
+          "difficulty": "easy"
+        },
+        {
+          "id": 38,
+          "question": "عايز أطلب كوتشي مقاس 42 وشنطة رياضية",
+          "expectedIntent": "order_inquiry",
+          "context": null,
+          "expectedResponse": "تأكيد المنتجات + طلب البيانات + حساب الإجمالي",
+          "difficulty": "medium"
+        },
+        {
+          "id": 39,
+          "question": "عايز أطلب بس لو في خصم",
+          "expectedIntent": "order_inquiry",
+          "context": null,
+          "expectedResponse": "عرض الخصومات المتاحة + متابعة الطلب",
+          "difficulty": "medium"
+        },
+        {
+          "id": 40,
+          "question": "تمام، خلاص اكد",
+          "expectedIntent": "order_inquiry",
+          "context": {
+            "previousMessage": "تم الإجابة عن سؤال السعر والشحن"
+          },
+          "expectedResponse": "فهم أن هذا تأكيد طلب + طلب البيانات",
+          "difficulty": "hard"
+        }
+      ]
+    },
+    "complex_cases": {
+      "name": "حالات معقدة وغامضة",
+      "count": 5,
+      "questions": [
+        {
+          "id": 41,
+          "question": "ممكن",
+          "expectedIntent": "general_inquiry",
+          "context": null,
+          "expectedResponse": "طلب توضيح ما يريده العميل + عرض المساعدة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 42,
+          "question": "عايز حاجة حلوة",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "طلب توضيح (نوع المنتج، الاستخدام) + عرض منتجات مميزة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 43,
+          "question": "السلام عليكم، عايز أشوف كوتشي Nike، كام سعره؟ ولو في خصم ممكن أطلب",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "معالجة جميع النقاط (التحية، المنتج، السعر، الخصم، الطلب)",
+          "difficulty": "hard"
+        },
+        {
+          "id": 44,
+          "question": "عايز اكوتشاي نايك مقاس 42 بكام وهوصله امتي",
+          "expectedIntent": "product_inquiry",
+          "context": null,
+          "expectedResponse": "فهم الرسالة رغم الأخطاء + الإجابة على جميع الأسئلة",
+          "difficulty": "hard"
+        },
+        {
+          "id": 45,
+          "question": "ممكن أخش الموقع بتاعك؟",
+          "expectedIntent": "general_inquiry",
+          "context": {
+            "previousMessage": "كان يتحدث عن منتج معين"
+          },
+          "expectedResponse": "توفير رابط الموقع + الاستمرار في المساعدة",
+          "difficulty": "easy"
+        }
+      ]
+    },
+    "support_inquiry": {
+      "name": "استفسارات الدعم والمساعدة",
+      "count": 5,
+      "questions": [
+        {
+          "id": 46,
+          "question": "ازاي أدفع؟",
+          "expectedIntent": "general_inquiry",
+          "context": null,
+          "expectedResponse": "عرض طرق الدفع المتاحة + شرح كل طريقة",
+          "difficulty": "easy"
+        },
+        {
+          "id": 47,
+          "question": "في ضمان على المنتج ده؟",
+          "expectedIntent": "general_inquiry",
+          "context": {
+            "previousMessage": "تم ذكر منتج معين"
+          },
+          "expectedResponse": "معلومات عن الضمان + شروط التطبيق",
+          "difficulty": "easy"
+        },
+        {
+          "id": 48,
+          "question": "ممكن أرجع المنتج لو مش ناسبني؟",
+          "expectedIntent": "general_inquiry",
+          "context": null,
+          "expectedResponse": "شرح سياسة الإرجاع + الشروط والمدة",
+          "difficulty": "easy"
+        },
+        {
+          "id": 49,
+          "question": "المنتج اللي جابلي إياه مش زي الصورة",
+          "expectedIntent": "general_inquiry",
+          "context": null,
+          "expectedResponse": "اعتذار + طلب تفاصيل + حل المشكلة (إرجاع/استبدال)",
+          "difficulty": "medium"
+        },
+        {
+          "id": 50,
+          "question": "شكراً، أنت خدمة ممتازة",
+          "expectedIntent": "greeting",
+          "context": {
+            "previousMessage": "تم إتمام طلب بنجاح"
+          },
+          "expectedResponse": "رد شكر لطيف + دعوة للتواصل في المستقبل",
+          "difficulty": "easy"
+        }
+      ]
+    }
+  },
+  "statistics": {
+    "totalQuestions": 50,
+    "byDifficulty": {
+      "easy": 25,
+      "medium": 18,
+      "hard": 7
+    },
+    "byIntent": {
+      "greeting": 6,
+      "product_inquiry": 12,
+      "price_inquiry": 8,
+      "shipping_inquiry": 7,
+      "order_inquiry": 10,
+      "general_inquiry": 7
+    }
+  }
+}
+
+

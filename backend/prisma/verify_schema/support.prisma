@@ -1,0 +1,62 @@
+model SupportTicket {
+  id                                        String                @id
+  ticketId                                  String                @unique
+  subject                                   String
+  description                               String                @db.Text
+  category                                  SupportTicketCategory @default(INQUIRY)
+  status                                    SupportTicketStatus   @default(OPEN)
+  rating                                    Int?
+  feedback                                  String?               @db.Text
+  userId                                    String
+  companyId                                 String?
+  createdAt                                 DateTime              @default(now())
+  updatedAt                                 DateTime
+  closedAt                                  DateTime?
+  assignedUserId                            String?
+  priority                                  SupportTicketPriority @default(MEDIUM)
+  SupportAttachment                         SupportAttachment[]
+  SupportMessage                            SupportMessage[]
+  users_SupportTicket_assignedUserIdTousers User?                 @relation("SupportTicket_assignedUserIdTousers", fields: [assignedUserId], references: [id])
+  companies                                 Company?              @relation(fields: [companyId], references: [id])
+  users_SupportTicket_userIdTousers         User                  @relation("SupportTicket_userIdTousers", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([assignedUserId])
+  @@index([category])
+  @@index([companyId])
+  @@index([priority])
+  @@index([status])
+  @@index([userId])
+}
+
+model SupportMessage {
+  id                String              @id
+  content           String              @db.Text
+  isFromAdmin       Boolean             @default(false)
+  ticketId          String
+  senderId          String
+  createdAt         DateTime            @default(now())
+  isInternal        Boolean             @default(false)
+  SupportAttachment SupportAttachment[]
+  users             User                @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  SupportTicket     SupportTicket       @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@index([senderId])
+  @@index([ticketId])
+}
+
+model SupportAttachment {
+  id             String          @id
+  filename       String
+  originalName   String
+  mimeType       String
+  size           Int
+  url            String
+  ticketId       String?
+  messageId      String?
+  createdAt      DateTime        @default(now())
+  SupportMessage SupportMessage? @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  SupportTicket  SupportTicket?  @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@index([ticketId])
+}

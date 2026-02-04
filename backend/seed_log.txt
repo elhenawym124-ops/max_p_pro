@@ -1,0 +1,37 @@
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒöæ add access controls to secrets: https://dotenvx.com/ops
+Seeding dummy asset data...
+Using Company: ╪┤╪▒┘â╪⌐ ╪º┘ü╪¬╪▒╪º╪╢┘è╪⌐ (cme8oj1fo000cufdcg2fquia9)
+Using User: ┘à╪»┘è╪▒ ╪º┘ä╪┤╪▒┘â╪⌐ (cmea7qtdj0001ufkg716abjoj)
+Created Asset: MacBook Pro M3 (Test) (cml59wkbw0001uqysin81qn45)
+Error seeding: PrismaClientValidationError: 
+Invalid `prisma.assetAssignment.create()` invocation in
+E:\max_p_new\max_p_new\backend\scripts\seed_dummy_assets.js:62:38
+
+  59 console.log(`Created Asset: ${asset.name} (${asset.id})`);
+  60 
+  61 // 5. Create Assignment (Active)
+ΓåÆ 62 await prisma.assetAssignment.create({
+       data: {
+         assetId: "cml59wkbw0001uqysin81qn45",
+         userId: "cmea7qtdj0001ufkg716abjoj",
+         assignedBy: "cmea7qtdj0001ufkg716abjoj",
+         assignedAt: new Date("2026-02-02T14:36:46.903Z"),
+         expectedReturnAt: new Date("2026-03-04T14:36:46.903Z"),
+         conditionOnAssign: "NEW",
+         ~~~~~~~~~~~~~~~~~
+         notes: "Test assignment",
+     ?   id?: String,
+     ?   returnedAt?: DateTime | Null,
+     ?   returnCondition?: AssetCondition | Null
+       }
+     })
+
+Unknown argument `conditionOnAssign`. Available options are marked with ?.
+    at Dn (E:\max_p_new\max_p_new\backend\prisma\generated\mysql\runtime\library.js:32:1363)
+    at ri.handleRequestError (E:\max_p_new\max_p_new\backend\prisma\generated\mysql\runtime\library.js:124:7102)
+    at ri.handleAndLogRequestError (E:\max_p_new\max_p_new\backend\prisma\generated\mysql\runtime\library.js:124:6784)
+    at ri.request (E:\max_p_new\max_p_new\backend\prisma\generated\mysql\runtime\library.js:124:6491)
+    at async l (E:\max_p_new\max_p_new\backend\prisma\generated\mysql\runtime\library.js:133:9812)
+    at async main (E:\max_p_new\max_p_new\backend\scripts\seed_dummy_assets.js:62:9) {
+  clientVersion: '6.12.0'
+}

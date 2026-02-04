@@ -1,0 +1,8 @@
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ΓÜÖ∩╕Å  suppress all logs with { quiet: true }
+Seeding dummy asset data...
+Using Company: ╪┤╪▒┘â╪⌐ ╪º┘ü╪¬╪▒╪º╪╢┘è╪⌐ (cme8oj1fo000cufdcg2fquia9)
+Using User: ┘à╪»┘è╪▒ ╪º┘ä╪┤╪▒┘â╪⌐ (cmea7qtdj0001ufkg716abjoj)
+Created Asset: MacBook Pro M3 (Test) (cml5a2o600001uq8cfz5v4cw3)
+Created Active Assignment.
+Created History Record.
+Done! Refresh the page.

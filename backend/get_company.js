@@ -1,0 +1,1 @@
+const { PrismaClient } = require('@prisma/client'); const prisma = new PrismaClient(); async function main() { const company = await prisma.company.findFirst({ select: { slug: true, name: true } }); console.log(JSON.stringify(company)); } main().catch(e => console.error(e)).finally(() => prisma.());
