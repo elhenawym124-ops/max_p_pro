@@ -254,13 +254,13 @@ jobs:
             # NOTE: Server-side npm/prisma steps removed to prevent deployment failures.
             # Backend dependencies are installed during CI before upload.
             
-            # Database migration
-            echo "🔄 Synchronizing database schema..."
+            # Database migration (temporarily disabled due to type column conflict)
+            echo "⚠️ Database migration temporarily disabled"
             cd /var/www/back_maxP
-            npx prisma db push --schema=prisma/schema --accept-data-loss || {
-              echo "❌ Database synchronization failed"
-              exit 1
-            }
+            # npx prisma db push --schema=prisma/schema --accept-data-loss || {
+            #   echo "❌ Database synchronization failed"
+            #   exit 1
+            # }
 
             # Database migration note
             echo " Note: Database migration file is available at:"
